@@ -1,4 +1,4 @@
-> # IT314  Educational Networking Tool for College Students - Group 29
+> ## Educational Networking Tool for College Students - Group 29
 
 - 202001441 - Priyanshi Parmar
 - 202001449 - Achyut Shah
