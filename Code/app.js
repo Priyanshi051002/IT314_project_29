@@ -53,21 +53,36 @@ app.post('/register', async (req, res) => {
         if (!foundUser){
 
 			let hashPassword = await bcrypt.hash(req.body.password, 10);
-			console.log(typeof req.body.password);
-			console.log(req.body.password.length);
-			
-			let newUser = {
-				id: Date.now(),
-				username: req.body.username,
-				email: req.body.email,
-				password: hashPassword,
-			};
+            //check password length
+            if(req.body.password.length < 8){
+                res.send("<div align ='center'><h2>Password must be at least 8 characters</h2></div><br><br><div align='center'><a href='./registration.html'>Register again</a></div>");
+            }
+            //check if password contains a special character
+            else if(!req.body.password.match(/[!@#$%^&*(),.?":{}|<>]/)){
+                res.send("<div align ='center'><h2>Password must contain a special character</h2></div><br><br><div align='center'><a href='./registration.html'>Register again</a></div>");
+            }
+            //check if password contains a number
+            else if(!req.body.password.match(/[0-9]/)){
+                res.send("<div align ='center'><h2>Password must contain a number</h2></div><br><br><div align='center'><a href='./registration.html'>Register again</a></div>");
+            }
+            else{
 
-			users.push(newUser);
-			console.log('User list', users);
-			console.log(users);
-			res.send("<div align ='center'><h2>Registration successful</h2></div><br><br><div align='center'><a href='./login.html'>login</a></div><br><br><div align='center'><a href='./registration.html'>Register another user</a></div>");
-            console.log(users);
+                console.log(typeof req.body.password);
+                console.log(req.body.password.length);
+                
+                let newUser = {
+                    id: Date.now(),
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: hashPassword,
+                };
+
+                users.push(newUser);
+                console.log('User list', users);
+                console.log(users);
+                res.send("<div align ='center'><h2>Registration successful</h2></div><br><br><div align='center'><a href='./login.html'>login</a></div><br><br><div align='center'><a href='./registration.html'>Register another user</a></div>");
+                console.log(users);
+            }
             
 		
         } 
