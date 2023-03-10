@@ -11,3 +11,5 @@
 - 202001452 - Krish Patel
 - 202001461 - Harsh Agheda
 - 202001462 - Om Patel
+
+> Refer to this link to follow the installation steps - [Project.md](Project/Project.md)
