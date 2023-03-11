@@ -1,8 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Profile from "./pages/Profile";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
-    <h2>Educational Networking Tool for College Students</h2>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
