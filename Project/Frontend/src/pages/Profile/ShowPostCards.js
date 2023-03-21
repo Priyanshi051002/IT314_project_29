@@ -1,3 +1,7 @@
+import {
+  Container,
+  Box,
+} from "@mui/material";
 import React from "react";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
@@ -44,9 +48,12 @@ const DUMMY_DATA = [
 const ShowPostCards = () => {
   return (
     <>
-      <h1>hellop</h1>
-      <Navbar />
-      <PostCards items={DUMMY_DATA} />
+      <Container maxWidth="lg">
+        <Box>
+          <Navbar />
+          <PostCards xs={12} sm={6} md={6} items={DUMMY_DATA} />
+        </Box>
+      </Container>
     </>
   );
 };

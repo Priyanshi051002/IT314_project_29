@@ -53,6 +53,18 @@ const DUMMY_DATA = [
   // },
 ];
 
+const PROFILE_DATA = {
+  name: "Virat Kohli",
+  prf_image: "https://source.unsplash.com/random",
+  bg_image: "https://source.unsplash.com/random",
+  description: `Virat Kohli is an Indian international cricketer and former captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the IPL and for Delhi in Indian domestic cricket.`,
+  about: `Virat Kohli is an Indian international cricketer and former
+  captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the
+  IPL and for Delhi in Indian domestic cricket.Virat Kohli is an Indian international cricketer and former captain of the
+  Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the IPL and for Delhi in
+  Indian domestic cricket.Virat Kohli is an Indian international cricketer and former captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the IPL and for Delhi in Indian domestic cricket.Virat Kohli is an Indian international cricketer and former captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the IPL and for Delhi in Indian domestic cricket.`,
+};
+
 const postCard = (
   <React.Fragment>
     <Card>
@@ -90,14 +102,14 @@ const profileCard = (
       <CardMedia
         component="img"
         height="250"
-        image="https://source.unsplash.com/random"
+        image={PROFILE_DATA.bg_image}
       ></CardMedia>
 
       <Grid container>
         <Grid item xs={12} sm={5} md={4} py={3}>
           <CardMedia
             component="img"
-            image="https://source.unsplash.com/random"
+            image={PROFILE_DATA.prf_image}
             sx={{
               margin: "auto",
               width: "200px",
@@ -112,7 +124,7 @@ const profileCard = (
             <Grid container>
               <Grid item xs={8} sm={8} md={8}>
                 <Typography variant="h4" component="div" gutterBottom>
-                  Virat Kohli
+                  {PROFILE_DATA.name}
                 </Typography>
               </Grid>
               <Grid item xs={2} sm={2} md={2}>
@@ -127,10 +139,7 @@ const profileCard = (
               </Grid>
             </Grid>
             <Typography variant="body2" height={80} gutterBottom>
-              Virat Kohli is an Indian international cricketer and former
-              captain of the Indian national team who plays as a right-handed
-              batsman for Royal Challengers Bangalore in the IPL and for Delhi
-              in Indian domestic cricket.
+              {PROFILE_DATA.description}
             </Typography>
           </CardContent>
           <CardActions>
@@ -172,22 +181,7 @@ const Profile = () => {
                     About
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Virat Kohli is an Indian international cricketer and former
-                    captain of the Indian national team who plays as a
-                    right-handed batsman for Royal Challengers Bangalore in the
-                    IPL and for Delhi in Indian domestic cricket.Virat Kohli is
-                    an Indian international cricketer and former captain of the
-                    Indian national team who plays as a right-handed batsman for
-                    Royal Challengers Bangalore in the IPL and for Delhi in
-                    Indian domestic cricket.Virat Kohli is an Indian
-                    international cricketer and former captain of the Indian
-                    national team who plays as a right-handed batsman for Royal
-                    Challengers Bangalore in the IPL and for Delhi in Indian
-                    domestic cricket.Virat Kohli is an Indian international
-                    cricketer and former captain of the Indian national team who
-                    plays as a right-handed batsman for Royal Challengers
-                    Bangalore in the IPL and for Delhi in Indian domestic
-                    cricket.
+                    {PROFILE_DATA.about}
                   </Typography>
                 </CardContent>
               </Card>
