@@ -34,18 +34,34 @@ const path = require("path");
 const bodyParser = require('body-parser');
 const { isLength } = require('lodash');
 const users = require('./data').userDB;
-
 const app = express();
 const server = http.createServer(app);
-
+const mongoose = require('mongoose');
+const dbURL = 'mongodb+srv://202001449:ITPROJECT_69@cluster0.dtdhh6b.mongodb.net/firstdb?retryWrites=true&w=majority'
+mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
+	.then((result) => app.listen(3000))
+	.catch((err) => console.log(err));
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./views',{root: __dirname}));
+
 
 
 app.get('/',(req,res) => {
     res.sendFile('./views/index.html',{root: __dirname});
 });
+//get login.html page
+app.get('/login.html',(req,res) => {
+    res.sendFile('./views/login.html',{root: __dirname});
+});
+//get registration.html page
+app.get('/registration.html',(req,res) => {
+    res.sendFile('./views/registration.html',{root: __dirname});
+});
 
+//get test.html only if user is logged in
+// app.get('/test.html', passport.authenticate('bearer', { session: false }), (req, res) => {
+//     res.sendFile('./views/test.html',{root: __dirname});
+// });
 
 app.post('/register', async (req, res) => {
     try{
@@ -123,6 +139,3 @@ app.post('/login', async (req, res) => {
 });
 
 
-server.listen(3000, function(){
-    console.log("server is listening on port: 3000");
-});
