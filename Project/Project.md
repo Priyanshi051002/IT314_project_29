@@ -4,7 +4,6 @@
 ## Creating a branch:
 
 - Create a branch of your name in this repository.
-- For e.g. upar dekhlo jaha **main** likha waha naya branch bana dena apna.
 
 
 ## Run Locally for the first time:
