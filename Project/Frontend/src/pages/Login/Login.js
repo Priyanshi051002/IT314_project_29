@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Checkbox from '@mui/material/Checkbox';
 
 
-const Login = () => {
+const Login = ({handleChange}) => {
   const paperStyle = {padding: 20, height: '70vh', width: 300, margin: "0 auto"}
   const avatarStyle = {backgroundColor: '#1bbd7e'}
   const buttonStyle={margin:'8px 0'}
@@ -32,14 +32,19 @@ const Login = () => {
     />
     <Button type='submit' variant="contained" color="primary" fullWidth='true' style={buttonStyle}>Sign in</Button>
     <Typography>
+       <Link href="#" onClick={
+      ()=>handleChange("event",1)
+     } ></Link>
       <Link href="#" >
      Forgot Password?
 </Link>
     </Typography>
     <Typography> Do you have an account?
-      <Link href="#" >
+     <Link href="#" onClick={
+      ()=>handleChange("event",1)
+     } >
      Sign Up
-</Link>
+</Link> 
     </Typography>
            </Paper>
       </Grid>

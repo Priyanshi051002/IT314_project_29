@@ -1,53 +1,44 @@
 import React from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-
-export const SignUp = () => {
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+export const Passwordchangeq = ({handleChange2}) => {
  const paperStyle = {padding: 20, height: '70vh', width: 300, margin: "0 auto"};
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
   return (
     <div>
       <Grid>
-        <Paper style={paperStyle}>
+        <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
             <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
+              <HomeOutlinedIcon />
             </Avatar>
-            <h2>Sign Up</h2>
+            <h2>Answer this Question</h2>
           </Grid>
-          <TextField
+          {/* <TextField
             variant="filled"
             label="Username"
             required
             placeholder="Enter username"
             fullWidth="true"
             margin="10 px"
-          ></TextField>
+          ></TextField> */}
           <TextField
             variant="filled"
-            label="Password"
+            label="What is your birth place?"
             required
-            placeholder="Enter password"
-            type="password"
+            placeholder="Enter place of birth"
+            type="text"
             fullWidth="true"
           ></TextField>
-          <TextField
+          {/* <TextField
             variant="filled"
             label="Confirm Password"
             required
             placeholder="Enter password"
             type="password"
             fullWidth="true"
-          ></TextField>
-           <TextField
-            variant="filled"
-            label="Enter your birth place for Password Recovery"
-            required
-            placeholder="Enter your birth place"
-            type="text"
-            fullWidth="true"
-          ></TextField>
+          ></TextField> */}
           <Button
             type="submit"
             variant="contained"
@@ -55,7 +46,7 @@ export const SignUp = () => {
             fullWidth="true"
             style={buttonStyle}
           >
-            Sign in
+            Submit
           </Button>
         </Paper>
       </Grid>
@@ -63,4 +54,4 @@ export const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Passwordchangeq;

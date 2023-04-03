@@ -1,29 +1,23 @@
 import React from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
-export const SignUp = () => {
+export const Forgotpassword = () => {
  const paperStyle = {padding: 20, height: '70vh', width: 300, margin: "0 auto"};
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
   return (
     <div>
       <Grid>
-        <Paper style={paperStyle}>
+        <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
             <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
+              <VpnKeyOutlinedIcon />
             </Avatar>
-            <h2>Sign Up</h2>
+            <h2>Enter New Password</h2>
           </Grid>
-          <TextField
-            variant="filled"
-            label="Username"
-            required
-            placeholder="Enter username"
-            fullWidth="true"
-            margin="10 px"
-          ></TextField>
+          
           <TextField
             variant="filled"
             label="Password"
@@ -40,14 +34,6 @@ export const SignUp = () => {
             type="password"
             fullWidth="true"
           ></TextField>
-           <TextField
-            variant="filled"
-            label="Enter your birth place for Password Recovery"
-            required
-            placeholder="Enter your birth place"
-            type="text"
-            fullWidth="true"
-          ></TextField>
           <Button
             type="submit"
             variant="contained"
@@ -55,7 +41,7 @@ export const SignUp = () => {
             fullWidth="true"
             style={buttonStyle}
           >
-            Sign in
+            Change Password
           </Button>
         </Paper>
       </Grid>
@@ -63,4 +49,5 @@ export const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Forgotpassword;
+

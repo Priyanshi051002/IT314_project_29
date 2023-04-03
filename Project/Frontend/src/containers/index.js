@@ -48,7 +48,7 @@ return (
         <Tab label="Sign Up" />
       </Tabs>
       <TabPanel value={value} index={0}>
-  <Login/>
+  <Login handleChange = {handleChange}/>
 </TabPanel>
 <TabPanel value={value} index={1}>
  <Signup/>
