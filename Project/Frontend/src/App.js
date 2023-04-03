@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import ShowPostCards from "./pages/Profile/ShowPostCards";
+import SignInOutContainer from "../../../../demo/Folder/src/containers";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} /> */}
+           <Route path="/signinout" element={<SignInOutContainer />} />
           <Route path="/myposts" element={<ShowPostCards />} />
         </Routes>
       </BrowserRouter>

@@ -6,13 +6,13 @@ import Checkbox from '@mui/material/Checkbox';
 
 
 const Login = () => {
-  const paperStyle = {padding: 20, height: '70vh', width: 280, margin: "20px auto"}
+  const paperStyle = {padding: 20, height: '70vh', width: 300, margin: "0 auto"}
   const avatarStyle = {backgroundColor: '#1bbd7e'}
   const buttonStyle={margin:'8px 0'}
   return (
     <div>
       <Grid>
-        <Paper elevation={10} style={paperStyle}>
+        <Paper style={paperStyle}>
           <Grid align='center'>
           <Avatar style={avatarStyle}>
             <LockOutlinedIcon/>
