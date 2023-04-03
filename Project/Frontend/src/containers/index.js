@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Login from '../components/Login';
-import Signup from '../components/signup';
+import Login from '../pages/Login/Login';
+import Signup from '../pages/SignUp/SignUp';
 const SignInOutContainer = () => {
 const [value, setValue] = useState(0);
 const handleChange = (event, newValue) => {

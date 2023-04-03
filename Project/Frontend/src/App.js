@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import ShowPostCards from "./pages/Profile/ShowPostCards";
-import SignInOutContainer from "../../../../demo/Folder/src/containers";
+import SignInOutContainer from "./containers/index";
 
 function App() {
   return (
