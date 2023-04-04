@@ -59,6 +59,10 @@ const User = mongoose.model('User', userSchema);
 			return done(error);
 		}
 	}));
+	isAuthenticated = (req, res, next) => {
+		if(req.user) return next();
+		res.redirect('/login');
+	};
 
 	passport.serializeUser((user, done) => done(null, user.id));
 
@@ -123,6 +127,17 @@ app.post('/login',passport.authenticate('local',{failureRedirect:'/register',suc
 	
 });
 
+app.get('/profile',isAuthenticated,(req,res)=>{
+	res.send(req.user);
+});
+
+app.get('/logout',(req,res)=>{
+	req.logout(function(err){
+		if(err) return next(err);
+		res.redirect('/');
+	});
+	
+});
 // app.get('/testing', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 // 	res.render('testing');
 // });
