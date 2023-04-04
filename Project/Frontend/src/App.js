@@ -17,8 +17,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/myposts" element={<ShowPostCards />} />
           <Route path="/profile/addPost" element={<AddPost />} />
-        </Routes>
-      </BrowserRouter>
+        </Routes >
+      </BrowserRouter >
     </>
   );
 }
