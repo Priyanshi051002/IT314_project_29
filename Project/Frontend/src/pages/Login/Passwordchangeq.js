@@ -1,8 +1,10 @@
 import React from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-export const Passwordchangeq = ({handleChange2}) => {
- const paperStyle = {padding: 20, height: '70vh', width: 300, margin: "0 auto"};
+import { Link } from 'react-router-dom';
+
+export const Passwordchangeq = () => {
+ const paperStyle = {padding: 20, height: '40vh', width: 300, margin: "0 auto"};
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
   return (
@@ -46,7 +48,8 @@ export const Passwordchangeq = ({handleChange2}) => {
             fullWidth="true"
             style={buttonStyle}
           >
-            Submit
+            <Link to="/fp" style={{ textDecoration: 'none' , color:'white'}}>Submit</Link>
+            
           </Button>
         </Paper>
       </Grid>

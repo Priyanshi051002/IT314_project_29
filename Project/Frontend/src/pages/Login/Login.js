@@ -1,8 +1,8 @@
 import React from 'react'
-import {Avatar, Button, FormControlLabel, Grid, Paper, TextField, Typography,Link} from '@mui/material'
+import {Avatar, Button, FormControlLabel, Grid, Paper, TextField, Typography} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
 import Checkbox from '@mui/material/Checkbox';
+import { Link } from 'react-router-dom';
 
 
 const Login = ({handleChange}) => {
@@ -12,7 +12,7 @@ const Login = ({handleChange}) => {
   return (
     <div>
       <Grid>
-        <Paper style={paperStyle}>
+        <Paper elevation={20} style={paperStyle}>
           <Grid align='center'>
           <Avatar style={avatarStyle}>
             <LockOutlinedIcon/>
@@ -32,12 +32,10 @@ const Login = ({handleChange}) => {
     />
     <Button type='submit' variant="contained" color="primary" fullWidth='true' style={buttonStyle}>Sign in</Button>
     <Typography>
-       <Link href="#" onClick={
-      ()=>handleChange("event",1)
-     } ></Link>
-      <Link href="#" >
-     Forgot Password?
-</Link>
+      
+     <Link to="/pc">Forgot Password?</Link>
+
+      
     </Typography>
     <Typography> Do you have an account?
      <Link href="#" onClick={
