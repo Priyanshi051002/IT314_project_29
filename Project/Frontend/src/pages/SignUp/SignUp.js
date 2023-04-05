@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import {useNavigate} from "react-router-dom";
 
 export const SignUp = () => {
+
+  const navigate = useNavigate();
+
   const [details, setDetails] = useState({
     name: "",
     username: "",
@@ -31,7 +35,11 @@ export const SignUp = () => {
       body: JSON.stringify(details),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if(data.success){
+          return navigate("/login");
+        }
+      })
       .catch((err) => {
         console.log(err.message);
       });

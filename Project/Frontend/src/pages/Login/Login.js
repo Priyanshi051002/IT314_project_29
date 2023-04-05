@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -13,6 +14,8 @@ import Checkbox from "@mui/material/Checkbox";
 import { Link, redirect } from "react-router-dom";
 
 const Login = ({ handleChange }) => {
+
+  const navigate = useNavigate();
 
   const [details, setDetails] = useState({
     username: "",
@@ -31,7 +34,7 @@ const Login = ({ handleChange }) => {
 
   const handleSignin = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/login`, {
+    fetch(`http://localhost:5000/user/login`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -41,11 +44,12 @@ const Login = ({ handleChange }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if(data.success){
-          return redirect("/");
+          return navigate("/");
         }
         else{
-          return null;
+          return navigate("/myposts");
         }
       })
       .catch((err) => {
