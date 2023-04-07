@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -11,12 +11,13 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Checkbox from "@mui/material/Checkbox";
-import { Link, redirect } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import { Link } from "react-router-dom";
 
-const Login = ({ handleChange }) => {
-
+const Login = (props) => {
   const navigate = useNavigate();
 
+  const [isLoginError, setisLoginError] = useState(false);
   const [details, setDetails] = useState({
     username: "",
     password: "",
@@ -45,11 +46,12 @@ const Login = ({ handleChange }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if(data.success){
+        if (data.success) {
+          setisLoginError(false);
           return navigate("/");
-        }
-        else{
-          return navigate("/myposts");
+        } else {
+          // return navigate("/myposts");
+          setisLoginError(true);
         }
       })
       .catch((err) => {
@@ -74,6 +76,11 @@ const Login = ({ handleChange }) => {
               <LockOutlinedIcon />
             </Avatar>
             <h2>Sign in</h2>
+            {isLoginError ? (
+              <Alert severity="error" sx={{ margin: "1em" }}>
+                Invalid Login Credentials!
+              </Alert>
+            ) : null}
           </Grid>
           <form onSubmit={handleSignin}>
             <TextField
@@ -118,7 +125,7 @@ const Login = ({ handleChange }) => {
           <Typography>
             {" "}
             Do you have an account?
-            <Link href="#" onClick={() => handleChange("event", 1)}>
+            <Link href="#" onClick={() => props.handleChange("event", 1)}>
               Sign Up
             </Link>
           </Typography>
