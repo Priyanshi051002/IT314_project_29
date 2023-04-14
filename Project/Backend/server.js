@@ -18,6 +18,7 @@ app.use(
   expressSession({ secret: "secret", resave: false, saveUninitialized: false })
 );
 app.use(passport.initialize());
+
 app.use(passport.session());
 // app.set("view engine", "ejs");
 
@@ -112,3 +113,62 @@ app.use("/user", userRoutes);
 // app.get('/testing', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 // 	res.render('testing');
 // });
+
+app.get('/follow',isAuthenticated,(req,res)=>{
+	res.render('follow');
+});
+app.get('/unfollow',isAuthenticated,(req,res)=>{
+	res.render('unfollow');
+});
+//add a follower in the followers array of a user
+app.post('/follow',async (req,res)=>{
+	//get the username of the user who is being followed
+	const follwedUser = req.body.username;
+	//get the username of the user who is following
+	const follower = req.user.username;
+
+	//check if the user is already following the user
+
+	//add the follower in the followers array of the user
+	const x = await User.findOneAndUpdate({username : follwedUser},{$push : {followers : follower}},{new : true})
+	.then((result)=>{
+		;
+	})
+	.catch((err)=>{
+		res.send(err);
+	});
+	//add the user in the following array of the follower
+	const y = await User.findOneAndUpdate({username : follower},{$push : {following : follwedUser}},{new : true})
+	.then((result)=>{
+		res.send('done');
+	})
+	.catch((err)=>{
+		res.send(err);
+	});
+});
+//unfollow a user
+app.post('/unfollow',async (req,res)=>{
+	//get the username of the user who is being unfollowed
+	const unfollwedUser = req.body.username;
+	//get the username of the user who is unfollowing
+	const unfollower = req.user.username;
+
+	//delete the unfollower in the followers array of the user
+	const Updatedfolloweduser =await User.findOneAndUpdate({username : unfollwedUser},{$pull : {followers : unfollower}},{new : true})
+	.then((result)=>{
+		;
+	})
+	.catch((err)=>{
+		res.send(err);
+	});
+	//delete the user in the following array of the unfollower
+	const UpdatedfollowedrserUser = await User.findOneAndUpdate({username : unfollower},{$pull : {following : unfollwedUser}},{new : true})
+	.then((result)=>{
+		res.send('done');
+	})
+	.catch((err)=>{
+		res.send(err);
+	});
+
+});
+
