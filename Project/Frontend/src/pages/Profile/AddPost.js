@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import './AddPost.css'
-
+import { BiImageAdd, BiVideoPlus, BiFile } from 'react-icons/bi';
+import Navbar from "../../components/Navbar";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
 
 function AddPost() {
     const [title, setTitle] = useState("");
@@ -30,7 +33,10 @@ function AddPost() {
     };
 
     return (
-        <div><h1 > Add Post </h1>
+
+        <div>
+            <Navbar />
+            <h1 > Add Post </h1>
             <form onSubmit={handleSubmit}>
 
                 <div>
@@ -50,24 +56,62 @@ function AddPost() {
                         onChange={(event) => setContent(event.target.value)}
                     ></textarea>
                 </div>
-                <div>
-                    <label htmlFor="image">Image:</label>
-                    <input type="file" id="image" onChange={handleImageChange} />
-                    {image && <p>Selected image: {image.name}</p>}
+                <div className="file-card">
+                    <div className="file-inputs">
+                        <input type="file" accept="image/png, image/jpeg" id="image" onChange={handleImageChange} />
+                        <button type="Upload">
+                            <i>
+                                <BiImageAdd />
+                            </i>
+                            Upload Image
+                        </button>
+
+                    </div>
+                    <p className="main">Supported files : JPG,PNG</p>
+                    {image && <p> {image.name}</p>}
+                    {/* <li className="list-item">
+                        <FontAwesomeIcon icon={faFileAlt} />
+                        <p>{image.name}</p>
+                        <div className="actions">
+                            {image.isUploading}
+                        </div>
+                         </li> */}
+
                 </div>
-                <div>
-                    <label htmlFor="video">Video:</label>
-                    <input type="file" id="video" onChange={handleVideoChange} />
+                <div className="file-card">
+                    <div className="file-inputs">
+
+                        <input type="file" accept="video/mp4" id="video" onChange={handleVideoChange} />
+                        <button type="Upload">
+                            <i>
+                                <BiVideoPlus />
+                            </i>
+                            Upload Video
+                        </button>
+
+                    </div>
+                    <p className="main">Supported files : mp4</p>
                     {video && <p>Selected video: {video.name}</p>}
                 </div>
-                <div>
-                    <label htmlFor="document">Document:</label>
-                    <input type="file" id="document" onChange={handleDocumentChange} />
+                <div className="file-card">
+                    <div className="file-inputs">
+
+                        <input type="file" accept="application/pdf" id="document" onChange={handleDocumentChange} />
+                        <button type="Upload">
+                            <i>
+                                <BiFile />
+                            </i>
+                            Upload File
+                        </button>
+
+                    </div>
+                    <p className="main">Supported files : PDF</p>
                     {document && <p>Selected document: {document.name}</p>}
                 </div>
+
                 <button type="submit">Submit</button>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 }
 
