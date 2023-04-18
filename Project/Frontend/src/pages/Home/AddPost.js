@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Container, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import Navbar from "../../components/Navbar";
+import TextEditor from '../../components/TextEditor';
 
 const AddPost = () => {
     return (
@@ -15,13 +16,7 @@ const AddPost = () => {
           sx={{ p: "1em" }}>
               <Grid item xs={1} md={2}></Grid>
               <Grid item xs={10} md={8}>
-              <TextField
-                id="outlined-multiline-static"
-                multiline
-                fullWidth
-                rows={4}
-                placeholder="Write your thoughts here"
-                />
+                <TextEditor />
               </Grid>
               <Grid item xs={1} md={2}></Grid>
             </Grid>
