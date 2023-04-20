@@ -1,36 +1,27 @@
 import React from 'react'
-import { Button, Container, Grid, TextField } from "@mui/material";
+import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 import Navbar from "../../components/Navbar";
 import TextEditor from '../../components/TextEditor';
 
 const AddPost = () => {
-    return (
-        <Container maxWidth="lg">
-          <Box>
-            <Navbar />
-            <Grid container
-          spacing={2}
-          justifyContent="center"
-          alignItems="center"
-          sx={{ p: "1em" }}>
-              <Grid item xs={1} md={2}></Grid>
-              <Grid item xs={10} md={8}>
-                <TextEditor />
-              </Grid>
-              <Grid item xs={1} md={2}></Grid>
-            </Grid>
+  return (
+    <Container maxWidth="lg">
+      <Box>
+        <Navbar />
+        {/* <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ p: "1em" }}>
+          <Grid item xs={1} md={2}></Grid>
+          <Grid item xs={10} md={8}>
+            <TextEditor />
+          </Grid>
+          <Grid item xs={1} md={2}></Grid>
+        </Grid> */}
 
-            <Grid container spacing={2}>
-              <Grid item xs={4} md={5}></Grid>
-              <Grid item xs={4} md={2}>
-                <Button variant="contained" fullWidth> Add Post</Button>
-              </Grid>
-              <Grid item xs={4} md={5}></Grid>
-            </Grid>
-          </Box>
-        </Container>
-      );
+        <TextEditor />
+
+      </Box>
+    </Container>
+  );
 }
 
 export default AddPost;
