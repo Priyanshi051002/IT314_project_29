@@ -1,6 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { Button, Grid } from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const TextEditor = () => {
   const editorRef = useRef(null);
@@ -10,6 +15,22 @@ const TextEditor = () => {
       editorRef.current.setContent('');
     }
   };
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClose1 = () => {
+    log();
+    setOpen(false);
+  };
+
   return (
     <>
       <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ p: "1em" }}>
@@ -20,7 +41,7 @@ const TextEditor = () => {
             onInit={(evt, editor) => editorRef.current = editor}
             initialValue="<p>Share your thoughts here..</p>"
             init={{
-              selector: "#myTextarea",
+              selector: "#editor",
               height: 500,
               menubar: false,
               statusbar: false,
@@ -29,8 +50,28 @@ const TextEditor = () => {
               plugins: [
                 'advlist', 'autolink', 'lists', 'charmap', 'searchreplace', 'wordcount', 'code', 'fullscreen', 'table', 'codesample'
               ],
-              toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | charmap table  codesample |  searchreplace wordcount code | fullscreen',
-              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px } + .blue { color: blue; }'
+              //toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | charmap table  codesample |  searchreplace wordcount code | fullscreen | customInsertButton',
+              toolbar: [
+                { name: 'history', items: [ 'undo', 'redo' ] },
+                { name: 'styles', items: [ 'blocks' ] },
+                { name: 'formatting', items: [ 'bold', 'italic', 'underline' ] },
+                { name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify' ] },
+                { name: 'Add post', items: [ 'customAddButton' ] },
+                { name: 'indentation', items: [ 'bullist', 'numlist','outdent', 'indent' ] },
+                { name: 'special', items: [ 'charmap', 'table', 'codesample' ] },
+                { name: 'tools', items: [ 'searchreplace', 'wordcount', 'code' ] }
+                
+              ],
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px } + .blue { color: blue; }',
+
+              setup: (editor) =>  {
+                editor.ui.registry.addButton('customAddButton', {
+                  text: 'ADD POST',
+                  onAction: (_) => {
+                    setOpen(true);
+                  }
+                });
+              }
             }}
           />
         </Grid>
@@ -40,7 +81,32 @@ const TextEditor = () => {
       <Grid container spacing={2}>
         <Grid item xs={4} md={3}></Grid>
         <Grid item xs={4} md={6}>
-          <Button onClick={log} variant="contained" fullWidth> Add Post</Button>
+          <Button  variant="contained" fullWidth onClick={handleClickOpen}>
+            Add post
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+            maxWidth = 'xs'
+          >
+            <DialogTitle id="responsive-dialog-title">
+              {"Add the post?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to add the post? You will not be able to edit it afterwards.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button variant="outlined" onClick={handleClose}>
+                Return
+              </Button>
+              <Button onClick={handleClose1}  variant="contained" autoFocus>
+                Confirm
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Grid>
         <Grid item xs={4} md={3}></Grid>
       </Grid>
