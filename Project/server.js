@@ -18,6 +18,12 @@ const { create } = require("domain");
 const { error } = require("console");
 //const connectEnsureLogin = require('connect-ensure-login');
 
+ 
+// const crypto = require('crypto');
+// const verificationCode = crypto.randomBytes(20).toString('hex');
+// const nodemailer = require('nodemailer');
+// });
+
 // const verificationLink = 'https://localhost:3000/verify?code=${verificationCode}';
 
 const dbURL =
@@ -195,7 +201,10 @@ app.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/register",
+
     successRedirect: "/user_post_show",
+
+   
   }),
   (req, res) => {}
 );
@@ -233,6 +242,7 @@ app.post("/post_show", async (req, res) => {
     res.status(400).send({ data: null, success: false, error: err });
   }
 });
+
 
 app.get("/upost", isAuthenticated, (req, res) => {
   res.render("/upost");
@@ -278,45 +288,48 @@ app.get("/del_Post", isAuthenticated, (req, res) => {
 });
 
 app.post("/del_Post", async (req, res) => {
-  const post = await Post.findById(req.Post._id);
+
   try {
-    if (post) {
-      if (post.likes.find((like) => like.username === username)) {
-        // Post already likes, unlike it
-        post.likes = post.likes.filter((like) => like.username !== username); // filter out the like
-      } else {
-        // Not liked, like post
-        post.likes.push({
-          // push to the array
-          username,
-          createdAt: new Date().toISOString(), // current time
-        });
-      }
-      await post.save();
-      return post;
+    const post = await Post.findById(req.Post._id);
+    if (!post) {
+      return res.status(404).send({ data: null, success: false, error: "Post not found" });
+    }
+    if (req.user.username === post.username) {
+      await post.deleteOne(); // check if this works
+      return res.status(200).send({ data: null, success: true, error: null });
+    } else {
+      return res.status(403).send({ data: null, success: false, error: "Unauthorized" });
     }
   } catch (err) {
     console.log(err);
-  }
+  }
 });
-
+app.get('/like_Post',isAuthenticated,(req,res)=>{
+  res.render('like_Post');
+});
 app.post("/like_Post", async (req, res) => {
-  const post = await Post.findById(req.body.postId); // see if this works
+   // see if this works
   try {
+    const post = await Post.findById(req.body.postid);
     if (post) {
       if (post.likes.find((like) => like.username === req.user.username)) {
         // Post already likes, unlike it
-        post.likes = post.likes.filter((like) => like.username !== username); // filter out the like
+        post.likes = post.likes.filter((like) => like.username !== req.user.username); // filter out the like
+
       } else {
         // Not liked, like post
         post.likes.push({
           // push to the array
-          username,
+
+          username: req.user.username,
+
           createdAt: new Date().toISOString(), // current time
         });
       }
       await post.save();
-      return post;
+
+      return res.status(200).send({ data: post, success: true, error: null });
+
     }
   } catch (err) {
     console.log(err);
