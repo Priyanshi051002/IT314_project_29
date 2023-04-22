@@ -1,0 +1,22 @@
+{
+  "name": "project-prototype",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "apollo-server": "^3.12.0",
+    "bcryptjs": "^2.4.3",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

@@ -18,10 +18,12 @@ const { create } = require("domain");
 const { error } = require("console");
 //const connectEnsureLogin = require('connect-ensure-login');
 
+ 
 // const crypto = require('crypto');
 // const verificationCode = crypto.randomBytes(20).toString('hex');
 // const nodemailer = require('nodemailer');
 // });
+
 // const verificationLink = 'https://localhost:3000/verify?code=${verificationCode}';
 
 const dbURL =
@@ -199,7 +201,10 @@ app.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/register",
-    successRedirect: "/like_post",
+
+    successRedirect: "/user_post_show",
+
+   
   }),
   (req, res) => {}
 );
@@ -231,25 +236,32 @@ app.get("/post_show", isAuthenticated, (req, res) => {
 
 app.post("/post_show", async (req, res) => {
   try {
-    const post = await Post.findByUsername(req.body.username);
+    const post = await Post.find().sort({ createdAt: -1 });
     res.status(200).send({ data: post, success: true, error: null });
   } catch (err) {
     res.status(400).send({ data: null, success: false, error: err });
   }
 });
 
-app.get("/users_post", isAuthenticated, (req, res) => {
-  res.render("/users_post");
+
+app.get("/upost", isAuthenticated, (req, res) => {
+  res.render("/upost");
 });
 
-app.post("/users_post", async (req, res) => {
+app.get("/user_post_show", isAuthenticated, (req, res) => {
+  res.render("user_post_show");
+});
+
+app.post("/user_post_show", async (req, res) => {
   try {
-    const post = await Post.findByUsername(req.body.username);
+    const user_id = req.user.username;
+    const post = await Post.find({ username: user_id });
     res.status(200).send({ data: post, success: true, error: null });
   } catch (err) {
     res.status(400).send({ data: null, success: false, error: err });
   }
 });
+
 // name : name
 // username : email
 
@@ -276,6 +288,7 @@ app.get("/del_Post", isAuthenticated, (req, res) => {
 });
 
 app.post("/del_Post", async (req, res) => {
+
   try {
     const post = await Post.findById(req.Post._id);
     if (!post) {
@@ -302,16 +315,21 @@ app.post("/like_Post", async (req, res) => {
       if (post.likes.find((like) => like.username === req.user.username)) {
         // Post already likes, unlike it
         post.likes = post.likes.filter((like) => like.username !== req.user.username); // filter out the like
+
       } else {
         // Not liked, like post
         post.likes.push({
           // push to the array
+
           username: req.user.username,
+
           createdAt: new Date().toISOString(), // current time
         });
       }
       await post.save();
+
       return res.status(200).send({ data: post, success: true, error: null });
+
     }
   } catch (err) {
     console.log(err);
@@ -379,50 +397,4 @@ app.post("/unfollow", async (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-});
-app.get("/profile", isAuthenticated, (req, res) => {
-  res.render("profile");
-});
-app.post("/profile", async (req, res) => {
-  try {
-    const username = req.user.username;
-    // const post = await User.findById(username).populate('posts');
-    //   if (!user) {
-    // 	return res.status(404).json({ msg: 'User not found' });
-    //   }
-
-    // extract required fields from user object
-    const {
-      name,
-      prf_image,
-      bg_image,
-      description,
-      about,
-      followers,
-      following,
-      posts,
-    } = user;
-
-    // extract required fields from posts object
-    const userPosts = posts.slice(0, 2).map((post) => {
-      const { _id, title, description } = post;
-      return { _id, title, description };
-    });
-
-    const profileData = {
-      name,
-      profilePicture,
-      coverPicture,
-      shortBio,
-      longBio,
-      followers: followers.length,
-      following: following.length,
-      posts: userPosts,
-    };
-
-    return res.json(profileData);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({ msg: "Server error" });
-  }
 });
