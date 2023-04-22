@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import Alert from "@mui/material/Alert";
 
 export const SignUp = () => {
-
   const navigate = useNavigate();
 
   const [details, setDetails] = useState({
     name: "",
     username: "",
     password: "",
+    confirm_password: "",
     birthplace: "",
   });
+
+  const [isPasswordMatched, setIsPasswordMatched] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,23 +30,28 @@ export const SignUp = () => {
 
   const signUpHandler = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/user/register`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify(details),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data.success){
-          return navigate("/login");
-        }
+
+    if (details.password !== details.confirm_password) {
+      setIsPasswordMatched(false);
+    } else {
+      fetch(`http://localhost:5000/user/register`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify(details),
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            return navigate("/login");
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
   };
 
   const paperStyle = {
@@ -62,6 +71,11 @@ export const SignUp = () => {
               <AddCircleOutlineOutlinedIcon />
             </Avatar>
             <h2>Sign Up</h2>
+            {!isPasswordMatched ? (
+              <Alert severity="error" sx={{ margin: "1em" }}>
+                Password did not match!
+              </Alert>
+            ) : null}
           </Grid>
           <form onSubmit={signUpHandler}>
             <TextField
@@ -99,6 +113,8 @@ export const SignUp = () => {
             <TextField
               variant="filled"
               label="Confirm Password"
+              name="confirm_password"
+              value={details.confirm_password}
               required
               placeholder="Enter password"
               type="password"
@@ -123,7 +139,7 @@ export const SignUp = () => {
               fullWidth="true"
               style={buttonStyle}
             >
-              Sign in
+              Sign up
             </Button>
           </form>
         </Paper>

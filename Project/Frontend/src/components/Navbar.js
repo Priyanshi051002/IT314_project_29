@@ -15,14 +15,20 @@ import { Box } from "@mui/system";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import SchoolIcon from "@mui/icons-material/School";
-import { Link } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Link, useNavigate } from "react-router-dom";
 
 const pages = ["Search", "Universities"];
 const settings = ["Profile", "Account", "Logout"];
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleLogout = () => {
+    navigate("/signinout")
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -100,7 +106,7 @@ const Navbar = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -127,38 +133,27 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Tooltip title="Logout">
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={handleLogout}
+            >
+              <LogoutIcon />
+            </IconButton>
+            </Tooltip>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Profile">
+              <IconButton
+                onClick={handleOpenUserMenu}
+                component={Link}
+                to={"/profile"}
+                sx={{ p: 0 }}
+              >
                 <Avatar src="/" sx={{ bgcolor: "inherit" }} />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={handleCloseUserMenu}
-                  component={Link}
-                  to={setting.toLowerCase()}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
