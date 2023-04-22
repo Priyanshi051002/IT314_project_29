@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
 import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
@@ -8,6 +7,7 @@ import ShowPostCards from "./pages/Profile/ShowPostCards";
 import SignInOutContainer from "./containers/index";
 import Forgotpassword from "./pages/Login/Forgotpassword";
 import Passwordchangeq from "./pages/Login/Passwordchangeq";
+import Connect from "./pages/Connect/Connect";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
         <Route path="/fp" element={<Forgotpassword />} />
         <Route path="/myposts" element={<ShowPostCards />} />
         <Route path="/pc" element={<Passwordchangeq />} />
+        <Route path="/connect" element={<Connect />} />
       </Routes>
     </BrowserRouter>
   );

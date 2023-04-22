@@ -18,7 +18,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
 
-const pages = ["Search", "Universities"];
+const pages = ["Search", "Universities", "Connect"];
 const settings = ["Profile", "Account", "Logout"];
 
 const Navbar = () => {
@@ -27,8 +27,8 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleLogout = () => {
-    navigate("/signinout")
-  }
+    navigate("/signinout");
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -97,7 +97,13 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    textAlign="center"
+                    component={Link}
+                    to={"/" + page.toLowerCase()}
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -126,6 +132,8 @@ const Navbar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={Link}
+                to={"/" + page.toLowerCase()}
               >
                 {page}
               </Button>
@@ -134,13 +142,9 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Logout">
-            <IconButton
-              size="large"
-              color="inherit"
-              onClick={handleLogout}
-            >
-              <LogoutIcon />
-            </IconButton>
+              <IconButton size="large" color="inherit" onClick={handleLogout}>
+                <LogoutIcon />
+              </IconButton>
             </Tooltip>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
