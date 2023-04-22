@@ -150,7 +150,9 @@ const profileCard = (
               Share Profile
             </Button>
             <Button size="small" variant="contained">
-              Add Post
+              <a href={'./Profile/addPost'}>
+                Add Post
+              </a>
             </Button>
           </CardActions>
         </Grid>

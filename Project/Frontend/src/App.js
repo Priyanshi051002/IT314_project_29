@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import ShowPostCards from "./pages/Profile/ShowPostCards";
 import AddPost from "./pages/Home/AddPost";
+import AddPost from "./pages/Profile/AddPost";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           <Route path="/addPost" element={<AddPost />} />
         </Routes>
       </BrowserRouter>
+          <Route path="/profile/addPost" element={<AddPost />} />
+        </Routes >
+      </BrowserRouter >
     </>
   );
 }
