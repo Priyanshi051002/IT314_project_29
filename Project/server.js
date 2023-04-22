@@ -21,12 +21,6 @@ const { error } = require("console");
 // const crypto = require('crypto');
 // const verificationCode = crypto.randomBytes(20).toString('hex');
 // const nodemailer = require('nodemailer');
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'shahachyut1412@gmail.com',
-//     pass: 'shreenathji1412'
-//   }
 // });
 // const verificationLink = 'https://localhost:3000/verify?code=${verificationCode}';
 
@@ -105,7 +99,6 @@ const postSchema = new mongoose.Schema({
   name: String,
   username: {
     type: String,
-    
   },
 });
 
@@ -206,7 +199,7 @@ app.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/register",
-    successRedirect: "/del_post",
+    successRedirect: "/like_post",
   }),
   (req, res) => {}
 );
@@ -232,67 +225,93 @@ app.get("/Post", isAuthenticated, (req, res) => {
   res.render("Post");
 });
 
+app.get("/post_show", isAuthenticated, (req, res) => {
+  res.render("post_show");
+});
+
+app.post("/post_show", async (req, res) => {
+  try {
+    const post = await Post.findByUsername(req.body.username);
+    res.status(200).send({ data: post, success: true, error: null });
+  } catch (err) {
+    res.status(400).send({ data: null, success: false, error: err });
+  }
+});
+
+app.get("/users_post", isAuthenticated, (req, res) => {
+  res.render("/users_post");
+});
+
+app.post("/users_post", async (req, res) => {
+  try {
+    const post = await Post.findByUsername(req.body.username);
+    res.status(200).send({ data: post, success: true, error: null });
+  } catch (err) {
+    res.status(400).send({ data: null, success: false, error: err });
+  }
+});
 // name : name
 // username : email
 
 app.post("/Post", async (req, res) => {
-	//check if post is empty
-	  if (req.body.body.trim() === "") {
-		return res.status(400).json({ body: "Body must not be empty" });
-	  }
-	  //
+  //check if post is empty
+  if (req.body.body.trim() === "") {
+    return res.status(400).json({ body: "Body must not be empty" });
+  }
+  //
   const newPost = new Post({
     title: req.body.title,
     body: req.body.body,
     createdAt: new Date().toISOString(),
-    name : req.user.name,
-	username : req.user.username,
+    name: req.user.name,
+    username: req.user.username,
   });
 
   const new_post = await newPost.save();
   return res.status(201).send({ data: new_post, success: true, error: null });
 });
 
+app.get("/del_Post", isAuthenticated, (req, res) => {
+  res.render("del_Post");
+});
+
 app.post("/del_Post", async (req, res) => {
-  const post = await Post.findById(req.Post._id);
   try {
-    if (post) {
-      if (post.likes.find((like) => like.username === username)) {
-        // Post already likes, unlike it
-        post.likes = post.likes.filter((like) => like.username !== username); // filter out the like
-      } else {
-        // Not liked, like post
-        post.likes.push({
-          // push to the array
-          username,
-          createdAt: new Date().toISOString(), // current time
-        });
-      }
-      await post.save();
-      return post;
+    const post = await Post.findById(req.Post._id);
+    if (!post) {
+      return res.status(404).send({ data: null, success: false, error: "Post not found" });
+    }
+    if (req.user.username === post.username) {
+      await post.deleteOne(); // check if this works
+      return res.status(200).send({ data: null, success: true, error: null });
+    } else {
+      return res.status(403).send({ data: null, success: false, error: "Unauthorized" });
     }
   } catch (err) {
     console.log(err);
-  }
+  }
 });
-
+app.get('/like_Post',isAuthenticated,(req,res)=>{
+  res.render('like_Post');
+});
 app.post("/like_Post", async (req, res) => {
-  const post = await Post.findById(req.body.postId); // see if this works
+   // see if this works
   try {
+    const post = await Post.findById(req.body.postid);
     if (post) {
       if (post.likes.find((like) => like.username === req.user.username)) {
         // Post already likes, unlike it
-        post.likes = post.likes.filter((like) => like.username !== username); // filter out the like
+        post.likes = post.likes.filter((like) => like.username !== req.user.username); // filter out the like
       } else {
         // Not liked, like post
         post.likes.push({
           // push to the array
-          username,
+          username: req.user.username,
           createdAt: new Date().toISOString(), // current time
         });
       }
       await post.save();
-      return post;
+      return res.status(200).send({ data: post, success: true, error: null });
     }
   } catch (err) {
     console.log(err);
