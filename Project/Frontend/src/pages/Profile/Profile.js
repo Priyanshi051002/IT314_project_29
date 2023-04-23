@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
+import PersonIcon from "@mui/icons-material/Person";
 
 const DUMMY_DATA = [
   {
@@ -127,14 +128,42 @@ const profileCard = (
                   {PROFILE_DATA.name}
                 </Typography>
               </Grid>
-              <Grid item xs={2} sm={2} md={2}>
-                <Typography variant="h6" component="div" gutterBottom>
-                  120
+              <Grid
+                item
+                xs={2}
+                sm={2}
+                md={2}
+                sx={{
+                  textAlign: "center",
+                  textDecoration: "none",
+                  activeStyle: { color: "red" },
+                  color: "black",
+                }}
+                component={Link}
+                to={"/myconnection"}
+              >
+                <PersonIcon fontSize="large" />
+                <Typography variant="body2" component="div" gutterBottom>
+                  Followers
                 </Typography>
               </Grid>
-              <Grid item xs={2} sm={2} md={2}>
-                <Typography variant="h6" component="div" gutterBottom>
-                  120
+              <Grid
+                item
+                xs={2}
+                sm={2}
+                md={2}
+                sx={{
+                  textAlign: "center",
+                  textDecoration: "none",
+                  activeStyle: { color: "red" },
+                  color: "black",
+                }}
+                component={Link}
+                to={"/myconnection"}
+              >
+                <PersonIcon fontSize="large" />
+                <Typography variant="body2" component="div" gutterBottom>
+                  Following
                 </Typography>
               </Grid>
             </Grid>
