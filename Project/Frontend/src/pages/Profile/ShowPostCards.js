@@ -1,7 +1,4 @@
-import {
-  Container,
-  Box,
-} from "@mui/material";
+import { Grid, Container, Box } from "@mui/material";
 import React from "react";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
@@ -51,7 +48,11 @@ const ShowPostCards = () => {
       <Container maxWidth="lg">
         <Box>
           <Navbar />
-          <PostCards xs={12} sm={6} md={6} items={DUMMY_DATA} />
+          <Grid container>
+            <Grid item xs={12} sm={6} md={6}>
+              <PostCards items={DUMMY_DATA} />
+            </Grid>
+          </Grid>
         </Box>
       </Container>
     </>
