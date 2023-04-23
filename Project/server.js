@@ -398,3 +398,50 @@ app.post("/unfollow", async (req, res) => {
       res.send(err);
     });
 });
+
+app.get("/profile", isAuthenticated, (req, res) => {
+  res.render("profile");
+});
+app.post("/profile", async (req, res) => {
+  try {
+    const username = req.user.username;
+    // const post = await User.findById(username).populate('posts');
+    //   if (!user) {
+    // 	return res.status(404).json({ msg: 'User not found' });
+    //   }
+
+    // extract required fields from user object
+    const {
+      name,
+      prf_image,
+      bg_image,
+      description,
+      about,
+      followers,
+      following,
+      posts,
+    } = user;
+
+    // extract required fields from posts object
+    const userPosts = posts.slice(0, 2).map((post) => {
+      const { _id, title, description } = post;
+      return { _id, title, description };
+    });
+
+    const profileData = {
+      name,
+      profilePicture,
+      coverPicture,
+      shortBio,
+      longBio,
+      followers: followers.length,
+      following: following.length,
+      posts: userPosts,
+    };
+
+    return res.json(profileData);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ msg: "Server error" });
+  }
+});
