@@ -2,9 +2,9 @@
     background-color: #edf2f7;
     border: 1px dashed #82b0e1;
     padding: 1em;
-    min-width: 20px;
+    width: 1000px;
     min-height: 20px;
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -62,7 +62,7 @@ i {
     justify-content: center;
     align-items: center;
     margin-right: 0.8em;
-    font-size: 1em;
+    font-size: 1.25em;
 }
 
 form {

@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { BiImageAdd, BiVideoPlus, BiFile } from 'react-icons/bi';
+import '../pages/Profile/AddPost.css'
 
 const TextEditor = () => {
   const [title, setTitle] = useState("");
@@ -119,69 +120,69 @@ const TextEditor = () => {
             </Grid>
           </div>
 
+          <div>
+            <Grid container spacing={2} style={{ marginLeft: "4%" }}>
 
-          <Grid container spacing={2} style={{ marginLeft: "4%" }}>
+
+              <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id="upload_img">
+                <div className="file-inputs">
+                  <input type="file" accept="image/png, image/jpeg" id="image" onChange={handleImageChange} />
+                  <button type="Upload" >
+                    <i>
+                      <BiImageAdd />
+                    </i>
+                    Upload Image
+                  </button>
+
+                </div>
+                <p className="main">Supported files : JPG,PNG</p>
+                {image && <p> {image.name}</p>}
+
+              </Grid>
 
 
-            <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id="upload_img">
-              <div className="file-inputs">
-                <input type="file" accept="image/png, image/jpeg" id="image" onChange={handleImageChange} />
-                <button type="Upload" >
-                  <i>
-                    <BiImageAdd />
-                  </i>
-                  Upload Image
-                </button>
+              <br></br>
 
-              </div>
-              <p className="main">Supported files : JPG,PNG</p>
-              {image && <p> {image.name}</p>}
+
+              <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_video'>
+                <div className="file-inputs">
+
+                  <input type="file" accept="video/mp4" id="video" onChange={handleVideoChange} />
+                  <button type="Upload">
+                    <i>
+                      <BiVideoPlus />
+                    </i>
+                    Upload Video
+                  </button>
+
+                </div>
+                <p className="main">Supported files : mp4</p>
+                {video && <p>Selected video: {video.name}</p>}
+              </Grid>
+
+
+              <br></br>
+
+
+              <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_file'>
+                <div className="file-inputs">
+
+                  <input type="file" accept="application/pdf" id="document" onChange={handleDocumentChange} />
+                  <button type="Upload">
+                    <i>
+                      <BiFile />
+                    </i>
+                    Upload File
+                  </button>
+
+                </div>
+                <p className="main">Supported files : PDF</p>
+                {document && <p>Selected document: {document.name}</p>}
+              </Grid>
+
 
             </Grid>
-
-
-            <br></br>
-
-
-            <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_video'>
-              <div className="file-inputs">
-
-                <input type="file" accept="video/mp4" id="video" onChange={handleVideoChange} />
-                <button type="Upload">
-                  <i>
-                    <BiVideoPlus />
-                  </i>
-                  Upload Video
-                </button>
-
-              </div>
-              <p className="main">Supported files : mp4</p>
-              {video && <p>Selected video: {video.name}</p>}
-            </Grid>
-
-
-            <br></br>
-
-
-            <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_file'>
-              <div className="file-inputs">
-
-                <input type="file" accept="application/pdf" id="document" onChange={handleDocumentChange} />
-                <button type="Upload">
-                  <i>
-                    <BiFile />
-                  </i>
-                  Upload File
-                </button>
-
-              </div>
-              <p className="main">Supported files : PDF</p>
-              {document && <p>Selected document: {document.name}</p>}
-            </Grid>
-
-
-          </Grid>
-
+          </div>
           <br></br>
         </form >
 
