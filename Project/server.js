@@ -398,3 +398,32 @@ app.post("/unfollow", async (req, res) => {
       res.send(err);
     });
 });
+
+app.get("/forget", (req, res) => {
+  res.render("forget");
+}
+);
+app.post("/forget", async (req, res) => {
+  const { username, birthplace } = req.body;
+  const user = await User.findOne({ username });
+  if (user) {
+    if (user.birthplace === birthplace) {
+      res.render("updatepassword");
+    } else {
+      res.send("wrong birthplace");
+    }
+  } else {
+    res.send("user not found");
+  }
+});
+app.get("/updatepassword", (req, res) => {
+  res.render("updatepassword");
+});
+
+app.post("/updatepassword", async (req, res) => {
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  req.body.password = hashedPassword;
+  const user = await User.findOneAndUpdate({ username: req.body.username },{password : req.body.password});
+  res.send("password updated");
+
+} );
