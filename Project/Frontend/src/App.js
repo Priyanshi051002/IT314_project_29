@@ -8,6 +8,7 @@ import SignInOutContainer from "./containers/index";
 import Forgotpassword from "./pages/Login/Forgotpassword";
 import Passwordchangeq from "./pages/Login/Passwordchangeq";
 import Connect from "./pages/Connect/Connect";
+import MyConnection from "./pages/MyConnection/MyConnection";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/myposts" element={<ShowPostCards />} />
         <Route path="/pc" element={<Passwordchangeq />} />
         <Route path="/connect" element={<Connect />} />
+        <Route path="/myconnection" element={<MyConnection />} />
       </Routes>
     </BrowserRouter>
   );
