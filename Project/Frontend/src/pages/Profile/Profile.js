@@ -18,37 +18,37 @@ import PersonIcon from "@mui/icons-material/Person";
 const DUMMY_DATA = [
   {
     name: "Om",
-    source: "https://source.unsplash.com/random",
+    source: "https://picsum.photos/1000/1000",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
   },
   // {
   //   name: "Harsh",
-  //   source: "https://source.unsplash.com/random",
+  //   source: "https://picsum.photos/1000/1000",
   //   description:
   //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
   // },
   // {
   //   name: "Priyanshi",
-  //   source: "https://source.unsplash.com/random",
+  //   source: "https://picsum.photos/1000/1000",
   //   description:
   //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
   // },
   // {
   //   name: "Kaushal",
-  //   source: "https://source.unsplash.com/random",
+  //   source: "https://picsum.photos/1000/1000",
   //   description:
   //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
   // },
   // {
   //   name: "Devdeep",
-  //   source: "https://source.unsplash.com/random",
+  //   source: "https://picsum.photos/1000/1000",
   //   description:
   //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
   // },
   // {
   //   name: "Achyut",
-  //   source: "https://source.unsplash.com/random",
+  //   source: "https://picsum.photos/1000/1000",
   //   description:
   //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
   // },
@@ -56,8 +56,8 @@ const DUMMY_DATA = [
 
 const PROFILE_DATA = {
   name: "Virat Kohli",
-  prf_image: "https://source.unsplash.com/random",
-  bg_image: "https://source.unsplash.com/random",
+  prf_image: "https://picsum.photos/1000/1000",
+  bg_image: "https://picsum.photos/1000/1000",
   description: `Virat Kohli is an Indian international cricketer and former captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the IPL and for Delhi in Indian domestic cricket.`,
   about: `Virat Kohli is an Indian international cricketer and former
   captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the
@@ -172,16 +172,29 @@ const profileCard = (
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" variant="contained">
+            <Button
+              size="small"
+              variant="contained"
+              component={Link}
+              to={"/profile/addpost"}
+            >
               Edit Profile
             </Button>
-            <Button size="small" variant="contained">
+            <Button
+              size="small"
+              variant="contained"
+              component={Link}
+              to={"/profile/addpost"}
+            >
               Share Profile
             </Button>
-            <Button size="small" variant="contained">
-              <a href={'./Profile/addPost'}>
-                Add Post
-              </a>
+            <Button
+              size="small"
+              variant="contained"
+              component={Link}
+              to={"/profile/addpost"}
+            >
+              Add Post
             </Button>
           </CardActions>
         </Grid>
@@ -196,14 +209,7 @@ const Profile = () => {
       <Container maxWidth="lg">
         <Box>
           <Navbar />
-          <Grid
-            container
-            xs={12}
-            sm={12}
-            md={12}
-            rowSpacing={2}
-            sx={{ margin: "auto" }}
-          >
+          <Grid container xs={12} sm={12} md={12} rowSpacing={2}>
             <Grid item>{profileCard}</Grid>
             <Grid item>
               <Card>
