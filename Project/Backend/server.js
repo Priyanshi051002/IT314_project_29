@@ -1,31 +1,14 @@
 const express = require("express");
+const client = require("./elasticSearch/connection");
+const indexSettings = require("./elasticSearch/mappings_and_settings");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const bcrypt = require("bcrypt");
-//const passportLocalMongoose = require('passport-local-mongoose');
-//const http = require('http');
-// const ejs = require("ejs");
-//app.use(express.urlencoded({extended: true}));
-const passport = require("passport");
-const expressSession = require("express-session");
+// const expressSession = require("express-session");
+const userRoutes = require("./routes/user.routes");
+const postRoutes = require("./routes/post.routes");
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(
-  expressSession({ secret: "secret", resave: false, saveUninitialized: false })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-// app.set("view engine", "ejs");
-
-//const { initialize, passport } = require('passport');
-// const LocalStrategy = require("passport-local").Strategy;
-
-//const { initializingPasssport } = require('./passportConfig');
-//const connectEnsureLogin = require('connect-ensure-login');
 const dbURL =
   "mongodb+srv://202001449:ITPROJECT_69@cluster0.dtdhh6b.mongodb.net/passport?retryWrites=true&w=majority";
 mongoose
@@ -35,80 +18,52 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-const userRoutes = require("./routes/user.routes");
-
-// passport.use(
-//   new LocalStrategy(async (username, password, done) => {
-//     try {
-//       const user = await User.findOne({ username });
-//       if (!user) return done(null, false);
-//       let submittedPassword = password;
-//       let storedPassword = user.password;
-//       const passwordMatch = await bcrypt.compare(
-//         submittedPassword,
-//         storedPassword
-//       );
-
-//       if (passwordMatch) {
-//         return done(null, user);
-//       } else {
-//         return done(null, false);
-//       }
-//     } catch (error) {
-//       return done(error);
-//     }
-//   })
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// app.use(
+//   expressSession({ secret: "secret", resave: false, saveUninitialized: false })
 // );
-// isAuthenticated = (req, res, next) => {
-//   if (req.user) return next();
-//   res.redirect("/login");
-// };
 
-// passport.serializeUser((user, done) => done(null, user.id));
+client.ping(
+  {
+    requestTimeout: 30000,
+  },
+  function (error) {
+    if (error) {
+      console.error("Elasticsearch cluster is down!");
+    } else {
+      console.log("Everything is ok");
+      app.listen(7000, () => console.log("Server started on port 7000"));
+    }
+  }
+);
 
-// passport.deserializeUser(async (id, done) => {
-//   try {
-//     const user = await User.findById(id);
-//     done(null, user);
-//   } catch (error) {
-//     done(error);
-//   }
-// });
-
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
-
-// app.get("/register", (req, res) => {
-//   res.render("register");
-// });
-
-// app.get("/login", (req, res) => {
-//   res.render("login");
-// });
+// Check if the index named post exists or not if not create it with mapping and analyzer settings
+client.indices.exists(
+  {
+    index: "post",
+  },
+  (err, res, status) => {
+    if (res) {
+      console.log("index already exists");
+    } else {
+      client.indices.create(
+        {
+          index: "post",
+          body: indexSettings,
+        },
+        (err, res, status) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("created a new index", res);
+          }
+        }
+      );
+    }
+  }
+);
 
 app.use("/user", userRoutes);
-
-// app.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     failureRedirect: "/register",
-//     successRedirect: "/",
-//   }),
-//   (req, res) => {}
-// );
-
-// app.get("/profile", isAuthenticated, (req, res) => {
-//   res.send(req.user);
-// });
-
-// app.get("/logout", (req, res) => {
-//   req.logout(function (err) {
-//     if (err) return next(err);
-//     res.redirect("/");
-//   });
-// });
-
-// app.get('/testing', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-// 	res.render('testing');
-// });
+app.use("/post", postRoutes);
