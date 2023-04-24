@@ -25,7 +25,7 @@ function App() {
         <Route path="/pc" element={<Passwordchangeq />} />
         <Route path="/connect" element={<Connect />} />
         <Route path="/myconnection" element={<MyConnection />} />
-        <Route path="Profile/addpost" element={<AddPost />} />
+        <Route path="/profile/addpost" element={<AddPost />} />
       </Routes>
     </BrowserRouter>
   );

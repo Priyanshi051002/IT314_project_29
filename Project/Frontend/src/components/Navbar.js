@@ -18,7 +18,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
 
-const pages = ["Search", "Universities", "Connect"];
+const pages = ["Search", "Connect"];
 const settings = ["Profile", "Account", "Logout"];
 
 const Navbar = () => {
@@ -45,7 +45,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="sticky" sx={{ mb: 2, borderRadius: 2 }}>
+    <AppBar position="sticky" sx={{ mt: 1, mb:1, borderRadius: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SchoolIcon sx={{ mr: 1 }} />
