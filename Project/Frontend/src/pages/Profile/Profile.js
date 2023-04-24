@@ -179,7 +179,7 @@ const profileCard = (
               Share Profile
             </Button>
             <Button size="small" variant="contained">
-              <a href={'./Profile/addPost'}>
+              <a className="button_addpost" href={'./Profile/addPost'}>
                 Add Post
               </a>
             </Button>
