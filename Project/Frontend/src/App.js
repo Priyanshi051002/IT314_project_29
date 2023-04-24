@@ -9,6 +9,7 @@ import Forgotpassword from "./pages/Login/Forgotpassword";
 import Passwordchangeq from "./pages/Login/Passwordchangeq";
 import Connect from "./pages/Connect/Connect";
 import MyConnection from "./pages/MyConnection/MyConnection";
+import AddPost from "./pages/Profile/AddPost";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/pc" element={<Passwordchangeq />} />
         <Route path="/connect" element={<Connect />} />
         <Route path="/myconnection" element={<MyConnection />} />
+        <Route path="/addpost" element={<AddPost />} />
       </Routes>
     </BrowserRouter>
   );
