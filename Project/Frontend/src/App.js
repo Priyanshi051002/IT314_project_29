@@ -7,23 +7,27 @@ import ShowPostCards from "./pages/Profile/ShowPostCards";
 import SignInOutContainer from "./containers/index";
 import Forgotpassword from "./pages/Login/Forgotpassword";
 import Passwordchangeq from "./pages/Login/Passwordchangeq";
+import Connect from "./pages/Connect/Connect";
+import MyConnection from "./pages/MyConnection/MyConnection";
+import AddPost from "./pages/Profile/AddPost";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-           <Route path="/signinout" element={<SignInOutContainer />} />
-           <Route path="/fp" element={<Forgotpassword />} />
-          <Route path="/myposts" element={<ShowPostCards />} />
-          <Route path="/pc" element={<Passwordchangeq />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signinout" element={<SignInOutContainer />} />
+        <Route path="/fp" element={<Forgotpassword />} />
+        <Route path="/myposts" element={<ShowPostCards />} />
+        <Route path="/pc" element={<Passwordchangeq />} />
+        <Route path="/connect" element={<Connect />} />
+        <Route path="/myconnection" element={<MyConnection />} />
+        <Route path="/profile/addpost" element={<AddPost />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

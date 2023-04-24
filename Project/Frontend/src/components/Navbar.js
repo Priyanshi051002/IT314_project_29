@@ -17,12 +17,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SchoolIcon from "@mui/icons-material/School";
 import { Link } from "react-router-dom";
 
-const pages = ["Search", "Universities"];
+const pages = ["Search", "Connect"];
 const settings = ["Profile", "Account", "Logout"];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleLogout = () => {
+    navigate("/signinout");
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,7 +43,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="sticky" sx={{ mb: 2, borderRadius: 2 }}>
+    <AppBar position="sticky" sx={{ mt: 1, mb:1, borderRadius: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SchoolIcon sx={{ mr: 1 }} />
@@ -91,7 +95,13 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    textAlign="center"
+                    component={Link}
+                    to={"/" + page.toLowerCase()}
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -120,6 +130,8 @@ const Navbar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={Link}
+                to={"/" + page.toLowerCase()}
               >
                 {page}
               </Button>
@@ -127,8 +139,20 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Tooltip title="Logout">
+              <IconButton size="large" color="inherit" onClick={handleLogout}>
+                <LogoutIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Profile">
+              <IconButton
+                onClick={handleOpenUserMenu}
+                component={Link}
+                to={"/profile"}
+                sx={{ p: 0 }}
+              >
                 <Avatar src="/" sx={{ bgcolor: "inherit" }} />
               </IconButton>
             </Tooltip>
