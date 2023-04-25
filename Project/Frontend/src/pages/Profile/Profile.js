@@ -175,7 +175,7 @@ const profileCard = (
           <CardActions disableSpacing={true}>
             <Grid container>
               <Grid item xs={2} md={3}>
-                <EditProfile />
+                <EditProfile profile={PROFILE_DATA} />
               </Grid>
 
               <Grid item xs={2} md={3}>

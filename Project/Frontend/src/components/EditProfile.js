@@ -7,9 +7,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-const EditProfile = () => {
+const EditProfile = ({ profile }) => {
 
     const [open, setOpen] = React.useState(false);
+    const [name, setName] = React.useState(profile.name);
+    const [description, setDescription] = React.useState(profile.description);
+    const [about, setAbout] = React.useState(profile.about);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -57,10 +60,14 @@ const EditProfile = () => {
                                         autoFocus
                                         margin="dense"
                                         id="name"
+                                        value={name}
                                         label="Name"
                                         type="text"
                                         variant="outlined"
                                         fullWidth
+                                        onChange={(event) => {
+                                            setName(event.target.value);
+                                        }}
                                     />
                                     <TextField
                                         autoFocus
@@ -68,8 +75,12 @@ const EditProfile = () => {
                                         id="email"
                                         label="Email Address"
                                         type="email"
+                                        defaultValue={'temp@gmail.com'}
                                         variant="outlined"
                                         fullWidth
+                                        inputProps={{
+                                            readOnly: true,
+                                        }}
                                     />
                                 </Grid>
                             </Grid>
@@ -82,23 +93,31 @@ const EditProfile = () => {
                         margin="dense"
                         id="desc"
                         label="Description"
+                        value={description}
                         type="text"
                         variant="filled"
                         fullWidth
                         multiline
                         minRows={4}
+                        onChange={(event) => {
+                            setDescription(event.target.value);
+                        }}
                     />
 
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="Description"
+                        id="about"
                         label="About"
+                        value={about}
                         type="text"
                         variant="filled"
                         fullWidth
                         multiline
                         minRows={4}
+                        onChange={(event) => {
+                            setAbout(event.target.value);
+                        }}
 
                     />
 
