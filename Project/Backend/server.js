@@ -278,9 +278,32 @@ app.post("/updatepassword", async (req, res) => {
 } );
 
 app.post('/getUser',authenticateToken,async (req,res)=>{
-  //get all the users with name
+  //get the users
+  const x = req.body.name;
+  User.find({ name: { $regex: x , $options: 'i' } })
+  .then(users => {
+    console.log(users);
+  })
+  .catch(err => {
+    console.log(err);
+  });
   
-}
+});
+
+app.post('/getAllUser',authenticateToken,async (req,res)=>{
+  //get All the users
+  
+  User.find({})
+  .then(users => {
+    console.log(users);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  
+});
+
+
 
 
 

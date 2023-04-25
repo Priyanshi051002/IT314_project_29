@@ -72,13 +72,13 @@ exports.registerfunc = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
-  const newUser = await User.create();
-  newUser.name = req.body.name;
-  newUser.username = req.body.username;
-  newUser.password = req.body.password;
-  newUser.birthplace = req.body.birthplace;
+  const newUser = await User.create(user);
+  // newUser.name = req.body.name;
+  // newUser.username = req.body.username;
+  // newUser.password = req.body.password;
+  // newUser.birthplace = req.body.birthplace;
 
-  await newUser.save();
+  // await newUser.save();
 
   res.status(201).send({
     data: newUser,
