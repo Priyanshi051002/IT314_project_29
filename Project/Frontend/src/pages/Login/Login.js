@@ -10,9 +10,8 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Checkbox from "@mui/material/Checkbox";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = ({ handleChange }) => {
   const navigate = useNavigate();
@@ -46,9 +45,11 @@ const Login = ({ handleChange }) => {
       .then((data) => {
         console.log(data);
         if (data.success) {
+          localStorage.setItem("token", data.data._id);
+          // console.log(data.data._id);
           return navigate("/");
         } else {
-          return navigate("/myposts");
+          return alert("Wrong Credentials");
         }
       })
       .catch((err) => {
@@ -90,11 +91,11 @@ const Login = ({ handleChange }) => {
             </Typography>
             {/* </Box> */}
             {/* <h2>Sign in</h2> */}
-            {isLoginError ? (
+            {/* {isLoginError ? (
               <Alert severity="error" sx={{ margin: "1em" }}>
                 Invalid Login Credentials!
               </Alert>
-            ) : null}
+            ) : null} */}
           </Grid>
           <form onSubmit={handleSignin}>
             <TextField
@@ -105,8 +106,7 @@ const Login = ({ handleChange }) => {
               required
               onChange={changeHandler}
               placeholder="Enter username"
-              fullWidth="true"
-              margin="10 px"
+              fullWidth
             ></TextField>
             <TextField
               variant="filled"
@@ -117,7 +117,7 @@ const Login = ({ handleChange }) => {
               placeholder="Enter password"
               type="password"
               onChange={changeHandler}
-              fullWidth="true"
+              fullWidth
             ></TextField>
             <FormControlLabel
               control={<Checkbox name="checkedB" color="primary" />}
@@ -127,7 +127,7 @@ const Login = ({ handleChange }) => {
               type="submit"
               variant="contained"
               color="primary"
-              fullWidth="true"
+              fullWidth
               style={buttonStyle}
             >
               Sign in

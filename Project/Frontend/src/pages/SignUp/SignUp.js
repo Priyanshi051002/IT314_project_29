@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { useNavigate } from "react-router-dom";
-import {Divider} from "@mui/material"
+import { Divider } from "@mui/material";
 import Alert from "@mui/material/Alert";
-import { Typography,Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 export const SignUp = () => {
-
   const navigate = useNavigate();
 
   const [details, setDetails] = useState({
@@ -41,7 +40,7 @@ export const SignUp = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.success){
+        if (data.success) {
           return navigate("/login");
         }
       })
@@ -58,27 +57,37 @@ export const SignUp = () => {
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
-   const boxStyle = { padding: "10px", border: "1px solid #ccc", marginBottom: "20px",};
+  const boxStyle = {
+    padding: "10px",
+    border: "1px solid #ccc",
+    marginBottom: "20px",
+  };
   return (
     <div>
       <Grid>
-        <Paper elevation={20} style={paperStyle}>
-          <Grid align="center">
-          <Grid item xs={12} sm={6} md={3}></Grid>
-            {/* <Avatar style={avatarStyle}>
+        <form onSubmit={signUpHandler}>
+          <Paper elevation={20} style={paperStyle}>
+            <Grid align="center">
+              <Grid item xs={12} sm={6} md={3}></Grid>
+              {/* <Avatar style={avatarStyle}>
               <AddCircleOutlineOutlinedIcon />
             </Avatar> */}
-            {/* <Box sx={boxStyle}> */}
-            <Typography variant="h5" align="center" style={{ fontWeight: 600, marginBottom: 20 }}>Educational <span style={{ color: "blue" }}>App</span></Typography>
-            {/* </Box> */}
-            <h3>Personal Details</h3>
-            {!isPasswordMatched ? (
+              {/* <Box sx={boxStyle}> */}
+              <Typography
+                variant="h5"
+                align="center"
+                style={{ fontWeight: 600, marginBottom: 20 }}
+              >
+                Educational <span style={{ color: "blue" }}>App</span>
+              </Typography>
+              {/* </Box> */}
+              <h3>Personal Details</h3>
+              {/* {!isPasswordMatched ? (
               <Alert severity="error" sx={{ margin: "1em" }}>
                 Password did not match!
               </Alert>
-            ) : null}
-          </Grid>
-          <form onSubmit={signUpHandler}>
+            ) : null} */}
+            </Grid>
             <TextField
               variant="filled"
               label="Name"
@@ -86,7 +95,7 @@ export const SignUp = () => {
               value={details.name}
               required
               placeholder="Enter your name"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
             <TextField
@@ -97,7 +106,7 @@ export const SignUp = () => {
               value={details.username}
               required
               placeholder="Enter username"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
             <TextField
@@ -108,7 +117,7 @@ export const SignUp = () => {
               value={details.password}
               placeholder="Enter password"
               type="password"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
             <TextField
@@ -117,7 +126,7 @@ export const SignUp = () => {
               required
               placeholder="Enter password"
               type="password"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
             <TextField
@@ -128,19 +137,16 @@ export const SignUp = () => {
               required
               placeholder="Enter your birth place"
               type="text"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
-            </form>
-            </Paper>
-             <Divider/>
-            <Paper elevation={20} style={paperStyle}>
-            
-             <form>
-              <Grid align='center'>
+          </Paper>
+          <Divider />
+          <Paper elevation={20} style={paperStyle}>
+            <Grid align="center">
               <Grid item xs={12} sm={6} md={3}></Grid>
-               <h3>Profile Details</h3>
-               </Grid>
+              <h3>Profile Details</h3>
+            </Grid>
             <TextField
               variant="filled"
               label="Enter about yourself"
@@ -149,31 +155,31 @@ export const SignUp = () => {
               required
               placeholder="Enter about yourself"
               type="text"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
             <TextField
               variant="filled"
               label="Enter description"
-              name="name"
+              name="desc"
               value={details.desc}
               required
               placeholder="Enter description"
               type="text"
-              fullWidth="true"
+              fullWidth
               onChange={handleChange}
             ></TextField>
             <Button
               type="submit"
               variant="contained"
               color="primary"
-              fullWidth="true"
+              fullWidth
               style={buttonStyle}
             >
-              Sign in
+              Sign Up
             </Button>
-          </form>
-        </Paper>
+          </Paper>
+        </form>
       </Grid>
     </div>
   );
