@@ -1,16 +1,19 @@
+// relative import
 const express = require("express");
-const client = require("./elasticSearch/connection");
-const indexSettings = require("./elasticSearch/mappings_and_settings");
 const app = express();
-const port = process.env.PORT || 5000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 // const expressSession = require("express-session");
+const port = process.env.PORT || 5000;
+require("dotenv").config();
+
+//dependencies imports
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
+const client = require("./elasticSearch/connection");
+const indexSettings = require("./elasticSearch/mappings_and_settings");
 
-const dbURL =
-  "mongodb+srv://202001449:ITPROJECT_69@cluster0.dtdhh6b.mongodb.net/passport?retryWrites=true&w=majority";
+const dbURL = process.env.DATABASE_URL || "https://localhost/8000";
 mongoose
   .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) =>
