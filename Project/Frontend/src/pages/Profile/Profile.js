@@ -16,43 +16,67 @@ import PostCards from "../../components/PostCards";
 import PersonIcon from "@mui/icons-material/Person";
 import EditProfile from "../../components/EditProfile";
 
-const DUMMY_DATA = [
+const posts = [
   {
-    name: "Om",
+    title: "Om",
     source: "https://picsum.photos/1000/1000",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
   },
-  // {
-  //   name: "Harsh",
-  //   source: "https://picsum.photos/1000/1000",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Priyanshi",
-  //   source: "https://picsum.photos/1000/1000",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Kaushal",
-  //   source: "https://picsum.photos/1000/1000",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Devdeep",
-  //   source: "https://picsum.photos/1000/1000",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Achyut",
-  //   source: "https://picsum.photos/1000/1000",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
+  {
+    title: "Harsh",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Priyanshi",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Kaushal",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Devdeep",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Achyut",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
 ];
 
 const PROFILE_DATA = {
@@ -75,12 +99,11 @@ const postCard = (
           My Posts
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={6}>
-            <PostCards items={DUMMY_DATA} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-            <PostCards items={DUMMY_DATA} />
-          </Grid>
+          {posts.slice(0, 2).map((post) => (
+            <Grid item xs={12} sm={6} md={6}>
+              <PostCards item={post} />
+            </Grid>
+          ))}
         </Grid>
       </CardContent>
       <CardActions>
