@@ -11,7 +11,6 @@ import '../pages/Profile/AddPost.css'
 
 const TextEditor = () => {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [document, setDocument] = useState(null);

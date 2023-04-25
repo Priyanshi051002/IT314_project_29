@@ -10,6 +10,7 @@ import Passwordchangeq from "./pages/Login/Passwordchangeq";
 import Connect from "./pages/Connect/Connect";
 import MyConnection from "./pages/MyConnection/MyConnection";
 import AddPost from "./pages/Profile/AddPost";
+import EditProfile from "./components/EditProfile";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/connect" element={<Connect />} />
         <Route path="/myconnection" element={<MyConnection />} />
         <Route path="Profile/addpost" element={<AddPost />} />
+        <Route path="profile/EditProfile" element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
   );
