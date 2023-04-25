@@ -63,14 +63,14 @@ const TextEditor = () => {
     <>
       <div>
         {/* <Navbar /> */}
-        <h1 > Add Post </h1>
-        <form onSubmit={handleSubmit}>
+        <h1 className='addpost' > Add Post </h1>
+        <form className='Form' onSubmit={handleSubmit}>
 
           <div>
-            <label htmlFor="title">Title:</label>
+            <label htmlFor="title" className='title'>Title:</label>
             <input
               type="text"
-              id="title"
+              className='input_title'
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
@@ -126,9 +126,9 @@ const TextEditor = () => {
 
               <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id="upload_img">
                 <div className="file-inputs">
-                  <input type="file" accept="image/png, image/jpeg" id="image" onChange={handleImageChange} />
-                  <button type="Upload" >
-                    <i>
+                  <input type="file" accept="image/png, image/jpeg" className="upload" onChange={handleImageChange} />
+                  <button type="Upload" className='upload_button'>
+                    <i className='icon'>
                       <BiImageAdd />
                     </i>
                     Upload Image
@@ -147,9 +147,9 @@ const TextEditor = () => {
               <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_video'>
                 <div className="file-inputs">
 
-                  <input type="file" accept="video/mp4" id="video" onChange={handleVideoChange} />
-                  <button type="Upload">
-                    <i>
+                  <input type="file" accept="video/mp4" className="upload" onChange={handleVideoChange} />
+                  <button type="Upload" className='upload_button' >
+                    <i className='icon'>
                       <BiVideoPlus />
                     </i>
                     Upload Video
@@ -167,9 +167,9 @@ const TextEditor = () => {
               <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_file'>
                 <div className="file-inputs">
 
-                  <input type="file" accept="application/pdf" id="document" onChange={handleDocumentChange} />
-                  <button type="Upload">
-                    <i>
+                  <input type="file" accept="application/pdf" className="upload" onChange={handleDocumentChange} />
+                  <button type="Upload" className='upload_button'>
+                    <i className='icon'>
                       <BiFile />
                     </i>
                     Upload File
