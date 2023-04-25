@@ -1,7 +1,7 @@
 const User = require("../models/register.model");
 const bcrypt = require("bcrypt");
 
-exports.loginfunc = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -31,20 +31,11 @@ exports.loginfunc = async (req, res) => {
   }
 };
 
-exports.registerfunc = async (req, res) => {
+exports.register = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
 
   if (user) return res.status(400).send("User already registered");
   console.log(req.body);
-
-  // //check password length should be greater than or equal to 8
-  // if(req.body.password.length < 8) return res.status(400).send("Password should be greater than or equal to 8 characters");
-  // //should contain atleast one uppercase letter
-  // if(!req.body.password.match(/[A-Z]/)) return res.status(400).send("Password should contain atleast one uppercase letter");
-  // //should contain atleast one special character
-  // if(!req.body.password.match(/[!@#$%^&*]/)) return res.status(400).send("Password should contain atleast one special character");
-
-  //encrypt password
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
