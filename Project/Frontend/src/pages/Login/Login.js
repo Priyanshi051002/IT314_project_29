@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -11,10 +11,9 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Checkbox from "@mui/material/Checkbox";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = ({ handleChange }) => {
-
   const navigate = useNavigate();
 
   const [details, setDetails] = useState({
@@ -45,10 +44,9 @@ const Login = ({ handleChange }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if(data.success){
+        if (data.success) {
           return navigate("/");
-        }
-        else{
+        } else {
           return navigate("/myposts");
         }
       })

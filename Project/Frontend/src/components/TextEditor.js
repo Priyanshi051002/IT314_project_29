@@ -1,20 +1,46 @@
-import React, { useRef, useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+import React, { useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 import { Button, Grid } from "@mui/material";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { BiImageAdd, BiVideoPlus, BiFile } from 'react-icons/bi';
-import '../pages/Profile/AddPost.css'
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { BiImageAdd, BiVideoPlus, BiFile } from "react-icons/bi";
+import "../pages/Profile/AddPost.css";
+import { useNavigate } from "react-router-dom";
+
+const user_id = "omp217";
 
 const TextEditor = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [document, setDocument] = useState(null);
+
+  const handleAddPost = (post) => {
+    fetch(`http://localhost:7000/post/addPost`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify(post),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          return navigate("/");
+        } else {
+          return navigate("/profile/addPost");
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,8 +65,8 @@ const TextEditor = () => {
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-      editorRef.current.setContent('');
+      // console.log(editorRef.current.getContent());
+      editorRef.current.setContent("");
     }
   };
 
@@ -57,31 +83,44 @@ const TextEditor = () => {
   const handleClose1 = () => {
     log();
     setOpen(false);
+    const post = {
+      user_id: user_id,
+      title: title,
+      description: content,
+    };
+    setTitle("");
+    handleAddPost(post);
   };
 
   return (
     <>
       <div>
         {/* <Navbar /> */}
-        <h1 className='addpost' > Add Post </h1>
-        <form className='Form' onSubmit={handleSubmit}>
-
+        <h1 className="addpost"> Add Post </h1>
+        <form className="Form" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="title" className='title'>Title:</label>
+            <label htmlFor="title" className="title">
+              Title:
+            </label>
             <input
               type="text"
-              className='input_title'
+              className="input_title"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
           </div>
 
-
           <div>
-            <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ p: "1em" }}>
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+              sx={{ p: "1em" }}
+            >
               <Editor
-                apiKey='gu0fysg21lqeq36qwa8mjpn5i0n7bqnvfkrzl5dbsujw6u22'
-                onInit={(evt, editor) => editorRef.current = editor}
+                apiKey="gu0fysg21lqeq36qwa8mjpn5i0n7bqnvfkrzl5dbsujw6u22"
+                onInit={(evt, editor) => (editorRef.current = editor)}
                 initialValue="<p>Share your thoughts here..</p>"
                 init={{
                   selector: "#editor",
@@ -89,12 +128,22 @@ const TextEditor = () => {
                   width: 1000,
                   menubar: false,
                   statusbar: false,
-                  icons: 'material',
-                  toolbar_mode: 'floating',
+                  icons: "material",
+                  toolbar_mode: "floating",
                   plugins: [
-                    'advlist', 'autolink', 'lists', 'charmap', 'searchreplace', 'wordcount', 'code', 'fullscreen', 'table', 'codesample'
+                    "advlist",
+                    "autolink",
+                    "lists",
+                    "charmap",
+                    "searchreplace",
+                    "wordcount",
+                    "code",
+                    "fullscreen",
+                    "table",
+                    "codesample",
                   ],
-                  toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | charmap table codesample | searchreplace wordcount code | fullscreen ',
+                  toolbar:
+                    "undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | charmap table codesample | searchreplace wordcount code | fullscreen ",
                   // toolbar: [
                   //   { name: 'history', items: [ 'undo', 'redo' ] },
                   //   { name: 'styles', items: [ 'blocks' ] },
@@ -105,7 +154,8 @@ const TextEditor = () => {
                   //   { name: 'tools', items: [ 'searchreplace', 'wordcount', 'code' ] }
 
                   // ],
-                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px } + .blue { color: blue; }',
+                  content_style:
+                    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px } + .blue { color: blue; }",
 
                   // setup: (editor) =>  {
                   //   editor.ui.registry.addButton('customAddButton', {
@@ -116,77 +166,96 @@ const TextEditor = () => {
                   //   });
                   // }
                 }}
+                onEditorChange={(newText) => setContent(newText)}
               />
             </Grid>
           </div>
 
           <div>
             <Grid container spacing={2} style={{ marginLeft: "4%" }}>
-
-
-              <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id="upload_img">
+              <Grid
+                item
+                xs={3}
+                style={{ margin: "3%" }}
+                className="file-card"
+                id="upload_img"
+              >
                 <div className="file-inputs">
-                  <input type="file" accept="image/png, image/jpeg" className="upload" onChange={handleImageChange} />
-                  <button type="Upload" className='upload_button'>
-                    <i className='icon'>
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    className="upload"
+                    onChange={handleImageChange}
+                  />
+                  <button type="Upload" className="upload_button">
+                    <i className="icon">
                       <BiImageAdd />
                     </i>
                     Upload Image
                   </button>
-
                 </div>
                 <p className="main">Supported files : JPG,PNG</p>
                 {image && <p> {image.name}</p>}
-
               </Grid>
-
 
               <br></br>
 
-
-              <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_video'>
+              <Grid
+                item
+                xs={3}
+                style={{ margin: "3%" }}
+                className="file-card"
+                id="upload_video"
+              >
                 <div className="file-inputs">
-
-                  <input type="file" accept="video/mp4" className="upload" onChange={handleVideoChange} />
-                  <button type="Upload" className='upload_button' >
-                    <i className='icon'>
+                  <input
+                    type="file"
+                    accept="video/mp4"
+                    className="upload"
+                    onChange={handleVideoChange}
+                  />
+                  <button type="Upload" className="upload_button">
+                    <i className="icon">
                       <BiVideoPlus />
                     </i>
                     Upload Video
                   </button>
-
                 </div>
                 <p className="main">Supported files : mp4</p>
                 {video && <p>Selected video: {video.name}</p>}
               </Grid>
 
-
               <br></br>
 
-
-              <Grid item xs={3} style={{ margin: "3%" }} className="file-card" id='upload_file'>
+              <Grid
+                item
+                xs={3}
+                style={{ margin: "3%" }}
+                className="file-card"
+                id="upload_file"
+              >
                 <div className="file-inputs">
-
-                  <input type="file" accept="application/pdf" className="upload" onChange={handleDocumentChange} />
-                  <button type="Upload" className='upload_button'>
-                    <i className='icon'>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    className="upload"
+                    onChange={handleDocumentChange}
+                  />
+                  <button type="Upload" className="upload_button">
+                    <i className="icon">
                       <BiFile />
                     </i>
                     Upload File
                   </button>
-
                 </div>
                 <p className="main">Supported files : PDF</p>
                 {document && <p>Selected document: {document.name}</p>}
               </Grid>
-
-
             </Grid>
           </div>
           <br></br>
-        </form >
-
-      </div >
+        </form>
+      </div>
 
       <Grid container spacing={2}>
         <Grid item xs={4} md={3}></Grid>
@@ -198,14 +267,15 @@ const TextEditor = () => {
             open={open}
             onClose={handleClose}
             aria-labelledby="responsive-dialog-title"
-            maxWidth='xs'
+            maxWidth="xs"
           >
             <DialogTitle id="responsive-dialog-title">
               {"Add the post?"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Are you sure you want to add the post? You will not be able to edit it afterwards.
+                Are you sure you want to add the post? You will not be able to
+                edit it afterwards.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -222,6 +292,6 @@ const TextEditor = () => {
       </Grid>
     </>
   );
-}
+};
 
 export default TextEditor;
