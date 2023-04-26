@@ -1,16 +1,19 @@
+// relative import
 const express = require("express");
-const client = require("./elasticSearch/connection");
-const indexSettings = require("./elasticSearch/mappings_and_settings");
 const app = express();
-const port = process.env.PORT || 5000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 // const expressSession = require("express-session");
+const port = process.env.PORT || 5000;
+require("dotenv").config();
+
+//dependencies imports
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
+const client = require("./elasticSearch/connection");
+const indexSettings = require("./elasticSearch/mappings_and_settings");
 
-const dbURL =
-  "mongodb+srv://202001449:ITPROJECT_69@cluster0.dtdhh6b.mongodb.net/passport?retryWrites=true&w=majority";
+const dbURL = process.env.DATABASE_URL || "https://localhost/8000";
 mongoose
   .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) =>
@@ -244,6 +247,33 @@ app.use("/post", postRoutes);
 // app.get("/updatepassword", (req, res) => {
 //   res.render("updatepassword");
 // });
+// app.post('/getUser',authenticateToken,async (req,res)=>{
+//   //get the users
+//   const x = req.body.name;
+//   User.find({ name: { $regex: x , $options: 'i' } })
+//   .then(users => {
+//     console.log(users);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+  
+// });
+
+// app.post('/getAllUser',authenticateToken,async (req,res)=>{
+//   //get All the users
+  
+//   User.find({})
+//   .then(users => {
+//     console.log(users);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+  
+// });
+
+
 
 // app.post("/updatepassword", async (req, res) => {
 //   const hashedPassword = await bcrypt.hash(req.body.password, 10);
