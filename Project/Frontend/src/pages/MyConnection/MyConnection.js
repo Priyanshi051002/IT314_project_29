@@ -13,140 +13,32 @@ import {
 
 // import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-
-const users = [
-  {
-    name: "Om",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Harsh",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Priyanshi",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Kaushal",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Devdeep",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Achyut",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Katrina",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Kathan",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Krish",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Sanjay",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Ram",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Zeel",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Devdeep",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Achyut",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Katrina",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Kathan",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Krish",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Sanjay",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Ram",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Zeel",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-];
+import ImageUrl from "../../static";
 
 const MyConnection = () => {
-  // const [users, setUsers] = useState([]);
+  const [followersUsers, setFollowersUsers] = useState([]);
+  const [followingUsers, setfollowingUsers] = useState([]);
   const [follower, setFollower] = useState(8);
   const [following, setFollowing] = useState(8);
 
-  //   useEffect(() => {
-  //     fetch("https://jsonplaceholder.typicode.com/posts")
-  //       .then((res) => res.json())
-  //       .then((data) => setUsers(data));
-  //   }, []);
+  useEffect(() => {
+    fetch("http://localhost:5000/user/getProfile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setFollowersUsers(data.data.follower);
+          setfollowingUsers(data.data.following);
+        } else {
+          alert(data.error);
+        }
+      });
+  }, []);
 
   const ShowMoreFollower = () => {
     setFollower((prevValue) => prevValue + 4);
@@ -171,18 +63,18 @@ const MyConnection = () => {
           </Typography>
           <Divider />
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
-            {users.slice(0, follower).map((user) => (
+            {followersUsers.slice(0, follower).map((user) => (
               <Grid item xs={12} sm={6} md={3}>
                 <Card>
                   <CardMedia
                     component="img"
                     alt="green iguana"
                     height="125"
-                    image={user.source}
+                    image={ImageUrl}
                   />
                   <CardContent>
                     <Typography variant="h5" textAlign={"left"} component="div">
-                      {user.name}
+                      {user.username}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -210,18 +102,18 @@ const MyConnection = () => {
           <Divider />
 
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
-            {users.slice(0, following).map((user) => (
+            {followingUsers.slice(0, following).map((user) => (
               <Grid item xs={12} sm={6} md={3}>
                 <Card>
                   <CardMedia
                     component="img"
                     alt="green iguana"
                     height="125"
-                    image={user.source}
+                    image={ImageUrl}
                   />
                   <CardContent>
                     <Typography variant="h5" textAlign={"left"} component="div">
-                      {user.name}
+                      {user.username}
                     </Typography>
                   </CardContent>
                 </Card>

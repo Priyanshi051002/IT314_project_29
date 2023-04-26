@@ -14,7 +14,15 @@ const userSchema = new mongoose.Schema({
   birthplace: {
     type: String,
     required: true,
-  }
+  },
+  following: {
+    type: [{ username: String }],
+    required: false,
+  },
+  follower: {
+    type: [{ username: String }],
+    required: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
