@@ -13,7 +13,7 @@ const postRoutes = require("./routes/post.routes");
 const client = require("./elasticSearch/connection");
 const indexSettings = require("./elasticSearch/mappings_and_settings");
 
-const dbURL = process.env.DATABASE_URL || "https://localhost/8000";
+const dbURL = process.env.DATABASE_URL || "https://localhost:8000";
 mongoose
   .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) =>

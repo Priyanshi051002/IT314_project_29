@@ -1,4 +1,5 @@
 const User = require("../models/register.model");
+const Profile = require("../models/profile.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -39,7 +40,7 @@ exports.login = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(404).send({
+    res.status(404).send({
       data: {},
       success: false,
       error: "Internal server error",
@@ -50,7 +51,7 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
 
-  if (user) return res.status(400).send("User already registered");
+  if (user) res.status(400).send("User already registered");
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
@@ -66,13 +67,13 @@ exports.register = async (req, res) => {
 exports.getProfile = async (req, res) => {
   const user = await User.findOne({ username: req.user.username });
   if (user) {
-    return res.status(200).send({
+    res.status(200).send({
       data: user,
       success: true,
       error: "",
     });
   } else {
-    return res.status(403).send({
+    res.status(403).send({
       data: {},
       success: false,
       error: "User not found",
@@ -83,21 +84,20 @@ exports.getProfile = async (req, res) => {
 exports.createProfile = async (req, res) => {
   try {
     const { name, description, about } = req.body;
-
-    const profile = new Profile();
-    profile.user = req.user.username;
-    profile.name = name;
-    profile.description = description;
-    profile.about = about;
-
-    await profile.save();
-    return res.status(200).send({
+    const body = {
+      name,
+      description,
+      about,
+      user: req.user.username,
+    };
+    const profile = await Profile.create(body);
+    res.status(200).send({
       data: profile,
       success: true,
       error: "",
     });
   } catch (err) {
-    return res.status(400).send({
+    res.status(400).send({
       data: {},
       success: false,
       error: err,
@@ -112,7 +112,7 @@ exports.editProfile = async (req, res) => {
     //update profile
     //check if not found
     if (!profile) {
-      return res.status(404).send({
+      res.status(404).send({
         data: {},
         success: false,
         error: "Profile not found",
@@ -122,14 +122,14 @@ exports.editProfile = async (req, res) => {
       profile.description = req.body.description;
       profile.about = req.body.about;
       await profile.save();
-      return res.status(200).send({
+      res.status(200).send({
         data: profile,
         success: true,
         error: "",
       });
     }
   } catch (err) {
-    return res.status(400).send({
+    res.status(400).send({
       data: {},
       success: false,
       error: err,
@@ -138,103 +138,38 @@ exports.editProfile = async (req, res) => {
 };
 
 exports.follow = async (req, res) => {
-  //get the username of the user who is being followed
-  const follwedUser = req.body.username;
+  //get the username of the user who is being followed, so store this
+  const follwedUser = await User.findOne({ username: req.body.username });
   //get the username of the user who is following
-  const follower = req.user.username;
+  const follower = await User.findOne({ username: req.user.username });
 
   //check if the user is already following the user
-
-  //add the follower in the followers array of the user
-  const x = await User.findOneAndUpdate(
-    { username: follwedUser },
-    { $push: { followers: follower } },
-    { new: true }
-  )
-    .then((result) => {
-      res.status(200).send({
-        data: result,
-        success: true,
-        error: "",
-      });
-    })
-    .catch((err) => {
-      res.status(404).send({
-        data: {},
-        success: false,
-        error: err,
-      });
+  if (
+    follower.following.find(
+      (friend) => friend.username === follwedUser.username
+    )
+  ) {
+    const x = follower.following.pull({ username: follwedUser.username });
+    await follower.save();
+    const y = follwedUser.follower.pull({ username: follower.username });
+    await follwedUser.save();
+    return res.status(200).send({
+      data: "Removed",
+      success: true,
+      error: "",
     });
-
-  //add the user in the following array of the follower
-  const y = await User.findOneAndUpdate(
-    { username: follower },
-    { $push: { following: follwedUser } },
-    { new: true }
-  )
-    .then((result) => {
-      res.status(200).send({
-        data: result,
-        success: true,
-        error: "",
-      });
-    })
-    .catch((err) => {
-      res.status(404).send({
-        data: {},
-        success: false,
-        error: err,
-      });
+    //add the follower in the followers array of the user
+  } else {
+    const x = follower.following.push({ username: follwedUser.username });
+    await follower.save();
+    const y = follwedUser.follower.push({ username: follower.username });
+    await follwedUser.save();
+    return res.status(200).send({
+      data: "Added",
+      success: true,
+      error: "",
     });
-};
-
-exports.unfollow = async (req, res) => {
-  //get the username of the user who is being unfollowed
-  const unfollwedUser = req.body.username;
-  //get the username of the user who is unfollowing
-  const unfollower = req.user.username;
-
-  //delete the unfollower in the followers array of the user
-  const Updatedfolloweduser = await User.findOneAndUpdate(
-    { username: unfollwedUser },
-    { $pull: { followers: unfollower } },
-    { new: true }
-  )
-    .then((result) => {
-      res.status(200).send({
-        data: result,
-        success: true,
-        error: "",
-      });
-    })
-    .catch((err) => {
-      res.status(404).send({
-        data: {},
-        success: false,
-        error: err,
-      });
-    });
-
-  //delete the user in the following array of the unfollower
-  const UpdatedfollowedrserUser = await User.findOneAndUpdate(
-    { username: unfollower },
-    { $pull: { following: unfollwedUser } },
-    { new: true }
-  )
-    .then((result) => {
-      res.status(200).send({
-        data: result,
-        success: true,
-        error: "",
-      });
-    })
-    .catch((err) => {
-      res.status(404).send({
-        data: {},
-        success: false,
-        error: err,
-      });
-    });
+  }
 };
 
 exports.forget = async (req, res) => {
@@ -242,20 +177,20 @@ exports.forget = async (req, res) => {
   const user = await User.findOne({ username });
   if (user) {
     if (user.birthplace === birthplace) {
-      return res.status(200).send({
+      res.status(200).send({
         data: {},
         success: true,
         error: "",
       });
     } else {
-      return res.status(200).send({
+      res.status(200).send({
         data: {},
         success: false,
         error: "wrong birthplace",
       });
     }
   } else {
-    return res.status(200).send({
+    res.status(200).send({
       data: {},
       success: false,
       error: "User Not Found",
@@ -268,14 +203,14 @@ exports.getUserByName = async (req, res) => {
   const x = req.body.name;
   User.find({ name: { $regex: x, $options: "i" } })
     .then((users) => {
-      return res.status(200).send({
+      res.status(200).send({
         data: users,
         success: true,
         error: "",
       });
     })
     .catch((err) => {
-      return res.status(404).send({
+      res.status(404).send({
         data: {},
         success: false,
         error: err,
@@ -283,19 +218,19 @@ exports.getUserByName = async (req, res) => {
     });
 };
 
-exports.getUser = async (req, res) => {
+exports.getAllUser = async (req, res) => {
   //get All the users
 
   User.find({})
     .then((users) => {
-      return res.status(200).send({
+      res.status(200).send({
         data: users,
         success: true,
         error: "",
       });
     })
     .catch((err) => {
-      return res.status(404).send({
+      res.status(404).send({
         data: {},
         success: false,
         error: err,
@@ -307,12 +242,20 @@ exports.updatePassword = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
   const user = await User.findOneAndUpdate(
-    { username: req.body.username },
+    { username: req.user.username },
     { password: req.body.password }
   );
-  return res.status(200).send({
-    data: {},
-    success: true,
-    error: "",
-  });
+  if (user) {
+    res.status(200).send({
+      data: {},
+      success: true,
+      error: "",
+    });
+  } else {
+    res.status(400).send({
+      data: {},
+      success: false,
+      error: "Password not updated",
+    });
+  }
 };

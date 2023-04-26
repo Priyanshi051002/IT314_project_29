@@ -6,10 +6,9 @@ const {
   createProfile,
   editProfile,
   follow,
-  unfollow,
   forget,
   updatePassword,
-  getUser,
+  getAllUser,
   getUserByName,
 } = require("../controllers/user.controller");
 const router = express.Router();
@@ -21,9 +20,8 @@ router.get("/getProfile", authenticateToken, getProfile);
 router.post("/createProfile", authenticateToken, createProfile);
 router.put("/editProfile", authenticateToken, editProfile);
 router.post("/follow", authenticateToken, follow);
-router.post("/unfollow", authenticateToken, unfollow);
 router.post("/forget", forget);
-router.post("/updatepassword", updatePassword);
-router.post("/getUser", authenticateToken, getUser);
-router.post("/getUserByName", getUserByName);
+router.post("/updatepassword", authenticateToken, updatePassword);
+router.get("/getAllUser", authenticateToken, getAllUser);
+router.post("/getUserByName", authenticateToken, getUserByName);
 module.exports = router;
