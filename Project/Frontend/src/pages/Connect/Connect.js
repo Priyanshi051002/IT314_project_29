@@ -170,6 +170,7 @@ const Connect = () => {
           <Grid container rowSpacing={3} columnSpacing={4} mt ={0.5} mb = {2}>
             {users.slice(0, visible).map((user) => (
               <Grid item xs={12} sm={6} md={3}>
+                {/* Can be modified to reduce redundancy */}
                 <Card>
                   <CardMedia
                     component="img"

@@ -8,17 +8,14 @@ import {
   Paper,
   TextField,
   Typography,
-  Box
+  Box,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Checkbox from "@mui/material/Checkbox";
-import Alert from "@mui/material/Alert";
 import { Link } from "react-router-dom";
 
-const Login = (props) => {
+const Login = ({ handleChange }) => {
   const navigate = useNavigate();
 
-  const [isLoginError, setisLoginError] = useState(false);
   const [details, setDetails] = useState({
     username: "",
     password: "",
@@ -48,11 +45,11 @@ const Login = (props) => {
       .then((data) => {
         console.log(data);
         if (data.success) {
-          setisLoginError(false);
+          localStorage.setItem("token", data.data._id);
+          // console.log(data.data._id);
           return navigate("/");
         } else {
-          // return navigate("/myposts");
-          setisLoginError(true);
+          return alert("Wrong Credentials");
         }
       })
       .catch((err) => {
@@ -68,7 +65,11 @@ const Login = (props) => {
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
-  const boxStyle = { padding: "10px", border: "1px solid #ccc", marginBottom: "20px" };
+  const boxStyle = {
+    padding: "10px",
+    border: "1px solid #ccc",
+    marginBottom: "20px",
+  };
   return (
     <div>
       <Grid>
@@ -80,16 +81,21 @@ const Login = (props) => {
               <LockOutlinedIcon />
             </Avatar> */}
             {/* <h1>Educational App</h1> */}
-             {/* <Box sx={boxStyle}> */}
-            <Typography variant="h5" align="center" style={{ fontWeight: 600, marginBottom: 20 }}>Educational <span style={{ color: "blue" }}>App</span>
-</Typography>
-{/* </Box> */}
+            {/* <Box sx={boxStyle}> */}
+            <Typography
+              variant="h5"
+              align="center"
+              style={{ fontWeight: 600, marginBottom: 20 }}
+            >
+              Educational <span style={{ color: "blue" }}>App</span>
+            </Typography>
+            {/* </Box> */}
             {/* <h2>Sign in</h2> */}
-            {isLoginError ? (
+            {/* {isLoginError ? (
               <Alert severity="error" sx={{ margin: "1em" }}>
                 Invalid Login Credentials!
               </Alert>
-            ) : null}
+            ) : null} */}
           </Grid>
           <form onSubmit={handleSignin}>
             <TextField
@@ -100,8 +106,7 @@ const Login = (props) => {
               required
               onChange={changeHandler}
               placeholder="Enter username"
-              fullWidth="true"
-              margin="10 px"
+              fullWidth
             ></TextField>
             <TextField
               variant="filled"
@@ -112,7 +117,7 @@ const Login = (props) => {
               placeholder="Enter password"
               type="password"
               onChange={changeHandler}
-              fullWidth="true"
+              fullWidth
             ></TextField>
             <FormControlLabel
               control={<Checkbox name="checkedB" color="primary" />}
@@ -122,7 +127,7 @@ const Login = (props) => {
               type="submit"
               variant="contained"
               color="primary"
-              fullWidth="true"
+              fullWidth
               style={buttonStyle}
             >
               Sign in
@@ -134,7 +139,7 @@ const Login = (props) => {
           <Typography>
             {" "}
             Do you have an account?
-            <Link href="#" onClick={() => props.handleChange("event", 1)}>
+            <Link href="#" onClick={() => handleChange("event", 1)}>
               Sign Up
             </Link>
           </Typography>

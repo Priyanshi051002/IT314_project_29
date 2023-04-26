@@ -1,7 +1,9 @@
 const User = require("../models/register.model");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-exports.loginfunc = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -10,11 +12,35 @@ exports.loginfunc = async (req, res) => {
     if (isMatch) {
       user.password = null;
       user.confirmPassword = null;
-      return res.json({
-        success: true,
-        data: user,
-        error: "",
-      });
+      const acesstoken = jwt.sign(
+        { username: user.username },
+        process.env.ACCESS_TOKEN_SECRET,
+        (err, token) => {
+          if (err) {
+            console.log(err);
+            return res.json({
+              success: false,
+              error: "Error!",
+            });
+          } else {
+            // req.user = user;
+            // console(req.user.username);
+            return res.json({
+              success: true,
+              data: token,
+              error: "",
+            });
+          }
+        }
+      );
+
+      //user.token = acesstoken;
+
+      // return res.json({
+      //   success: true,
+      //   data: user,
+      //   error: "",
+      // });
     } else {
       return res.json({
         success: false,
@@ -31,20 +57,10 @@ exports.loginfunc = async (req, res) => {
   }
 };
 
-exports.registerfunc = async (req, res) => {
+exports.register = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
 
   if (user) return res.status(400).send("User already registered");
-  console.log(req.body);
-
-  // //check password length should be greater than or equal to 8
-  // if(req.body.password.length < 8) return res.status(400).send("Password should be greater than or equal to 8 characters");
-  // //should contain atleast one uppercase letter
-  // if(!req.body.password.match(/[A-Z]/)) return res.status(400).send("Password should contain atleast one uppercase letter");
-  // //should contain atleast one special character
-  // if(!req.body.password.match(/[!@#$%^&*]/)) return res.status(400).send("Password should contain atleast one special character");
-
-  //encrypt password
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
