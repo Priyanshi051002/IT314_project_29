@@ -244,6 +244,33 @@ app.use("/post", postRoutes);
 // app.get("/updatepassword", (req, res) => {
 //   res.render("updatepassword");
 // });
+app.post('/getUser',authenticateToken,async (req,res)=>{
+  //get the users
+  const x = req.body.name;
+  User.find({ name: { $regex: x , $options: 'i' } })
+  .then(users => {
+    console.log(users);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  
+});
+
+app.post('/getAllUser',authenticateToken,async (req,res)=>{
+  //get All the users
+  
+  User.find({})
+  .then(users => {
+    console.log(users);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  
+});
+
+
 
 // app.post("/updatepassword", async (req, res) => {
 //   const hashedPassword = await bcrypt.hash(req.body.password, 10);
