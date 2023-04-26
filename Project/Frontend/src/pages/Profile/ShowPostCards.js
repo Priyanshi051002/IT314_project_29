@@ -1,66 +1,102 @@
 import {
-  CardMedia,
-  Card,
-  CardContent,
   Typography,
-  CardActions,
-  Button,
   Grid,
   Container,
   Box,
   Divider,
+  Button,
 } from "@mui/material";
 import { React, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
+import PostCards from "../../components/PostCards";
 
-const posts = [
-  {
-    name: "Om",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Harsh",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Priyanshi",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Kaushal",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Devdeep",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-  {
-    name: "Achyut",
-    source: "https://picsum.photos/1000/1000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  },
-];
+const user_id = "omp217";
+
+// const posts = [
+//   {
+//     title: "Om",
+//     source: "https://picsum.photos/1000/1000",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+//     user_id: "",
+//     comments: [],
+//     post_id: "",
+//     likes: [],
+//   },
+//   {
+//     title: "Harsh",
+//     source: "https://picsum.photos/1000/1000",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+//     user_id: "",
+//     comments: [],
+//     post_id: "",
+//     likes: [],
+//   },
+//   {
+//     title: "Priyanshi",
+//     source: "https://picsum.photos/1000/1000",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+//     user_id: "",
+//     comments: [],
+//     post_id: "",
+//     likes: [],
+//   },
+//   {
+//     title: "Kaushal",
+//     source: "https://picsum.photos/1000/1000",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+//     user_id: "",
+//     comments: [],
+//     post_id: "",
+//     likes: [],
+//   },
+//   {
+//     title: "Devdeep",
+//     source: "https://picsum.photos/1000/1000",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+//     user_id: "",
+//     comments: [],
+//     post_id: "",
+//     likes: [],
+//   },
+//   {
+//     title: "Achyut",
+//     source: "https://picsum.photos/1000/1000",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+//     user_id: "",
+//     comments: [],
+//     post_id: "",
+//     likes: [],
+//   },
+// ];
 
 const ShowPostCards = () => {
-  // const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(4);
 
-  //   useEffect(() => {
-  //     fetch("https://jsonplaceholder.typicode.com/posts")
-  //       .then((res) => res.json())
-  //       .then((data) => setPosts(data));
-  //   }, []);
+  useEffect(() => {
+    fetch(`http://localhost:7000/post/getPostsUser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_id: user_id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setPosts(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   const ShowMoreItems = () => {
     setVisible((prevValue) => prevValue + 2);
@@ -84,28 +120,7 @@ const ShowPostCards = () => {
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
             {posts.slice(0, visible).map((post) => (
               <Grid item xs={12} sm={6} md={6}>
-                <Card variant="outlined" sx={{ mb: 2 }}>
-                  <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="200"
-                    image={post.source}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {post.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {post.description}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" variant="outlined">
-                      Share
-                    </Button>
-                    <Button size="small">Learn More</Button>
-                  </CardActions>
-                </Card>
+                <PostCards item={post} />
               </Grid>
             ))}
           </Grid>

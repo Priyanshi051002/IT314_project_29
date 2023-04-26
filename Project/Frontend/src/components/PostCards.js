@@ -7,36 +7,39 @@ import {
   Button,
   CardMedia,
 } from "@mui/material";
+import ImageUrl from "../static";
+import DOMPurify from "dompurify";
 
 const PostCards = (props) => {
-  const { items } = props;
+  const { item } = props;
+
+  item.description = DOMPurify.sanitize(item.description);
+
   return (
-    <>
-      {items.map((item) => (
-        <Card variant="outlined" sx={{ mb: 2 }}>
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="200"
-            image={item.source}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {item.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {item.description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" variant="outlined">
-              Share
-            </Button>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-      ))}
-    </>
+    <Card variant="outlined" sx={{ mb: 2 }}>
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        height="200"
+        image={ImageUrl}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {item.title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          dangerouslySetInnerHTML={{ __html: item.description }}
+        ></Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" variant="outlined">
+          Share
+        </Button>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
   );
 };
 

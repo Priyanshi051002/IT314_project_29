@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -8,13 +8,12 @@ import {
   Paper,
   TextField,
   Typography,
+  Box,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Checkbox from "@mui/material/Checkbox";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = ({ handleChange }) => {
-
   const navigate = useNavigate();
 
   const [details, setDetails] = useState({
@@ -45,11 +44,12 @@ const Login = ({ handleChange }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if(data.success){
+        if (data.success) {
+          localStorage.setItem("token", data.data._id);
+          // console.log(data.data._id);
           return navigate("/");
-        }
-        else{
-          return navigate("/myposts");
+        } else {
+          return alert("Wrong Credentials");
         }
       })
       .catch((err) => {
@@ -59,21 +59,43 @@ const Login = ({ handleChange }) => {
 
   const paperStyle = {
     padding: 20,
-    height: "70vh",
-    width: 300,
+    height: "auto",
+    width: "88%",
     margin: "0 auto",
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
+  const boxStyle = {
+    padding: "10px",
+    border: "1px solid #ccc",
+    marginBottom: "20px",
+  };
   return (
     <div>
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={avatarStyle}>
+            <Grid item xs={12} sm={6} md={3}></Grid>
+            {/* <Avatar style={avatarStyle}>
+              
               <LockOutlinedIcon />
-            </Avatar>
-            <h2>Sign in</h2>
+            </Avatar> */}
+            {/* <h1>Educational App</h1> */}
+            {/* <Box sx={boxStyle}> */}
+            <Typography
+              variant="h5"
+              align="center"
+              style={{ fontWeight: 600, marginBottom: 20 }}
+            >
+              Educational <span style={{ color: "blue" }}>App</span>
+            </Typography>
+            {/* </Box> */}
+            {/* <h2>Sign in</h2> */}
+            {/* {isLoginError ? (
+              <Alert severity="error" sx={{ margin: "1em" }}>
+                Invalid Login Credentials!
+              </Alert>
+            ) : null} */}
           </Grid>
           <form onSubmit={handleSignin}>
             <TextField
@@ -84,8 +106,7 @@ const Login = ({ handleChange }) => {
               required
               onChange={changeHandler}
               placeholder="Enter username"
-              fullWidth="true"
-              margin="10 px"
+              fullWidth
             ></TextField>
             <TextField
               variant="filled"
@@ -96,7 +117,7 @@ const Login = ({ handleChange }) => {
               placeholder="Enter password"
               type="password"
               onChange={changeHandler}
-              fullWidth="true"
+              fullWidth
             ></TextField>
             <FormControlLabel
               control={<Checkbox name="checkedB" color="primary" />}
@@ -106,7 +127,7 @@ const Login = ({ handleChange }) => {
               type="submit"
               variant="contained"
               color="primary"
-              fullWidth="true"
+              fullWidth
               style={buttonStyle}
             >
               Sign in
