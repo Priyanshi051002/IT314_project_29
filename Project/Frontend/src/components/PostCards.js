@@ -37,6 +37,35 @@ const PostCards = (props) => {
     setExpanded(!expanded);
   };
 
+  const handleDelete = () => {
+    const post = {
+      post_id: item.post_id,
+    };
+    handleDeletePost(post);
+  };
+
+  const handleDeletePost = (item) => {
+    fetch(`http://localhost:7000/post/deletePost`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify(item),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Post Deleted");
+        } else {
+          alert("Could not delete");
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   item.description = DOMPurify.sanitize(item.description);
   return (
     <Card variant="outlined" sx={{ mb: 2 }}>
@@ -48,7 +77,7 @@ const PostCards = (props) => {
         }
         action={
           <IconButton aria-label="settings">
-            <DeleteIcon sx={{ fontSize: 30 }} />
+            <DeleteIcon sx={{ fontSize: 30 }} onClick={handleDelete} />
           </IconButton>
         }
         title={item.user_id}
