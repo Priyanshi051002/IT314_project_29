@@ -31,7 +31,7 @@ const ExpandMore = styled((props) => {
 }));
 
 const PostCards = (props) => {
-  const { item } = props;
+  const { item, comments } = props;
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -113,9 +113,9 @@ const PostCards = (props) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Comments:{item.comments.length}</Typography>
+          <Typography paragraph>Comments:{comments.length}</Typography>
           <AddComment item={item} />
-          {item.comments.map((comment) => (
+          {comments.map((comment) => (
             <Comment item={comment} />
           ))}
         </CardContent>

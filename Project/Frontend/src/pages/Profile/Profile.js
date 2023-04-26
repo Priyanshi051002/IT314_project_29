@@ -101,7 +101,7 @@ const postCard = (
         <Grid container spacing={2}>
           {posts.slice(0, 2).map((post) => (
             <Grid item xs={12} sm={6} md={6}>
-              <PostCards item={post} />
+              <PostCards item={post} comments={post.comments} />
             </Grid>
           ))}
         </Grid>
