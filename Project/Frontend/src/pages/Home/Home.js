@@ -74,6 +74,24 @@ const Home = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    
+    fetch(`http://localhost:7000/post/getPostsQuery`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ string: searchInput }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        if (data) {
+          setPosts(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
   return (
     <Container maxWidth="lg">
@@ -118,7 +136,7 @@ const Home = () => {
                       paddingLeft: "0.5em",
                     }}
                   >
-                    <Button variant="contained" sx={{ borderRadius: "2em" }}>
+                    <Button variant="contained" sx={{ borderRadius: "2em" }} type="submit">
                       Search
                     </Button>
                   </Grid>
@@ -126,7 +144,7 @@ const Home = () => {
               </form>
             </Paper>
             {posts.map((post) => (
-              <PostCards item={post} />
+              <PostCards item={post} key={post.post_id} />
             ))}
           </Grid>
           <Grid item xs={1} md={2}></Grid>

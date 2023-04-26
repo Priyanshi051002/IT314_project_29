@@ -11,11 +11,14 @@ import {
   Box,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import { Link } from "react-router-dom";
 
 const Login = ({ handleChange }) => {
   const navigate = useNavigate();
 
+  const[loginError, setLoginError] = useState(false);
   const [details, setDetails] = useState({
     username: "",
     password: "",
@@ -23,6 +26,7 @@ const Login = ({ handleChange }) => {
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
+    setLoginError(false);
     setDetails((prevState) => {
       return {
         ...prevState,
@@ -45,11 +49,10 @@ const Login = ({ handleChange }) => {
       .then((data) => {
         console.log(data);
         if (data.success) {
-          localStorage.setItem("token", data.data._id);
-          // console.log(data.data._id);
-          return navigate("/");
+          localStorage.setItem("token", data.data);
+          return navigate("/");git 
         } else {
-          return alert("Wrong Credentials");
+          setLoginError(true);
         }
       })
       .catch((err) => {
@@ -91,11 +94,11 @@ const Login = ({ handleChange }) => {
             </Typography>
             {/* </Box> */}
             {/* <h2>Sign in</h2> */}
-            {/* {isLoginError ? (
+            {loginError ? (
               <Alert severity="error" sx={{ margin: "1em" }}>
                 Invalid Login Credentials!
               </Alert>
-            ) : null} */}
+            ) : null}
           </Grid>
           <form onSubmit={handleSignin}>
             <TextField

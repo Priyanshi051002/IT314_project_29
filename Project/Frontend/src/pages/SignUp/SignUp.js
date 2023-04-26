@@ -9,6 +9,8 @@ import { Typography, Box } from "@mui/material";
 export const SignUp = () => {
   const navigate = useNavigate();
 
+  const [passwordMatched, setPasswordMatched] = useState(true);
+  const [userExist, setUserExist] = useState(false);
   const [details, setDetails] = useState({
     name: "",
     username: "",
@@ -20,6 +22,10 @@ export const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setPasswordMatched(true);
+    if(name === "username"){
+      setUserExist(false);
+    }
     setDetails((prevState) => {
       return {
         ...prevState,
@@ -30,6 +36,12 @@ export const SignUp = () => {
 
   const signUpHandler = (e) => {
     e.preventDefault();
+
+    if (details.password !== details.confirm_password) {
+      setPasswordMatched(false);
+      return;
+    }
+
     fetch(`http://localhost:5000/user/register`, {
       method: "POST",
       headers: {
@@ -45,6 +57,7 @@ export const SignUp = () => {
         }
       })
       .catch((err) => {
+        setUserExist(true);
         console.log(err.message);
       });
   };
@@ -82,11 +95,15 @@ export const SignUp = () => {
               </Typography>
               {/* </Box> */}
               <h3>Personal Details</h3>
-              {/* {!isPasswordMatched ? (
-              <Alert severity="error" sx={{ margin: "1em" }}>
-                Password did not match!
-              </Alert>
-            ) : null} */}
+              {!passwordMatched ? (
+                <Alert severity="error" sx={{ margin: "1em" }}>
+                  Password did not match!
+                </Alert>
+              ) : userExist ? (
+                <Alert severity="error" sx={{ margin: "1em" }}>
+                  User already exists!
+                </Alert>
+              ) : null}
             </Grid>
             <TextField
               variant="filled"
@@ -124,6 +141,7 @@ export const SignUp = () => {
               variant="filled"
               label="Confirm Password"
               required
+              name="confirm_password"
               placeholder="Enter password"
               type="password"
               fullWidth
