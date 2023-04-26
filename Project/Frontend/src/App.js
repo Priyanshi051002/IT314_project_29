@@ -11,6 +11,7 @@ import Connect from "./pages/Connect/Connect";
 import MyConnection from "./pages/MyConnection/MyConnection";
 import AddPost from "./pages/Profile/AddPost";
 import Private from "./routes/Private";
+import EditProfile from "./components/EditProfile";
 
 function App() {
   return (
@@ -66,6 +67,14 @@ function App() {
           element={
             <Private>
               <AddPost />
+            </Private>
+          }
+        />
+        <Route
+          path="/profile/EditProfile"
+          element={
+            <Private>
+              <EditProfile />{" "}
             </Private>
           }
         />

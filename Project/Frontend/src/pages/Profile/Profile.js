@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
 import PersonIcon from "@mui/icons-material/Person";
+import EditProfile from "../../components/EditProfile";
 
 const posts = [
   {
@@ -194,31 +195,37 @@ const profileCard = (
               {PROFILE_DATA.description}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button
-              size="small"
-              variant="contained"
-              component={Link}
-              to={"/profile/addpost"}
-            >
-              Edit Profile
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              component={Link}
-              to={"/profile/addpost"}
-            >
-              Share Profile
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              component={Link}
-              to={"/profile/addpost"}
-            >
-              Add Post
-            </Button>
+          <CardActions disableSpacing={true}>
+            <Grid container>
+              <Grid item xs={2} md={3}>
+                <EditProfile profile={PROFILE_DATA} />
+              </Grid>
+
+              <Grid item xs={2} md={3}>
+                <Button
+                  size="small"
+                  variant="contained"
+                  component={Link}
+                  to={"/profile/addpost"}
+                  style={{ maxWidth: '500px', maxHeight: '30px', minWidth: '30px', minHeight: '20px' }}
+                >
+                  Share Profile
+                </Button>
+              </Grid>
+
+              <Button
+                size="small"
+                variant="contained"
+                component={Link}
+                to={"/profile/addpost"}
+                style={{ maxWidth: '300px', maxHeight: '100px', minWidth: '30px', minHeight: '30px' }}
+              >
+                Add Post
+              </Button>
+            </Grid>
+
+
+
           </CardActions>
         </Grid>
       </Grid>
