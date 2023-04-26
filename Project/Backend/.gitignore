@@ -12,5 +12,6 @@
 
 node_modules
 .env
+mongoinput.json
 input.json
 .vscode 
