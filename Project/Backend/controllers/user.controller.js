@@ -51,7 +51,13 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
 
-  if (user) res.status(400).send("User already registered");
+  if (user) {
+    res.status(400).send({
+      data: {},
+      success: false,
+      error: "User already exists",
+    });
+  }
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
@@ -66,9 +72,16 @@ exports.register = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   const user = await User.findOne({ username: req.user.username });
-  if (user) {
+  user.password = null;
+  const profile = await Profile.findOne({ user: req.user.username });
+  const profileData = {
+    user,
+    about: profile.about,
+    description: profile.description,
+  };
+  if (profileData) {
     res.status(200).send({
-      data: user,
+      data: profileData,
       success: true,
       error: "",
     });
@@ -83,14 +96,7 @@ exports.getProfile = async (req, res) => {
 
 exports.createProfile = async (req, res) => {
   try {
-    const { name, description, about } = req.body;
-    const body = {
-      name,
-      description,
-      about,
-      user: req.user.username,
-    };
-    const profile = await Profile.create(body);
+    const profile = await Profile.create(req.body);
     res.status(200).send({
       data: profile,
       success: true,

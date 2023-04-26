@@ -17,7 +17,7 @@ const authenticateToken = require("../middlewares/passport");
 router.post("/login", login);
 router.post("/register", register);
 router.get("/getProfile", authenticateToken, getProfile);
-router.post("/createProfile", authenticateToken, createProfile);
+router.post("/createProfile", createProfile);
 router.put("/editProfile", authenticateToken, editProfile);
 router.post("/follow", authenticateToken, follow);
 router.post("/forget", forget);
