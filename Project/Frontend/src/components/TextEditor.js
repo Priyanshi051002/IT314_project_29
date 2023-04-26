@@ -15,7 +15,6 @@ const user_id = "omp217";
 const TextEditor = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [document, setDocument] = useState(null);
