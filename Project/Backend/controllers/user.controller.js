@@ -23,8 +23,6 @@ exports.login = async (req, res) => {
               error: "Error!",
             });
           } else {
-            // req.user = user;
-            // console(req.user.username);
             return res.json({
               success: true,
               data: token,
@@ -33,14 +31,6 @@ exports.login = async (req, res) => {
           }
         }
       );
-
-      //user.token = acesstoken;
-
-      // return res.json({
-      //   success: true,
-      //   data: user,
-      //   error: "",
-      // });
     } else {
       return res.json({
         success: false,
@@ -71,4 +61,23 @@ exports.register = async (req, res) => {
     success: true,
     error: "",
   });
+};
+
+exports.profile = async (req, res) => {
+  console.log(req.user);
+  const user = await User.findOne({ username: req.user.username });
+  if (user) {
+    console.log(user);
+    return res.status(200).send({
+      data: user,
+      success: true,
+      error: "",
+    });
+  } else {
+    return res.status(403).send({
+      data: {},
+      success: false,
+      error: "User not found",
+    });
+  }
 };

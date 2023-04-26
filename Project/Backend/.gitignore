@@ -1,3 +1,4 @@
 /node_modules
 .env
 input.json
+mongoinp.json

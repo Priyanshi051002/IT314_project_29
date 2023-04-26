@@ -244,31 +244,31 @@ app.use("/post", postRoutes);
 // app.get("/updatepassword", (req, res) => {
 //   res.render("updatepassword");
 // });
-app.post('/getUser',authenticateToken,async (req,res)=>{
-  //get the users
-  const x = req.body.name;
-  User.find({ name: { $regex: x , $options: 'i' } })
-  .then(users => {
-    console.log(users);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+// app.post('/getUser',authenticateToken,async (req,res)=>{
+//   //get the users
+//   const x = req.body.name;
+//   User.find({ name: { $regex: x , $options: 'i' } })
+//   .then(users => {
+//     console.log(users);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
   
-});
+// });
 
-app.post('/getAllUser',authenticateToken,async (req,res)=>{
-  //get All the users
+// app.post('/getAllUser',authenticateToken,async (req,res)=>{
+//   //get All the users
   
-  User.find({})
-  .then(users => {
-    console.log(users);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+//   User.find({})
+//   .then(users => {
+//     console.log(users);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
   
-});
+// });
 
 
 
