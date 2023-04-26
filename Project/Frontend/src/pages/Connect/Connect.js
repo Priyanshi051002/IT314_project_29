@@ -14,6 +14,7 @@ import {
 
 // import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import ImageUrl from "../../static";
 
 const users = [
   {
@@ -139,14 +140,28 @@ const users = [
 ];
 
 const Connect = () => {
-  // const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [visible, setVisible] = useState(12);
 
-  //   useEffect(() => {
-  //     fetch("https://jsonplaceholder.typicode.com/posts")
-  //       .then((res) => res.json())
-  //       .then((data) => setUsers(data));
-  //   }, []);
+  useEffect(() => {
+    fetch(`http://localhost:5000/user/getAllUser`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          setUsers(data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   const ShowMoreItems = () => {
     setVisible((prevValue) => prevValue + 4);
@@ -167,7 +182,7 @@ const Connect = () => {
             Connect With Others
           </Typography>
           <Divider />
-          <Grid container rowSpacing={3} columnSpacing={4} mt ={0.5} mb = {2}>
+          <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
             {users.slice(0, visible).map((user) => (
               <Grid item xs={12} sm={6} md={3}>
                 {/* Can be modified to reduce redundancy */}
@@ -176,7 +191,7 @@ const Connect = () => {
                     component="img"
                     alt="green iguana"
                     height="125"
-                    image={user.source}
+                    image={ImageUrl}
                   />
                   <CardContent>
                     <Typography variant="h5" textAlign={"left"} component="div">

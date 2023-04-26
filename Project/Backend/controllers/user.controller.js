@@ -219,9 +219,11 @@ exports.getUserByName = async (req, res) => {
 };
 
 exports.getAllUser = async (req, res) => {
-  //get All the users
-
-  User.find({})
+  //get All the users whom the loggedUser is not following and can connect
+  const user = await User.findOne({ username: req.user.username });
+  const followingUsers = user.following.map((obj) => obj.username);
+  followingUsers.push(req.user.username);
+  User.find({ username: { $nin: followingUsers } })
     .then((users) => {
       res.status(200).send({
         data: users,
