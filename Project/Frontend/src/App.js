@@ -11,6 +11,7 @@ import Connect from "./pages/Connect/Connect";
 import MyConnection from "./pages/MyConnection/MyConnection";
 import AddPost from "./pages/Profile/AddPost";
 import EditProfile from "./components/EditProfile";
+import Landing from "./pages/Home/Landing";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/myconnection" element={<MyConnection />} />
         <Route path="/profile/addpost" element={<AddPost />} />
         <Route path="/profile/EditProfile" element={<EditProfile />} />
+        <Route path="/landing" element={<Landing />} />
       </Routes>
     </BrowserRouter>
   );
