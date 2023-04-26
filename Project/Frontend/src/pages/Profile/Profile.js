@@ -197,28 +197,13 @@ const profileCard = (
           </CardContent>
           <CardActions disableSpacing={true}>
             <Grid container>
-              <Grid item xs={2} md={3}>
-                <EditProfile profile={PROFILE_DATA} />
-              </Grid>
-
-              <Grid item xs={2} md={3}>
-                <Button
-                  size="small"
-                  variant="contained"
-                  component={Link}
-                  to={"/profile/addpost"}
-                  style={{ maxWidth: '500px', maxHeight: '30px', minWidth: '30px', minHeight: '20px' }}
-                >
-                  Share Profile
-                </Button>
-              </Grid>
+              <EditProfile profile={PROFILE_DATA} />
 
               <Button
                 size="small"
                 variant="contained"
                 component={Link}
                 to={"/profile/addpost"}
-                style={{ maxWidth: '300px', maxHeight: '100px', minWidth: '30px', minHeight: '30px' }}
               >
                 Add Post
               </Button>

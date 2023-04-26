@@ -11,7 +11,7 @@ const Landing = () => {
                 <Grid container spacing={1} alignItems={'center'} sx={{ mt: 2 }}>
                     <Grid item xs = {2} md={2}></Grid>
                     <Grid item xs = {8} md={3} justifyContent={'center'}>
-                        <SchoolIcon sx={{ mr: 2, color: "white", width: 50, height: 50 }} />
+                        <SchoolIcon sx={{ mr: 2, color: "#1976d2", width: 50, height: 50 }} />
                         <Typography
                             component="a"
                             href="/"
@@ -20,7 +20,7 @@ const Landing = () => {
                                 fontFamily: "monospace",
                                 fontWeight: 700,
                                 fontSize: 50,
-                                color: "#ffffff",
+                                color: "#1976d2",
                                 textDecoration: "none"
                             }}
                         >
@@ -42,8 +42,7 @@ const Landing = () => {
                     <Grid item xs = {2} md={2}></Grid>
                     <Grid item xs = {4} md={4}>
                         <Typography
-                            component="a"
-                            href="/"
+                            component="text"
                             sx={{
                                 mr: 2,
                                 mb: 2,
@@ -51,15 +50,14 @@ const Landing = () => {
                                 fontFamily: "",
                                 fontWeight: 500,
                                 fontSize: 60,
-                                color: "#ffffff",
+                                color: "#210062",
                                 textDecoration: "none"
                             }}
                         >
                         Welcome to your professional community!
                         </Typography>
                         <Typography
-                            component="a"
-                            href="/"
+                            component="text"
                             sx={{
                                 mr: 2,
                                 mb: 2,
@@ -67,7 +65,7 @@ const Landing = () => {
                                 fontFamily: "",
                                 fontWeight: 500,
                                 fontSize: 30,
-                                color: "#ffffff",
+                                color: "#394867",
                                 textDecoration: "none"
                             }}
                         >
@@ -75,8 +73,7 @@ const Landing = () => {
                         </Typography>
                         <Button variant='contained' sx={{ mr: 2 }}>
                             <Typography
-                            component="a"
-                            href="/"
+                            component="text"
                             sx={{
                                 fontFamily: "",
                                 fontWeight: 500,

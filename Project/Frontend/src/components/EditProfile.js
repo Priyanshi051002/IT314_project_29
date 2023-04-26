@@ -24,7 +24,7 @@ const EditProfile = ({ profile }) => {
 
     return (
         <div>
-            <Button variant="contained" onClick={handleClickOpen} size="small" >
+            <Button variant="contained"  onClick={handleClickOpen} size="small" sx =  {{mr : 2}} >
                 Edit Profile
             </Button>
             <Dialog open={open} onClose={handleClose}>
