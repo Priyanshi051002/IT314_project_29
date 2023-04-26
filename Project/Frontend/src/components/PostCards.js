@@ -4,19 +4,55 @@ import {
   CardContent,
   Typography,
   CardActions,
-  Button,
   CardMedia,
+  CardHeader,
+  Avatar,
+  IconButton,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 import ImageUrl from "../static";
 import DOMPurify from "dompurify";
+import Collapse from "@mui/material/Collapse";
+import red from "@mui/material/colors/red";
+import Comment from "./Comment";
+import AddComment from "./AddComment";
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  color: !expand ? "grey" : "black",
+  transition: theme.transitions.create("color", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const PostCards = (props) => {
   const { item } = props;
+  const [expanded, setExpanded] = React.useState(false);
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   item.description = DOMPurify.sanitize(item.description);
-
   return (
     <Card variant="outlined" sx={{ mb: 2 }}>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            R
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <DeleteIcon sx={{ fontSize: 30 }} />
+          </IconButton>
+        }
+        title={item.user_id}
+      />
       <CardMedia
         component="img"
         alt="green iguana"
@@ -33,12 +69,28 @@ const PostCards = (props) => {
           dangerouslySetInnerHTML={{ __html: item.description }}
         ></Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" variant="outlined">
-          Share
-        </Button>
-        <Button size="small">Learn More</Button>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <AddCommentIcon />
+        </ExpandMore>
       </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>Comments:{item.comments.length}</Typography>
+          <AddComment item={item} />
+          {item.comments.map((comment) => (
+            <Comment item={comment} />
+          ))}
+        </CardContent>
+      </Collapse>
     </Card>
   );
 };

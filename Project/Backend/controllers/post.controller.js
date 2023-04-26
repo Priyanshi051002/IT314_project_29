@@ -65,6 +65,7 @@ exports.getPostsUser = async (req, res) => {
           },
         },
       },
+      size: 10000,
     },
     (err, result, status) => {
       if (err) {
@@ -96,6 +97,7 @@ exports.getPostsQuery = async (req, res) => {
     {
       index: "post",
       body: query,
+      size: 10000,
     },
     (err, result, status) => {
       if (err) {
@@ -145,6 +147,7 @@ exports.getPostsHome = async (req, res) => {
           },
         },
       },
+      size: 10000,
     },
     (err, result, status) => {
       if (err) {
