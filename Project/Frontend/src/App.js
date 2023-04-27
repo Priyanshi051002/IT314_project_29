@@ -12,13 +12,14 @@ import MyConnection from "./pages/MyConnection/MyConnection";
 import AddPost from "./pages/Profile/AddPost";
 import Private from "./routes/Private";
 import EditProfile from "./components/EditProfile";
+import Landing from "./pages/Home/Landing";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/feed"
           element={
             <Private>
               <Home />{" "}
@@ -46,6 +47,7 @@ function App() {
           }
         />
         <Route path="/pc" element={<Passwordchangeq />} />
+        <Route path="/" element={<Landing />} />
         <Route
           path="/connect"
           element={

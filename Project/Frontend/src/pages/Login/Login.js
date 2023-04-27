@@ -50,7 +50,7 @@ const Login = ({ handleChange }) => {
         console.log(data);
         if (data.success) {
           localStorage.setItem("token", data.data);
-          return navigate("/");
+          return navigate("/feed");
         } else {
           setLoginError(true);
         }
