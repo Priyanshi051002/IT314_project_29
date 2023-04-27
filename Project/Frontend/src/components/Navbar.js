@@ -18,8 +18,12 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import SchoolIcon from "@mui/icons-material/School";
 import { Link, useNavigate } from "react-router-dom";
 
-const pages = ["Search", "Connect"];
-const settings = ["Profile", "Account", "Logout"];
+const pages = [
+  { url: "profile/addpost", name: "Add Post" },
+  { url: "myconnection", name: "My Connections" },
+  { url: "myposts", name: "My Posts" },
+  { url: "connect", name: "Connect" },
+];
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -27,6 +31,7 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     navigate("/signinout");
   };
 
@@ -45,7 +50,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="sticky" sx={{ mt: 1, mb:1, borderRadius: 2 }}>
+    <AppBar position="sticky" sx={{ mt: 1, mb: 1, borderRadius: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SchoolIcon sx={{ mr: 1 }} />
@@ -100,9 +105,9 @@ const Navbar = () => {
                   <Typography
                     textAlign="center"
                     component={Link}
-                    to={"/" + page.toLowerCase()}
+                    to={"/" + page.url}
                   >
-                    {page}
+                    <strong>{page.name}</strong>
                   </Typography>
                 </MenuItem>
               ))}
@@ -133,9 +138,9 @@ const Navbar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
                 component={Link}
-                to={"/" + page.toLowerCase()}
+                to={"/" + page.url}
               >
-                {page}
+                <strong>{page.name}</strong>
               </Button>
             ))}
           </Box>
@@ -158,33 +163,6 @@ const Navbar = () => {
                 <Avatar src="/" sx={{ bgcolor: "inherit" }} />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={handleCloseUserMenu}
-                  component={Link}
-                  to={setting.toLowerCase()}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>

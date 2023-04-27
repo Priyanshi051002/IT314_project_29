@@ -1,10 +1,10 @@
 import React from "react";
-import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
+import { Paper, Grid, Avatar, TextField, Button,Typography } from "@mui/material";
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 import { Link } from 'react-router-dom';
 
 export const Forgotpassword = () => {
- const paperStyle = {padding: 20, height: '50vh', width: 300, margin: "0 auto"};
+ const paperStyle = {padding: 20, height: '50vh', width: 300, margin: "2% 38%",};
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "10px 0" };
   return (
@@ -12,6 +12,7 @@ export const Forgotpassword = () => {
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
+            <Grid item xs={12} sm={6} md={3}></Grid>
             <Avatar style={avatarStyle}>
               <VpnKeyOutlinedIcon />
             </Avatar>
@@ -41,7 +42,7 @@ export const Forgotpassword = () => {
             fullWidth="true"
             style={buttonStyle}
           >
-            <Link to="/login" style={{color:'white',textDecoration:'none'}}> Change Password</Link>
+            <Link to="/signinout" style={{color:'white',textDecoration:'none'}}> Change Password</Link>
            
           </Button>
         </Paper>

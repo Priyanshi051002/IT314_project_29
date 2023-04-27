@@ -10,6 +10,7 @@ import Passwordchangeq from "./pages/Login/Passwordchangeq";
 import Connect from "./pages/Connect/Connect";
 import MyConnection from "./pages/MyConnection/MyConnection";
 import AddPost from "./pages/Profile/AddPost";
+import Private from "./routes/Private";
 import EditProfile from "./components/EditProfile";
 import Landing from "./pages/Home/Landing";
 
@@ -17,19 +18,68 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/"
+          element={
+            <Private>
+              <Home />{" "}
+            </Private>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Private>
+              <Profile />
+            </Private>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signinout" element={<SignInOutContainer />} />
         <Route path="/fp" element={<Forgotpassword />} />
-        <Route path="/myposts" element={<ShowPostCards />} />
+        <Route
+          path="/myposts"
+          element={
+            <Private>
+              <ShowPostCards />
+            </Private>
+          }
+        />
         <Route path="/pc" element={<Passwordchangeq />} />
-        <Route path="/connect" element={<Connect />} />
-        <Route path="/myconnection" element={<MyConnection />} />
-        <Route path="/profile/addpost" element={<AddPost />} />
-        <Route path="/profile/EditProfile" element={<EditProfile />} />
         <Route path="/landing" element={<Landing />} />
+        <Route
+          path="/connect"
+          element={
+            <Private>
+              <Connect />
+            </Private>
+          }
+        />
+        <Route
+          path="/myconnection"
+          element={
+            <Private>
+              <MyConnection />
+            </Private>
+          }
+        />
+        <Route
+          path="/profile/addpost"
+          element={
+            <Private>
+              <AddPost />
+            </Private>
+          }
+        />
+        <Route
+          path="/profile/EditProfile"
+          element={
+            <Private>
+              <EditProfile />{" "}
+            </Private>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -65,6 +65,7 @@ exports.getPostsUser = async (req, res) => {
           },
         },
       },
+      size: 10000,
     },
     (err, result, status) => {
       if (err) {
@@ -96,6 +97,7 @@ exports.getPostsQuery = async (req, res) => {
     {
       index: "post",
       body: query,
+      size: 10000,
     },
     (err, result, status) => {
       if (err) {
@@ -106,15 +108,16 @@ exports.getPostsQuery = async (req, res) => {
           const { title, user_id, likes } = post._source;
           const post_id = post._id;
           const normal_comments = post._source.comments;
-          const description = post.highlight.description[0];
-          const highlighted_comments = post.inner_hits.comments.hits.hits.map(
-            (comment) => {
+          // set description as highlight.description if post.highlight is not undefined otherwise set it as post._source.description
+          const description = post.highlight ? post.highlight.description[0] : post._source.description;
+
+          // set highlighted_comments as post.inner_hits.comments.hits.hits.map if post.inner_hits is not undefined otherwise set it as empty array
+          const highlighted_comments = post.inner_hits ? post.inner_hits.comments.hits.hits.map((comment) => {
               return {
-                user_id: comment._source.user_id,
-                comment: comment.highlight["comments.comment"][0],
-              };
-            }
-          );
+                  user_id: comment._source.user_id,
+                  comment: comment.highlight['comments.comment'][0]
+              }
+          }) : [];
           posts.push({
             title,
             description,
@@ -145,6 +148,7 @@ exports.getPostsHome = async (req, res) => {
           },
         },
       },
+      size: 10000,
     },
     (err, result, status) => {
       if (err) {

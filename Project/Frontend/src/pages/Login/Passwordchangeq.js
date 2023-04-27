@@ -4,7 +4,10 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { Link } from 'react-router-dom';
 
 export const Passwordchangeq = () => {
- const paperStyle = {padding: 20, height: '40vh', width: 300, margin: "0 auto"};
+ const paperStyle = { padding: 20,
+    height: "auto",
+    width: "20%",
+    margin: "2% 38%",};
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
   return (
@@ -12,6 +15,7 @@ export const Passwordchangeq = () => {
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
+            <Grid item xs={12} sm={6} md={3}></Grid>
             <Avatar style={avatarStyle}>
               <HomeOutlinedIcon />
             </Avatar>

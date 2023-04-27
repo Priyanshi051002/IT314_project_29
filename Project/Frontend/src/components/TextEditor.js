@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography, Divider } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,11 +10,26 @@ import { BiImageAdd, BiVideoPlus, BiFile } from "react-icons/bi";
 import "../pages/Profile/AddPost.css";
 import { useNavigate } from "react-router-dom";
 
-const user_id = "omp217";
+let user_id = "";
 
 const TextEditor = () => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch(`http://localhost:5000/user/getProfile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        user_id = data.data.user.username;
+      });
+  }, []);
+
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [document, setDocument] = useState(null);
@@ -31,9 +46,9 @@ const TextEditor = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          return navigate("/");
+          return navigate("/profile");
         } else {
-          return navigate("/profile/addPost");
+          return alert("Internal Server Error");
         }
       })
       .catch((err) => {
@@ -94,8 +109,16 @@ const TextEditor = () => {
   return (
     <>
       <div>
-        {/* <Navbar /> */}
-        <h1 className="addpost"> Add Post </h1>
+        <Typography
+          variant="h4"
+          textAlign={"center"}
+          component="div"
+          gutterBottom
+          mt={2}
+        >
+          Add Post
+        </Typography>
+        <Divider />
         <form className="Form" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title" className="title">
