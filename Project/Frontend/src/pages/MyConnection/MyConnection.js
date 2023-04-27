@@ -32,8 +32,8 @@ const MyConnection = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setFollowersUsers(data.data.follower);
-          setfollowingUsers(data.data.following);
+          setFollowersUsers(data.data.user.follower);
+          setfollowingUsers(data.data.user.following);
         } else {
           alert(data.error);
         }
