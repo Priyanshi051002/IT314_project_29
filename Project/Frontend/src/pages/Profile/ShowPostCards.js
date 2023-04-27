@@ -12,69 +12,6 @@ import PostCards from "../../components/PostCards";
 
 let user_id = "";
 
-// const posts = [
-//   {
-//     title: "Om",
-//     source: "https://picsum.photos/1000/1000",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-//     user_id: "",
-//     comments: [],
-//     post_id: "",
-//     likes: [],
-//   },
-//   {
-//     title: "Harsh",
-//     source: "https://picsum.photos/1000/1000",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-//     user_id: "",
-//     comments: [],
-//     post_id: "",
-//     likes: [],
-//   },
-//   {
-//     title: "Priyanshi",
-//     source: "https://picsum.photos/1000/1000",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-//     user_id: "",
-//     comments: [],
-//     post_id: "",
-//     likes: [],
-//   },
-//   {
-//     title: "Kaushal",
-//     source: "https://picsum.photos/1000/1000",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-//     user_id: "",
-//     comments: [],
-//     post_id: "",
-//     likes: [],
-//   },
-//   {
-//     title: "Devdeep",
-//     source: "https://picsum.photos/1000/1000",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-//     user_id: "",
-//     comments: [],
-//     post_id: "",
-//     likes: [],
-//   },
-//   {
-//     title: "Achyut",
-//     source: "https://picsum.photos/1000/1000",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-//     user_id: "",
-//     comments: [],
-//     post_id: "",
-//     likes: [],
-//   },
-// ];
-
 const ShowPostCards = () => {
   const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(4);

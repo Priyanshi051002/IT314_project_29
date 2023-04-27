@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/feed"
           element={
             <Private>
               <Home />{" "}
@@ -47,7 +47,7 @@ function App() {
           }
         />
         <Route path="/pc" element={<Passwordchangeq />} />
-        <Route path="/landing" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
         <Route
           path="/connect"
           element={
