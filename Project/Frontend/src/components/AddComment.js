@@ -15,6 +15,7 @@ const AddComment = (props) => {
       user_id: item.user_id,
       comment: text,
     };
+    console.log(item);
     item.comments.push(newComment);
     newComment = { ...newComment, ["post_id"]: item.post_id };
     handleAddComment(newComment);
