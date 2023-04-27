@@ -24,6 +24,7 @@ export const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPasswordMatched(true);
+    setUserExist(false);
     if (name === "username") {
       setUserExist(false);
     }
