@@ -20,6 +20,8 @@ import red from "@mui/material/colors/red";
 import Comment from "./Comment";
 import AddComment from "./AddComment";
 
+let user_id = "omp217";
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -33,6 +35,7 @@ const ExpandMore = styled((props) => {
 const PostCards = (props) => {
   const { item, comments } = props;
   const [expanded, setExpanded] = React.useState(false);
+  const [liked, setLiked] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -66,6 +69,36 @@ const PostCards = (props) => {
       });
   };
 
+  const handleAddLike = () => {
+    fetch(`http://localhost:7000/post/addLike`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ post_id: item.post_id, user_id: item.user_id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setLiked(true);
+        else alert("Could not add like");
+      });
+  };
+
+  const handleRemoveLike = () => {
+    fetch(`http://localhost:7000/post/removeLike`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ post_id: item.post_id, user_id: item.user_id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setLiked(false);
+        else alert("Could not remove like");
+      });
+  };
+
   item.description = DOMPurify.sanitize(item.description);
   return (
     <Card variant="outlined" sx={{ mb: 2 }}>
@@ -77,7 +110,9 @@ const PostCards = (props) => {
         }
         action={
           <IconButton aria-label="settings">
-            <DeleteIcon sx={{ fontSize: 30 }} onClick={handleDelete} />
+            {item.user_id === user_id && (
+              <DeleteIcon sx={{ fontSize: 30 }} onClick={handleDelete} />
+            )}
           </IconButton>
         }
         title={item.user_id}
@@ -99,9 +134,16 @@ const PostCards = (props) => {
         ></Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+        {liked && (
+          <IconButton aria-label="add to favorites" onClick={handleRemoveLike}>
+            <FavoriteIcon sx={{ color: red[500] }} />
+          </IconButton>
+        )}
+        {!liked && (
+          <IconButton aria-label="add to favorites" onClick={handleAddLike}>
+            <FavoriteIcon />
+          </IconButton>
+        )}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

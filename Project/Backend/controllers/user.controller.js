@@ -18,7 +18,6 @@ exports.login = async (req, res) => {
         process.env.ACCESS_TOKEN_SECRET,
         (err, token) => {
           if (err) {
-            // console.log(err);
             return res.json({
               success: false,
               error: "Error!",
@@ -62,11 +61,13 @@ exports.register = async (req, res) => {
   req.body.password = hashedPassword;
   const newUser = await User.create(req.body);
 
-  res.status(200).send({
-    data: newUser,
-    success: true,
-    error: "",
-  });
+
+    res.status(200).send({
+      data: newUser,
+      success: true,
+      error: "",
+    });
+  }
 };
 
 exports.getProfile = async (req, res) => {
@@ -167,7 +168,7 @@ exports.follow = async (req, res) => {
     await follower.save();
     const y = follwedUser.follower.pull({ username: follower.username });
     await follwedUser.save();
-    return res.status(200).send({
+    res.status(200).send({
       data: "Removed",
       success: true,
       error: "",
@@ -178,7 +179,7 @@ exports.follow = async (req, res) => {
     await follower.save();
     const y = follwedUser.follower.push({ username: follower.username });
     await follwedUser.save();
-    return res.status(200).send({
+    res.status(200).send({
       data: "Added",
       success: true,
       error: "",

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography, Divider } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -109,8 +109,16 @@ const TextEditor = () => {
   return (
     <>
       <div>
-        {/* <Navbar /> */}
-        <h1 className="addpost"> Add Post </h1>
+        <Typography
+          variant="h4"
+          textAlign={"center"}
+          component="div"
+          gutterBottom
+          mt={2}
+        >
+          Add Post
+        </Typography>
+        <Divider />
         <form className="Form" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title" className="title">
