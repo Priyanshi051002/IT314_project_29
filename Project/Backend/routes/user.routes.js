@@ -21,7 +21,7 @@ router.post("/createProfile", createProfile);
 router.put("/editProfile", authenticateToken, editProfile);
 router.post("/follow", authenticateToken, follow);
 router.post("/forget", forget);
-router.post("/updatepassword", authenticateToken, updatePassword);
+router.post("/updatepassword", updatePassword);
 router.get("/getAllUser", authenticateToken, getAllUser);
 router.post("/getUserByName", authenticateToken, getUserByName);
 module.exports = router;

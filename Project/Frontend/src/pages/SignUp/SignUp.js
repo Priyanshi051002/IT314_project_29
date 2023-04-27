@@ -24,6 +24,7 @@ export const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPasswordMatched(true);
+    setUserExist(false);
     if (name === "username") {
       setUserExist(false);
     }
@@ -60,7 +61,7 @@ export const SignUp = () => {
       description: details.description,
     };
     try {
-      const response1 = await fetch(`http://localhost:5000/user/register`, {
+      const response1 = await fetch(`${process.env.REACT_APP_FINAL}/user/register`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -70,7 +71,7 @@ export const SignUp = () => {
       })
       const data1 = await response1.json();
 
-      const response2 = await fetch(`http://localhost:5000/user/createProfile`, {
+      const response2 = await fetch(`${process.env.REACT_APP_FINAL}/user/createProfile`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -209,6 +210,7 @@ export const SignUp = () => {
               name="about"
               value={details.about}
               required
+              multiline
               placeholder="Enter about yourself"
               type="text"
               fullWidth
@@ -223,6 +225,7 @@ export const SignUp = () => {
               placeholder="Enter description"
               type="text"
               fullWidth
+              multiline
               onChange={handleChange}
             ></TextField>
             <Button
