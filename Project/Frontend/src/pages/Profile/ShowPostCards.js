@@ -120,7 +120,7 @@ const ShowPostCards = () => {
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
             {posts.slice(0, visible).map((post) => (
               <Grid item xs={12} sm={6} md={6}>
-                <PostCards item={post} />
+                <PostCards item={post} comments={post.comments}/>
               </Grid>
             ))}
           </Grid>
