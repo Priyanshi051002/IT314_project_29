@@ -93,6 +93,7 @@ const ShowPostCards = () => {
       .then((data) => {
         console.log(data);
         user_id = data.data.user.username;
+        // console.log(user_id);
         fetch(`http://localhost:7000/post/getPostsUser`, {
           method: "POST",
           headers: {
@@ -140,7 +141,7 @@ const ShowPostCards = () => {
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
             {posts.slice(0, visible).map((post) => (
               <Grid item xs={12} sm={6} md={6}>
-                <PostCards item={post} comments={post.comments} />
+                <PostCards key={post.post_id} item={post} comments={post.comments} user={user_id}/>
               </Grid>
             ))}
           </Grid>

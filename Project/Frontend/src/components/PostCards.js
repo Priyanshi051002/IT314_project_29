@@ -20,7 +20,7 @@ import red from "@mui/material/colors/red";
 import Comment from "./Comment";
 import AddComment from "./AddComment";
 
-let user_id = "omp217";
+let user_id = "";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,6 +34,7 @@ const ExpandMore = styled((props) => {
 
 const PostCards = (props) => {
   const { item, comments } = props;
+  user_id = props.user;
   const [expanded, setExpanded] = React.useState(false);
   const [liked, setLiked] = React.useState(false);
   const handleExpandClick = () => {
@@ -156,9 +157,9 @@ const PostCards = (props) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Comments:{comments.length}</Typography>
-          <AddComment item={item} />
+          <AddComment item={item} user={user_id}/>
           {comments.map((comment) => (
-            <Comment item={comment} />
+            <Comment item={comment}  />
           ))}
         </CardContent>
       </Collapse>

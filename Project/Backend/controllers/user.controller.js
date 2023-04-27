@@ -50,17 +50,16 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
 
-  if (user)
-    res.status(400).send({
+  if (user) {
+    res.status(404).send({
       data: {},
       success: false,
-      error: "User Already Exists",
+      error: "User already exists",
     });
-
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  req.body.password = hashedPassword;
-  const newUser = await User.create(req.body);
-
+  } else {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    req.body.password = hashedPassword;
+    const newUser = await User.create(req.body);
 
     res.status(200).send({
       data: newUser,

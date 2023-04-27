@@ -80,7 +80,7 @@ const Profile = () => {
               </Card>
             </Grid>
             <Grid item xs={12}>
-              <PostCard posts={posts} />
+              <PostCard posts={posts} user={profile.user}/>
             </Grid>
           </Grid>
         </Box>

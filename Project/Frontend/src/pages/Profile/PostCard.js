@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import PostCards from "../../components/PostCards";
 
 const PostCard = (props) => {
-  console.log(props.posts)
+  console.log(props.user)
   return (
     <>
       <Card>
@@ -25,7 +25,7 @@ const PostCard = (props) => {
           <Grid container spacing={2}>
             {props.posts.length > 0 ? props.posts.slice(0, 2).map((post) => (
               <Grid item xs={12} sm={6} md={6}>
-                <PostCards item={post} comments={post.comments} />
+                <PostCards item={post} comments={post.comments} user={props.user.username} />
               </Grid>
             )) : <Grid item xs={12}> <Typography>You have No Posts. Add Post to show it here</Typography></Grid>}
           </Grid>
