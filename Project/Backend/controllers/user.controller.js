@@ -18,7 +18,6 @@ exports.login = async (req, res) => {
         process.env.ACCESS_TOKEN_SECRET,
         (err, token) => {
           if (err) {
-            console.log(err);
             return res.json({
               success: false,
               error: "Error!",
@@ -52,22 +51,22 @@ exports.register = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
 
   if (user) {
-    res.status(400).send({
+    res.status(404).send({
       data: {},
       success: false,
       error: "User already exists",
     });
+  } else {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    req.body.password = hashedPassword;
+    const newUser = await User.create(req.body);
+
+    res.status(200).send({
+      data: newUser,
+      success: true,
+      error: "",
+    });
   }
-
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  req.body.password = hashedPassword;
-  const newUser = await User.create(req.body);
-
-  res.status(200).send({
-    data: newUser,
-    success: true,
-    error: "",
-  });
 };
 
 exports.getProfile = async (req, res) => {
@@ -159,7 +158,7 @@ exports.follow = async (req, res) => {
     await follower.save();
     const y = follwedUser.follower.pull({ username: follower.username });
     await follwedUser.save();
-    return res.status(200).send({
+    res.status(200).send({
       data: "Removed",
       success: true,
       error: "",
@@ -170,7 +169,7 @@ exports.follow = async (req, res) => {
     await follower.save();
     const y = follwedUser.follower.push({ username: follower.username });
     await follwedUser.save();
-    return res.status(200).send({
+    res.status(200).send({
       data: "Added",
       success: true,
       error: "",

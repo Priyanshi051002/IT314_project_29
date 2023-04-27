@@ -10,7 +10,7 @@ import { React, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
 
-const user_id = "omp217";
+const user_id = "jkl@jkl.com";
 
 // const posts = [
 //   {
