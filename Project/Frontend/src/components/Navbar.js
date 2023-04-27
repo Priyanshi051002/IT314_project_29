@@ -14,12 +14,16 @@ import {
 import { Box } from "@mui/system";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import SchoolIcon from "@mui/icons-material/School";
 import LogoutIcon from "@mui/icons-material/Logout";
+import SchoolIcon from "@mui/icons-material/School";
 import { Link, useNavigate } from "react-router-dom";
 
-const pages = ["Search", "Universities"];
-const settings = ["Profile", "Account", "Logout"];
+const pages = [
+  { url: "profile/addpost", name: "Add Post" },
+  { url: "myconnection", name: "My Connections" },
+  { url: "myposts", name: "My Posts" },
+  { url: "connect", name: "Connect" },
+];
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -27,8 +31,9 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleLogout = () => {
-    navigate("/signinout")
-  }
+    localStorage.removeItem("token");
+    navigate("/signinout");
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,7 +50,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="sticky" sx={{ mb: 2, borderRadius: 2 }}>
+    <AppBar position="sticky" sx={{ mt: 1, mb: 1, borderRadius: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SchoolIcon sx={{ mr: 1 }} />
@@ -97,7 +102,13 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    textAlign="center"
+                    component={Link}
+                    to={"/" + page.url}
+                  >
+                    <strong>{page.name}</strong>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -106,7 +117,7 @@ const Navbar = () => {
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -126,21 +137,19 @@ const Navbar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={Link}
+                to={"/" + page.url}
               >
-                {page}
+                <strong>{page.name}</strong>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Logout">
-            <IconButton
-              size="large"
-              color="inherit"
-              onClick={handleLogout}
-            >
-              <LogoutIcon />
-            </IconButton>
+              <IconButton size="large" color="inherit" onClick={handleLogout}>
+                <LogoutIcon />
+              </IconButton>
             </Tooltip>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
