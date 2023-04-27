@@ -1,0 +1,49 @@
+// localhost:3000/addPost (POST Request)
+
+{
+    "title": "MS Dhoniii",
+    "description": "Mahendra Singh Dhoni, commonly known as MS Dhoni, is a former Indian cricketer and captain of the Indian national team in limited-overs formats from 2007 to 2017 and in Test cricket from 2008 to 2014. He played as a wicket-keeper-batsman and is also the current captain of Chennai Super Kings in the Indian Premier League1. Under his captaincy, India won the 2007 ICC World Twenty20, the 2011 Cricket World Cup, and the 2013 ICC Champions Trophy1. He is considered one of the best finishers in the game ever, as well as one of the greatest wicket-keepers and captains in the history of cricket1.",
+    "user_id": "omp217"
+}
+
+// localhost:3000/addComment (POST Request)
+
+{
+    "comment": "I am big fan",
+    "user_id": "kp217",
+     "post_id": "Re1jr4cBil4ewwkOoxW1"
+}
+
+// localhost:3000/getPostsUser (GET Request)
+
+{
+    "user_id": "omp217"
+}
+
+// localhost:3000/getPostsQuery (GET Request)
+
+{
+    "string": "ms dhoni"
+}
+
+// localhost:3000/getPostsHome (GET Request) (Nothing required to send)
+
+// localhost:3000/deletePost (DELETE Request)
+
+{
+    "post_id": "1ysur4cBC0RNoNVRaYUj"
+}
+
+// localhost:3000/addLike (POST Request)
+
+{
+    "post_id": "bisqr4cBC0RNoNVRdYUg",
+    "user_id": "op217"
+}
+
+// localhost:3000/removeLike
+
+{
+    "post_id": "bisqr4cBC0RNoNVRdYUg",
+    "user_id": "op217"
+}
