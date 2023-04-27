@@ -13,50 +13,76 @@ import {
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
+import PersonIcon from "@mui/icons-material/Person";
+import EditProfile from "../../components/EditProfile";
 
-const DUMMY_DATA = [
+const posts = [
   {
-    name: "Om",
-    source: "https://source.unsplash.com/random",
+    title: "Om",
+    source: "https://picsum.photos/1000/1000",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
   },
-  // {
-  //   name: "Harsh",
-  //   source: "https://source.unsplash.com/random",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Priyanshi",
-  //   source: "https://source.unsplash.com/random",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Kaushal",
-  //   source: "https://source.unsplash.com/random",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Devdeep",
-  //   source: "https://source.unsplash.com/random",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
-  // {
-  //   name: "Achyut",
-  //   source: "https://source.unsplash.com/random",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
-  // },
+  {
+    title: "Harsh",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Priyanshi",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Kaushal",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Devdeep",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
+  {
+    title: "Achyut",
+    source: "https://picsum.photos/1000/1000",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Mus mauris vitae ultricies leo integer malesuada nunc.",
+    user_id: "",
+    comments: [],
+    post_id: "",
+    likes: [],
+  },
 ];
 
 const PROFILE_DATA = {
   name: "Virat Kohli",
-  prf_image: "https://source.unsplash.com/random",
-  bg_image: "https://source.unsplash.com/random",
+  prf_image: "https://picsum.photos/1000/1000",
+  bg_image: "https://picsum.photos/1000/1000",
   description: `Virat Kohli is an Indian international cricketer and former captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the IPL and for Delhi in Indian domestic cricket.`,
   about: `Virat Kohli is an Indian international cricketer and former
   captain of the Indian national team who plays as a right-handed batsman for Royal Challengers Bangalore in the
@@ -73,12 +99,11 @@ const postCard = (
           My Posts
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={6}>
-            <PostCards items={DUMMY_DATA} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-            <PostCards items={DUMMY_DATA} />
-          </Grid>
+          {posts.slice(0, 2).map((post) => (
+            <Grid item xs={12} sm={6} md={6}>
+              <PostCards item={post} comments={post.comments} />
+            </Grid>
+          ))}
         </Grid>
       </CardContent>
       <CardActions>
@@ -127,14 +152,42 @@ const profileCard = (
                   {PROFILE_DATA.name}
                 </Typography>
               </Grid>
-              <Grid item xs={2} sm={2} md={2}>
-                <Typography variant="h6" component="div" gutterBottom>
-                  120
+              <Grid
+                item
+                xs={2}
+                sm={2}
+                md={2}
+                sx={{
+                  textAlign: "center",
+                  textDecoration: "none",
+                  activeStyle: { color: "red" },
+                  color: "black",
+                }}
+                component={Link}
+                to={"/myconnection"}
+              >
+                <PersonIcon fontSize="large" />
+                <Typography variant="body2" component="div" gutterBottom>
+                  Followers
                 </Typography>
               </Grid>
-              <Grid item xs={2} sm={2} md={2}>
-                <Typography variant="h6" component="div" gutterBottom>
-                  120
+              <Grid
+                item
+                xs={2}
+                sm={2}
+                md={2}
+                sx={{
+                  textAlign: "center",
+                  textDecoration: "none",
+                  activeStyle: { color: "red" },
+                  color: "black",
+                }}
+                component={Link}
+                to={"/myconnection"}
+              >
+                <PersonIcon fontSize="large" />
+                <Typography variant="body2" component="div" gutterBottom>
+                  Following
                 </Typography>
               </Grid>
             </Grid>
@@ -142,16 +195,37 @@ const profileCard = (
               {PROFILE_DATA.description}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small" variant="contained">
-              Edit Profile
-            </Button>
-            <Button size="small" variant="contained">
-              Share Profile
-            </Button>
-            <Button size="small" variant="contained">
-              Add Post
-            </Button>
+          <CardActions disableSpacing={true}>
+            <Grid container>
+              <Grid item xs={2} md={3}>
+                <EditProfile profile={PROFILE_DATA} />
+              </Grid>
+
+              <Grid item xs={2} md={3}>
+                <Button
+                  size="small"
+                  variant="contained"
+                  component={Link}
+                  to={"/profile/addpost"}
+                  style={{ maxWidth: '500px', maxHeight: '30px', minWidth: '30px', minHeight: '20px' }}
+                >
+                  Share Profile
+                </Button>
+              </Grid>
+
+              <Button
+                size="small"
+                variant="contained"
+                component={Link}
+                to={"/profile/addpost"}
+                style={{ maxWidth: '300px', maxHeight: '100px', minWidth: '30px', minHeight: '30px' }}
+              >
+                Add Post
+              </Button>
+            </Grid>
+
+
+
           </CardActions>
         </Grid>
       </Grid>
@@ -165,14 +239,7 @@ const Profile = () => {
       <Container maxWidth="lg">
         <Box>
           <Navbar />
-          <Grid
-            container
-            xs={12}
-            sm={12}
-            md={12}
-            rowSpacing={2}
-            sx={{ margin: "auto" }}
-          >
+          <Grid container xs={12} sm={12} md={12} rowSpacing={2}>
             <Grid item>{profileCard}</Grid>
             <Grid item>
               <Card>
