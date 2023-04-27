@@ -14,15 +14,26 @@ import {
 import { Box } from "@mui/system";
 
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 import SchoolIcon from "@mui/icons-material/School";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const pages = ["Search", "Universities"];
-const settings = ["Profile", "Account", "Logout"];
+const pages = [
+  { url: "profile/addpost", name: "Add Post" },
+  { url: "myconnection", name: "My Connections" },
+  { url: "myposts", name: "My Posts" },
+  { url: "connect", name: "Connect" },
+];
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,7 +50,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="sticky" sx={{ mb: 2, borderRadius: 2 }}>
+    <AppBar position="sticky" sx={{ mt: 1, mb: 1, borderRadius: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SchoolIcon sx={{ mr: 1 }} />
@@ -91,7 +102,13 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    textAlign="center"
+                    component={Link}
+                    to={"/" + page.url}
+                  >
+                    <strong>{page.name}</strong>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -120,45 +137,32 @@ const Navbar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={Link}
+                to={"/" + page.url}
               >
-                {page}
+                <strong>{page.name}</strong>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Tooltip title="Logout">
+              <IconButton size="large" color="inherit" onClick={handleLogout}>
+                <LogoutIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Profile">
+              <IconButton
+                onClick={handleOpenUserMenu}
+                component={Link}
+                to={"/profile"}
+                sx={{ p: 0 }}
+              >
                 <Avatar src="/" sx={{ bgcolor: "inherit" }} />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={handleCloseUserMenu}
-                  component={Link}
-                  to={setting.toLowerCase()}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
