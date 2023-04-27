@@ -11,19 +11,20 @@ export const SignUp = () => {
 
   const [passwordMatched, setPasswordMatched] = useState(true);
   const [userExist, setUserExist] = useState(false);
+  const [profileCreated, setProfileCreated] = useState(false);
   const [details, setDetails] = useState({
     name: "",
     username: "",
     password: "",
     birthplace: "",
     about: "",
-    desc: "",
+    description: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPasswordMatched(true);
-    if(name === "username"){
+    if (name === "username") {
       setUserExist(false);
     }
     setDetails((prevState) => {
@@ -34,32 +35,64 @@ export const SignUp = () => {
     });
   };
 
-  const signUpHandler = (e) => {
+  const signUpHandler = async (e) => {
     e.preventDefault();
 
     if (details.password !== details.confirm_password) {
       setPasswordMatched(false);
       return;
     }
+    else if(!details.birthplace.trim()){
+      alert("Please Enter correct BirthPlace");
+      return;
+    }
+    const personalDetails = {
+      name: details.name,
+      username: details.username,
+      password: details.password,
+      birthplace: details.birthplace,
+    };
 
-    fetch(`http://localhost:5000/user/register`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify(details),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          return navigate("/login");
-        }
+    const profileDetails = {
+      user: details.username,
+      name: details.name,
+      about: details.about,
+      description: details.description,
+    };
+    try {
+      const response1 = await fetch(`http://localhost:5000/user/register`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify(personalDetails),
       })
-      .catch((err) => {
+      const data1 = await response1.json();
+
+      const response2 = await fetch(`http://localhost:5000/user/createProfile`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify(profileDetails),
+      })
+
+      const data2 = await response2.json();
+
+      if(!data1.success){
         setUserExist(true);
-        console.log(err.message);
-      });
+      }else{
+        if(data2.success){
+          setProfileCreated(true);
+          navigate(0);
+        }
+        // alert("Something Wrong Please Try Again Later")
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const paperStyle = {
@@ -102,6 +135,11 @@ export const SignUp = () => {
               ) : userExist ? (
                 <Alert severity="error" sx={{ margin: "1em" }}>
                   User already exists!
+                </Alert>
+              ) : null}
+              {profileCreated ? (
+                <Alert severity="success" sx={{ margin: "1em" }}>
+                  Profile Created! Go to SignIn...
                 </Alert>
               ) : null}
             </Grid>
@@ -179,8 +217,8 @@ export const SignUp = () => {
             <TextField
               variant="filled"
               label="Enter description"
-              name="desc"
-              value={details.desc}
+              name="description"
+              value={details.description}
               required
               placeholder="Enter description"
               type="text"
