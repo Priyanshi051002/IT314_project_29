@@ -5,12 +5,32 @@ import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
 import SearchIcon from "@mui/icons-material/Search";
 
+let user_id ="";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [searchInput, setSearchInput] = useState(null);
   const [searchPost, setSearchPost] = useState(false); // for search bar
   useEffect(() => {
     setSearchPost(false);
+    const token = localStorage.getItem('token');
+    const fetchData = async () => {
+      try {
+        const response1 = await fetch(`http://localhost:5000/user/getProfile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data1 = await response1.json();
+        console.log(data1.data);
+        if(data1.success){
+          user_id = data1.data.user.username;
+          console.log(user_id)
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
     fetch(`http://localhost:7000/post/getPostsHome`, {
       method: "GET",
       headers: {
@@ -111,11 +131,11 @@ const Home = () => {
             </Paper>
             {searchPost &&
               posts.map((post) => (
-                <PostCards item={post} comments={post.normal_comments} />
+                <PostCards item={post} comments={post.normal_comments} user={user_id} />
               ))}
             {!searchPost  &&
               posts.map((post) => (
-                <PostCards item={post} comments={post.comments} />
+                <PostCards item={post} comments={post.comments} user={user_id} />
               ))}
             {/* {posts.map((post) => (
               <PostCards item={post} comments={post.comments} />
