@@ -146,8 +146,7 @@ const TextEditor = () => {
                 initialValue="<p>Share your thoughts here..</p>"
                 init={{
                   selector: "#editor",
-                  height: 500,
-                  width: 1000,
+                  min_height: 500,
                   menubar: false,
                   statusbar: false,
                   icons: "material",
@@ -163,6 +162,7 @@ const TextEditor = () => {
                     "fullscreen",
                     "table",
                     "codesample",
+                    "autoresize",
                   ],
                   toolbar:
                     "undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | charmap table codesample | searchreplace wordcount code | fullscreen ",
