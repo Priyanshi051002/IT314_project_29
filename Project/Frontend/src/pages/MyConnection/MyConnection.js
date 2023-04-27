@@ -22,7 +22,7 @@ const MyConnection = () => {
   const [following, setFollowing] = useState(8);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user/getProfile", {
+    fetch(`${process.env.REACT_APP_MONGO}/user/getProfile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
