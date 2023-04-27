@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button, Grid, Typography, Divider } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -10,9 +10,23 @@ import { BiImageAdd, BiVideoPlus, BiFile } from "react-icons/bi";
 import "../pages/Profile/AddPost.css";
 import { useNavigate } from "react-router-dom";
 
-const user_id = "omp217";
+let user_id = "";
 
 const TextEditor = () => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch(`http://localhost:5000/user/getProfile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        user_id = data.data.user.username;
+      });
+  }, []);
+
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -32,9 +46,9 @@ const TextEditor = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          return navigate("/");
+          return navigate("/profile");
         } else {
-          return navigate("/profile/addPost");
+          return alert("Internal Server Error");
         }
       })
       .catch((err) => {

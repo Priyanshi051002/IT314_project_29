@@ -105,15 +105,17 @@ exports.createProfile = async (req, res) => {
     res.status(400).send({
       data: {},
       success: false,
-      error: err,
+      error: "Profile Already Created",
     });
   }
 };
 
 exports.editProfile = async (req, res) => {
   try {
+    // console.log(req.body);
     //find profile from schema
     const profile = await Profile.findOne({ user: req.user.username });
+    const user = await User.findOne({ username: req.user.username });
     //update profile
     //check if not found
     if (!profile) {
@@ -123,12 +125,19 @@ exports.editProfile = async (req, res) => {
         error: "Profile not found",
       });
     } else {
+      user.name = req.body.name;
       profile.name = req.body.name;
       profile.description = req.body.description;
       profile.about = req.body.about;
       await profile.save();
+      await user.save();
+      const newUser = {
+        user,
+        about: profile.about,
+        description: profile.description,
+      };
       res.status(200).send({
-        data: profile,
+        data: newUser,
         success: true,
         error: "",
       });
