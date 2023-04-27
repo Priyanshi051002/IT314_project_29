@@ -21,7 +21,7 @@ const ShowPostCards = () => {
   useEffect(() => {
     // handleUserId();
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/user/getProfile`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/getProfile`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -31,7 +31,7 @@ const ShowPostCards = () => {
         console.log(data);
         user_id = data.data.user.username;
         // console.log(user_id);
-        fetch(`http://localhost:7000/post/getPostsUser`, {
+        fetch(`${process.env.REACT_APP_FINAL}/post/getPostsUser`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

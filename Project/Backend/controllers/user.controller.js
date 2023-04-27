@@ -258,7 +258,7 @@ exports.updatePassword = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
   const user = await User.findOneAndUpdate(
-    { username: req.user.username },
+    { username: req.body.username },
     { password: req.body.password }
   );
   if (user) {

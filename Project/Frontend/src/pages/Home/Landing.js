@@ -36,7 +36,7 @@ const Landing = () => {
           <Grid item xs={2} md={3}></Grid>
           <Grid item xs={5} md={1}>
             {localStorage.getItem("token") == null && (
-              <Button variant="outlined" sx={{ mr: 2 }} onClick={handleClick}>
+              <Button variant="outlined" onClick={handleClick}>
                 Sign up
               </Button>
             )}

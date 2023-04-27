@@ -33,7 +33,7 @@ const EditProfile = ({ profile }) => {
   const handleEdit = () => {
     // console.log(details);
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/user/editProfile`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/editProfile`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
