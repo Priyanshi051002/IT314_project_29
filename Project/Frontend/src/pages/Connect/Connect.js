@@ -21,7 +21,7 @@ const Connect = () => {
   const [visible, setVisible] = useState(12);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_MONGO}/user/getAllUser`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/getAllUser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const Connect = () => {
 
   const handleFollow = (username) => {
     // console.log("Follow");
-    fetch(`${process.env.REACT_APP_MONGO}/user/follow`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/follow`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -35,7 +35,7 @@ export const Forgotpassword = () => {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_MONGO}/user/updatepassword`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/updatepassword`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

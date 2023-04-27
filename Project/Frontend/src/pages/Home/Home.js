@@ -15,7 +15,7 @@ const Home = () => {
     const token = localStorage.getItem("token");
     const fetchData = async () => {
       try {
-        const response1 = await fetch(`${process.env.REACT_APP_MONGO}/user/getProfile`, {
+        const response1 = await fetch(`${process.env.REACT_APP_FINAL}/user/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,7 +31,7 @@ const Home = () => {
       }
     };
     fetchData();
-    fetch(`${process.env.REACT_APP_ELASTIC}/post/getPostsHome`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/getPostsHome`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const Home = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_ELASTIC}/post/getPostsQuery`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/getPostsQuery`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

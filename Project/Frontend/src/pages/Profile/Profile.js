@@ -24,7 +24,7 @@ const Profile = () => {
     const token = localStorage.getItem("token");
     const fetchData = async () => {
       try {
-        const response1 = await fetch(`${process.env.REACT_APP_MONGO}/user/getProfile`, {
+        const response1 = await fetch(`${process.env.REACT_APP_FINAL}/user/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -33,7 +33,7 @@ const Profile = () => {
         console.log(data1.data);
 
         const response2 = await fetch(
-          `${process.env.REACT_APP_ELASTIC}/post/getPostsUser`,
+          `${process.env.REACT_APP_FINAL}/post/getPostsUser`,
           {
             method: "POST",
             headers: {

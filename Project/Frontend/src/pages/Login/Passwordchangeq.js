@@ -21,7 +21,7 @@ export const Passwordchangeq = () => {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_MONGO}/user/forget`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/forget`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

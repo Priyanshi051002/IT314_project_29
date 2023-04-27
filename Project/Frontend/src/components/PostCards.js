@@ -49,7 +49,7 @@ const PostCards = (props) => {
   };
 
   const handleDeletePost = (item) => {
-    fetch(`http://localhost:7000/post/deletePost`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/deletePost`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

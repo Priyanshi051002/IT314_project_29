@@ -61,7 +61,7 @@ export const SignUp = () => {
       description: details.description,
     };
     try {
-      const response1 = await fetch(`${process.env.REACT_APP_MONGO}/user/register`, {
+      const response1 = await fetch(`${process.env.REACT_APP_FINAL}/user/register`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -71,7 +71,7 @@ export const SignUp = () => {
       })
       const data1 = await response1.json();
 
-      const response2 = await fetch(`${process.env.REACT_APP_MONGO}/user/createProfile`, {
+      const response2 = await fetch(`${process.env.REACT_APP_FINAL}/user/createProfile`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
