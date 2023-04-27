@@ -10,7 +10,7 @@ import { React, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import PostCards from "../../components/PostCards";
 
-const user_id = "omp217";
+let user_id = "";
 
 // const posts = [
 //   {
@@ -79,19 +79,39 @@ const ShowPostCards = () => {
   const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(4);
 
+  const handleUserId = () => {};
+
   useEffect(() => {
-    fetch(`http://localhost:7000/post/getPostsUser`, {
-      method: "POST",
+    // handleUserId();
+    const token = localStorage.getItem("token");
+    fetch(`http://localhost:5000/user/getProfile`, {
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ user_id: user_id }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
-          setPosts(data);
-        }
+        console.log(data);
+        user_id = data.data.user.username;
+        fetch(`http://localhost:7000/post/getPostsUser`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_id: user_id }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data) {
+              setPosts((prevState) => {
+                return data;
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
       })
       .catch((err) => {
         console.log(err.message);
@@ -120,7 +140,7 @@ const ShowPostCards = () => {
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
             {posts.slice(0, visible).map((post) => (
               <Grid item xs={12} sm={6} md={6}>
-                <PostCards item={post} comments={post.comments}/>
+                <PostCards item={post} comments={post.comments} />
               </Grid>
             ))}
           </Grid>
