@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {
   Card,
@@ -8,8 +8,6 @@ import {
   Button,
   CardMedia,
   Grid,
-  Container,
-  Box,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import ImageUrl from "../../static";
@@ -42,15 +40,15 @@ const ProfileCard = ({ profileData }) => {
           </Grid>
           <Grid item xs={12} sm={7} md={8}>
             <CardContent>
-              <Grid container>
-                <Grid item xs={8} sm={8} md={8}>
+              <Grid container spacing={1}>
+                <Grid item xs={6} sm={8} md={8}>
                   <Typography variant="h4" component="div" gutterBottom>
                     {prof.user.name}
                   </Typography>
                 </Grid>
                 <Grid
                   item
-                  xs={2}
+                  xs={3}
                   sm={2}
                   md={2}
                   sx={{
@@ -69,7 +67,7 @@ const ProfileCard = ({ profileData }) => {
                 </Grid>
                 <Grid
                   item
-                  xs={2}
+                  xs={3}
                   sm={2}
                   md={2}
                   sx={{
@@ -94,13 +92,12 @@ const ProfileCard = ({ profileData }) => {
               </Grid>
             </CardContent>
             <CardActions disableSpacing={true}>
-              <Grid container>
-                <Grid item xs={6} md={3}>
+              <Grid container spacing={1}>
+                <Grid item xs={6} md={3} sx={{textAlign:"center"}}>
                   <EditProfile profile={prof} />
                 </Grid>
-                <Grid item xs={6} md={9}>
+                <Grid item xs={6} md={2} sx={{textAlign:"center"}}>
                   <Button
-                    size="small"
                     variant="contained"
                     onClick={(e) => {
                       navigate("/profile/addPost");

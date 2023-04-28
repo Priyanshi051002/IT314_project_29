@@ -4,16 +4,15 @@ import {
   CardContent,
   Typography,
   CardActions,
-  CardMedia,
   CardHeader,
   Avatar,
   IconButton,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCommentIcon from "@mui/icons-material/AddComment";
-import ImageUrl from "../static";
 import DOMPurify from "dompurify";
 import Collapse from "@mui/material/Collapse";
 import red from "@mui/material/colors/red";
@@ -73,7 +72,7 @@ const PostCards = (props) => {
   };
 
   const handleAddLike = () => {
-    fetch(`http://localhost:7000/post/addLike`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/addLike`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -88,7 +87,7 @@ const PostCards = (props) => {
   };
 
   const handleRemoveLike = () => {
-    fetch(`http://localhost:7000/post/removeLike`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/removeLike`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -120,7 +119,8 @@ const PostCards = (props) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {item.user_id !== undefined ? item.user_id[0]: "N"}
+            {/* {console.log(item.user_id[0])} */}
           </Avatar>
         }
         action={
@@ -132,12 +132,13 @@ const PostCards = (props) => {
         }
         title={item.user_id}
       />
-      <CardMedia
+      {/* <CardMedia
         component="img"
         alt="green iguana"
         height="200"
         image={ImageUrl}
-      />
+      /> */}
+      <Divider />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}
@@ -148,6 +149,7 @@ const PostCards = (props) => {
           dangerouslySetInnerHTML={{ __html: item.description }}
         ></Typography>
       </CardContent>
+      <Divider />
       <CardActions disableSpacing>
         {liked && (
           <IconButton aria-label="add to favorites" onClick={handleRemoveLike}>

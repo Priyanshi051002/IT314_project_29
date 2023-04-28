@@ -13,6 +13,7 @@ import AddPost from "./pages/Profile/AddPost";
 import Private from "./routes/Private";
 import EditProfile from "./components/EditProfile";
 import Landing from "./pages/Home/Landing";
+import UserProfile from "./pages/Connect/UserProfile";
 
 function App() {
   return (
@@ -77,6 +78,14 @@ function App() {
           element={
             <Private>
               <EditProfile />{" "}
+            </Private>
+          }
+        />
+        <Route
+          path="/profiles/:id"
+          element={
+            <Private>
+              <UserProfile />
             </Private>
           }
         />

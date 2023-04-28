@@ -7,6 +7,8 @@ import { Button } from "@mui/material/";
 
 const AddComment = (props) => {
   const { item } = props;
+  const user_id = props.user;
+  console.log(user_id);
 
   const [text, setText] = React.useState("");
   const addEmoji = (emoji) => () => setText(`${text}${emoji}`);

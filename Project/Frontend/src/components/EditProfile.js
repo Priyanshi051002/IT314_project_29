@@ -60,7 +60,7 @@ const EditProfile = ({ profile }) => {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} size="small">
+      <Button variant="contained" onClick={handleClickOpen} >
         Edit Profile
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -139,10 +139,11 @@ const EditProfile = ({ profile }) => {
             variant="filled"
             fullWidth
             multiline
+            
             minRows={4}
             onChange={handleChange}
           />
-          <Typography>Word Count:{details.description.length}/100</Typography>
+          <Typography>Letter Count:{details.description.length}/100</Typography>
 
           <TextField
             autoFocus
@@ -158,7 +159,7 @@ const EditProfile = ({ profile }) => {
             minRows={4}
             onChange={handleChange}
           />
-          <Typography>Word Count:{details.about.length}/500</Typography>
+          <Typography>Letter Count:{details.about.length}/500</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
