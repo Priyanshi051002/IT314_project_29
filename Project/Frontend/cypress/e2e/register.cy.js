@@ -2,6 +2,7 @@
 
 import {
   randCatchPhrase,
+  randCity,
   randEmail,
   randFullName,
   randLocale,
@@ -12,7 +13,7 @@ import {
 describe("Register", () => {
   // cypress register test
   it("Successfully loads the SignUp page", () => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("http://localhost:3000/signinout");
     cy.url().should("include", "/signinout");
     // got to sign up page
     // cy.get("SIGN UP").click();
@@ -140,7 +141,7 @@ describe("Register", () => {
         let password = randPassword();
         cy.get("[name='password']").type(password);
         cy.get("[name='confirm_password']").type(password);
-        cy.get("[name='birthplace']").type(randLocale());
+        cy.get("[name='birthplace']").type(randCity());
         cy.get("[name='about']").type(randSkill());
         // 2 type error in description
         cy.get("[name='description']").eq(1).type(randCatchPhrase());

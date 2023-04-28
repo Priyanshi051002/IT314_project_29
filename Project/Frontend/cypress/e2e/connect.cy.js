@@ -6,7 +6,7 @@ describe("Connect user test", () => {
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
-    cy.url().should("equal", "http://localhost:3000/");
+    cy.url().should("equal", "http://localhost:3000/feed");
     cy.reload();
     // if else statement in cypress
     cy.request("http://localhost:5000/user/getProfile").then((response) => {
@@ -51,7 +51,7 @@ describe("After the case connections", () => {
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
-    cy.url().should("equal", "http://localhost:3000/");
+    cy.url().should("equal", "http://localhost:3000/feed");
     cy.reload();
     // if else statement in cypress
     cy.request("http://localhost:5000/user/getProfile").then((response) => {

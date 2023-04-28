@@ -1,4 +1,4 @@
-import { containerClasses } from "@mui/material";
+/// <reference types="cypress" />
 
 describe("Login component", () => {
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe("Login component", () => {
     // });
 
     // Verify that the user is redirected to the home page
-    cy.url().should("equal", "http://localhost:3000/");
+    cy.url().should("equal", "http://localhost:3000/feed");
   });
 
   it("Displays an error message for invalid login credentials", () => {
@@ -57,11 +57,12 @@ describe("Login component", () => {
     cy.get('a:contains("Forgot Password")').click();
     cy.url().should("equal", "http://localhost:3000/pc");
 
+    cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='birthplace']").type("Tatooine");
     cy.get("button[type='submit']").click();
 
     cy.get("input[name='password']").type("1234");
-    cy.get("input[name='confirm_password']").type("1234");
+    cy.get("input[name='confirmPass']").type("1234");
     cy.get("button[type='submit']").click();
   });
 
@@ -81,6 +82,6 @@ describe("Login component", () => {
     // });
 
     // Verify that the user is redirected to the home page
-    cy.url().should("equal", "http://localhost:3000/");
+    cy.url().should("equal", "http://localhost:3000/feed");
   });
 });
