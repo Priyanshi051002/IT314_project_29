@@ -23,7 +23,45 @@ exports.addpost = async (req, res) => {
     }
   );
 };
-
+exports.getPostsOfUser = async (req, res) => {
+  
+  const {user_id } = req.query.profile;
+  //const { user_id } = req.body;
+  
+  client.search(
+    {
+      index: "post",
+      body: {
+        query: {
+          match: {
+            user_id,
+          },
+        },
+      },
+      size: 10000,
+    },
+    (err, result, status) => {
+      if (err) {
+        res.send({ err });
+      } else {
+        var ret = [];
+        result.hits.hits.forEach((post) => {
+          const { title, description, user_id, comments, likes } = post._source;
+          const post_id = post._id;
+          ret.push({
+            title,
+            description,
+            user_id,
+            comments,
+            post_id,
+            likes,
+          });
+        });
+        res.send(ret);
+      }
+    }
+  );
+};
 exports.addComment = async (req, res) => {
   const { comment, user_id, post_id } = req.body;
   client.update(
