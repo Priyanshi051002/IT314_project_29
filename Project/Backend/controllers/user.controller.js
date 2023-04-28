@@ -98,7 +98,7 @@ exports.getProfileOfUser = async (req, res) => {
   try {
     const requser = req.query.profile;
 
-    console.log(requser);
+    // console.log(requser);
 
     const user = await User.findOne({ username: requser });
     if (!user) {

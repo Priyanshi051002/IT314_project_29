@@ -16,7 +16,6 @@ import {
 import Navbar from "../../components/Navbar";
 import ImageUrl from "../../static";
 import { useNavigate } from "react-router-dom";
-import UserProfile from "./UserProfile";
 
 const Connect = () => {
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ const Connect = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data) {
           setUsers(data.data);
         }
@@ -63,7 +62,7 @@ const Connect = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.success) {
           alert(
             "Followed. Navigate to Following and Followers Page to see the results"
@@ -93,7 +92,7 @@ const Connect = () => {
           </Typography>
           <Divider />
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
-            {console.log(users)}
+            {/* {console.log(users)} */}
             {users.slice(0, visible).map((user) => (
               <Grid item xs={12} sm={6} md={3}>
                 {/* Can be modified to reduce redundancy */}
