@@ -8,6 +8,9 @@ const {
   deletePost,
   getPostsHome,
   getPostsQuery,
+
+ // getProfileOfUser,
+  getPostsOfUser,
 } = require("../controllers/post.controller");
 const router = express.Router();
 
@@ -19,5 +22,5 @@ router.delete("/deletePost", deletePost);
 router.post("/getPostsUser", getPostsUser);
 router.get("/getPostsHome", getPostsHome);
 router.post("/getPostsQuery", getPostsQuery);
-
+router.post("/getPostsOfUser",getPostsOfUser);
 module.exports = router;
