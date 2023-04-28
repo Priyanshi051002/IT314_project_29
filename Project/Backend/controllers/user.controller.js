@@ -92,7 +92,44 @@ exports.getProfile = async (req, res) => {
     });
   }
 };
+exports.getProfileOfUser = async (req, res) => {
+  
+  const requser = req.query.profile;
 
+  console.log(requser);
+
+  const user = await User.findOne({ username: requser});
+  if(!user){
+    return res.status(403).send({
+      data: {},
+      success: false,
+      error: "User not found",
+    });
+    
+  }
+  user.password = null;
+  user.birthplace = null;
+
+  const profile = await Profile.findOne({ user: requser });
+  const profileData = {
+    user,
+    about: profile.about,
+    description: profile.description,
+  };
+  if (profileData) {
+    res.status(200).send({
+      data: profileData,
+      success: true,
+      error: "",
+    });
+  } else {
+    res.status(403).send({
+      data: {},
+      success: false,
+      error: "User not found",
+    });
+  }
+};
 exports.createProfile = async (req, res) => {
   try {
     const profile = await Profile.create(req.body);
