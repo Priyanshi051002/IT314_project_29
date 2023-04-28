@@ -112,7 +112,11 @@ const PostCards = (props) => {
         action={
           <IconButton aria-label="settings">
             {item.user_id === user_id && (
-              <DeleteIcon sx={{ fontSize: 30 }} onClick={handleDelete} />
+              <DeleteIcon
+                name="delete"
+                sx={{ fontSize: 30 }}
+                onClick={handleDelete}
+              />
             )}
           </IconButton>
         }
@@ -136,12 +140,20 @@ const PostCards = (props) => {
       </CardContent>
       <CardActions disableSpacing>
         {liked && (
-          <IconButton aria-label="add to favorites" onClick={handleRemoveLike}>
+          <IconButton
+            name="like"
+            aria-label="add to favorites"
+            onClick={handleRemoveLike}
+          >
             <FavoriteIcon sx={{ color: red[500] }} />
           </IconButton>
         )}
         {!liked && (
-          <IconButton aria-label="add to favorites" onClick={handleAddLike}>
+          <IconButton
+            name="like"
+            aria-label="add to favorites"
+            onClick={handleAddLike}
+          >
             <FavoriteIcon />
           </IconButton>
         )}
@@ -151,15 +163,15 @@ const PostCards = (props) => {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <AddCommentIcon />
+          <AddCommentIcon name="comment" />
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Comments:{comments.length}</Typography>
-          <AddComment item={item} user={user_id}/>
+          <AddComment item={item} user={user_id} />
           {comments.map((comment) => (
-            <Comment item={comment}  />
+            <Comment item={comment} />
           ))}
         </CardContent>
       </Collapse>

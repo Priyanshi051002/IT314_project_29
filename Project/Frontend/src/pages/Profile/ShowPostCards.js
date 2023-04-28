@@ -78,7 +78,12 @@ const ShowPostCards = () => {
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
             {posts.slice(0, visible).map((post) => (
               <Grid item xs={12} sm={6} md={6}>
-                <PostCards key={post.post_id} item={post} comments={post.comments} user={user_id}/>
+                <PostCards
+                  key={post.post_id}
+                  item={post}
+                  comments={post.comments}
+                  user={user_id}
+                />
               </Grid>
             ))}
           </Grid>

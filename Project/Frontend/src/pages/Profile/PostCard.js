@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import PostCards from "../../components/PostCards";
 
 const PostCard = (props) => {
-  console.log(props.user)
+  console.log(props.user);
   return (
     <>
       <Card>
@@ -23,11 +23,24 @@ const PostCard = (props) => {
             My Posts
           </Typography>
           <Grid container spacing={2}>
-            {props.posts.length > 0 ? props.posts.slice(0, 2).map((post) => (
-              <Grid item xs={12} sm={6} md={6}>
-                <PostCards item={post} comments={post.comments} user={props.user.username} />
+            {props.posts.length > 0 ? (
+              props.posts.slice(0, 2).map((post) => (
+                <Grid item xs={12} sm={6} md={6}>
+                  <PostCards
+                    item={post}
+                    comments={post.comments}
+                    user={props.user.username}
+                  />
+                </Grid>
+              ))
+            ) : (
+              <Grid item xs={12}>
+                {" "}
+                <Typography>
+                  You have No Posts. Add Post to show it here
+                </Typography>
               </Grid>
-            )) : <Grid item xs={12}> <Typography>You have No Posts. Add Post to show it here</Typography></Grid>}
+            )}
           </Grid>
         </CardContent>
         <CardActions>
@@ -37,6 +50,8 @@ const PostCard = (props) => {
             to="/myposts"
             fullWidth
             color="success"
+            name="myposts"
+            type="button"
           >
             Show All Posts
           </Button>

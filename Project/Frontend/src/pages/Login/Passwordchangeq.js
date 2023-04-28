@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Passwordchangeq = () => {
+  const paperStyle = {
+    padding: 20,
   const navigate = useNavigate();
   const [details, setDetails] = useState({
     username: "",
@@ -47,6 +49,8 @@ export const Passwordchangeq = () => {
     width: "20%",
     margin: "2% 38%",
   };
+    margin: "2% 38%",
+  };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
   return (
@@ -73,6 +77,8 @@ export const Passwordchangeq = () => {
           <TextField
             variant="filled"
             label="What is your birth place?"
+            name="birthplace"
+            required
             value={details.birthplace}
             name="birthplace"
             placeholder="Enter place of birth"
@@ -96,6 +102,9 @@ export const Passwordchangeq = () => {
             style={buttonStyle}
             onClick={handlePasswordSubmit}
           >
+            <Link to="/fp" style={{ textDecoration: "none", color: "white" }}>
+              Submit
+            </Link>
             Submit
           </Button>
         </Paper>

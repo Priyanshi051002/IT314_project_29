@@ -52,6 +52,7 @@ const AddComment = (props) => {
         onChange={(event) => setText(event.target.value)}
         minRows={2}
         maxRows={4}
+        name="comment-text"
         startDecorator={
           <Box sx={{ display: "flex", gap: 0.5 }}>
             <IconButton
@@ -84,7 +85,7 @@ const AddComment = (props) => {
         }
         sx={{ minWidth: 300 }}
       />
-      <Button sx={{ ml: "auto" }} onClick={handleSave}>
+      <Button type="submit" ssx={{ ml: "auto" }} onClick={handleSave}>
         Send
       </Button>
     </>

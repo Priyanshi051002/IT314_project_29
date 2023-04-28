@@ -168,6 +168,7 @@ const EditProfile = ({ profile }) => {
               handleClose();
             }}
             variant="contained"
+            type="submit"
           >
             Edit
           </Button>

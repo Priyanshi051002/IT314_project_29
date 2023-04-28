@@ -22,7 +22,7 @@ const TextEditor = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         user_id = data.data.user.username;
       });
   }, []);
@@ -127,6 +127,7 @@ const TextEditor = () => {
             <input
               type="text"
               className="input_title"
+              name="title"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
@@ -282,7 +283,12 @@ const TextEditor = () => {
       <Grid container spacing={2}>
         <Grid item xs={4} md={3}></Grid>
         <Grid item xs={4} md={6}>
-          <Button variant="contained" fullWidth onClick={handleClickOpen}>
+          <Button
+            classname="add_posts"
+            variant="contained"
+            fullWidth
+            onClick={handleClickOpen}
+          >
             Add post
           </Button>
           <Dialog
@@ -304,7 +310,12 @@ const TextEditor = () => {
               <Button variant="outlined" onClick={handleClose}>
                 Return
               </Button>
-              <Button onClick={handleClose1} variant="contained" autoFocus>
+              <Button
+                classname="confirm_bhai"
+                onClick={handleClose1}
+                variant="contained"
+                autoFocus
+              >
                 Confirm
               </Button>
             </DialogActions>

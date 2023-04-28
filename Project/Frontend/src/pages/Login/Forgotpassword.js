@@ -9,6 +9,17 @@ import {
 } from "@mui/material";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import {
+  Paper,
+  Grid,
+  Avatar,
+  TextField,
+  Button,
+  Typography,
+} from "@mui/material";
+import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
+import { Link } from "react-router-dom";
 
 export const Forgotpassword = () => {
   const navigate = useNavigate();
@@ -46,7 +57,7 @@ export const Forgotpassword = () => {
       .then((data) => {
         if (data.success) {
           alert("Password Changed Successfully");
-          localStorage.removeItem('username');
+          localStorage.removeItem("username");
           navigate("/signinout");
         } else {
           alert(data.error);
@@ -79,6 +90,7 @@ export const Forgotpassword = () => {
           <TextField
             variant="filled"
             label="Password"
+            name="password"
             required
             name="password"
             value={password.password}
@@ -90,6 +102,7 @@ export const Forgotpassword = () => {
           <TextField
             variant="filled"
             label="Confirm Password"
+            name="confirm_password"
             name="confirmPass"
             value={password.confirmPass}
             required
@@ -106,6 +119,13 @@ export const Forgotpassword = () => {
             onClick={handlePasswordSubmit}
             style={buttonStyle}
           >
+            <Link
+              to="/signinout"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              {" "}
+              Change Password
+            </Link>
             Change Password
           </Button>
         </Paper>

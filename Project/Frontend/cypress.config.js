@@ -18,11 +18,5 @@ module.exports = {
     videoCompression: 0,
     downloadsFolder: "cypress/downloads",
     waitForAnimations: true,
-    setTimeouts: {
-      defaultCommandTimeout: 10000,
-      // pageLoadTimeout: 60000,
-      // requestTimeout: 5000,
-      // execTimeout: 5000,
-    },
   },
 };
