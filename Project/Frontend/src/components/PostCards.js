@@ -35,9 +35,21 @@ const PostCards = (props) => {
   const { item, comments } = props;
   user_id = props.user;
 
-  let initialLike = handlePostLike(item.liked, user_id);
+  const handlePostLike = (liked, user_id) => {
+    {
+      for (let i = 0; i < liked.length; i++) {
+        if (liked[i].user_id === user_id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  // let initialLike = handlePostLike(item.likes, user_id);
   const [expanded, setExpanded] = React.useState(false);
-  const [liked, setLiked] = React.useState(initialLike);
+  const [liked, setLiked] = React.useState(() => handlePostLike(item.likes, user_id));
+  console.log(liked, "DEKHLE BHAI");
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -101,25 +113,13 @@ const PostCards = (props) => {
       });
   };
 
-  const handlePostLike = (liked, user_id) => {
-    {
-      for (let i = 0; i < liked.length; i++) {
-        if (liked[i].user_id === user_id) {
-          setLiked(true);
-          return;
-        }
-      }
-    }
-    setLiked(false);
-  };
-
   item.description = DOMPurify.sanitize(item.description);
   return (
     <Card variant="outlined" sx={{ mb: 2 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {item.user_id !== undefined ? item.user_id[0]: "N"}
+            {item.user_id !== undefined ? item.user_id[0] : "N"}
             {/* {console.log(item.user_id[0])} */}
           </Avatar>
         }
