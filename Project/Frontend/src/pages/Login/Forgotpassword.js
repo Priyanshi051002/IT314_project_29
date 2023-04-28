@@ -60,16 +60,16 @@ export const Forgotpassword = () => {
     padding: 20,
     height: "50vh",
     width: 300,
-    margin: "2% 38%",
+    margin: "auto",
+    marginTop: "1em"
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "10px 0" };
   return (
     <div>
-      <Grid>
-        <Paper elevation={20} style={paperStyle}>
+      <Grid container>
+        <Paper elevation={20} style={paperStyle} component={Grid} xs={10} sm={6} md={3}>
           <Grid align="center">
-            <Grid item xs={12} sm={6} md={3}></Grid>
             <Avatar style={avatarStyle}>
               <VpnKeyOutlinedIcon />
             </Avatar>

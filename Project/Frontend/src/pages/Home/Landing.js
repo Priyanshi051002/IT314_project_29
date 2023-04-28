@@ -13,8 +13,8 @@ const Landing = () => {
     <div>
       <Box>
         <Grid container spacing={1} alignItems={"center"} sx={{ mt: 2 }}>
-          <Grid item xs={2} md={2}></Grid>
-          <Grid item xs={8} md={3} justifyContent={"center"}>
+          <Grid item xs={1} md={2}></Grid>
+          <Grid item xs={10} md={3} justifyContent={"center"} sx={{textAlign:"center"}}>
             <SchoolIcon
               sx={{ mr: 2, color: "#1976d2", width: 50, height: 50 }}
             />
@@ -33,28 +33,28 @@ const Landing = () => {
               DA-SH
             </Typography>
           </Grid>
-          <Grid item xs={2} md={3}></Grid>
-          <Grid item xs={5} md={1}>
+          <Grid item xs={0} md={3}></Grid>
+          <Grid item xs={6} md={1} sx={{textAlign:"right"}}>
             {localStorage.getItem("token") == null && (
               <Button variant="outlined" onClick={handleClick}>
                 Sign up
               </Button>
             )}
           </Grid>
-          <Grid item xs={5} md={1}>
+          <Grid item xs={6} md={1} sx={{textAlign:"center"}}>
             {localStorage.getItem("token") == null && (
               <Button color="primary" variant="contained" onClick={handleClick}>
                 Sign in
               </Button>
             )}
           </Grid>
-          <Grid item xs={1} md={2}></Grid>
+          <Grid item xs={0} md={2}></Grid>
         </Grid>
       </Box>
-      <Box sx={{ mt: 10 }}>
-        <Grid container spacing={1} sx={{ mt: 2 }}>
-          <Grid item xs={2} md={2}></Grid>
-          <Grid item xs={4} md={4}>
+      <Box sx={{ mt: 4.5 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={1} md={2}></Grid>
+          <Grid item xs={11} md={3}>
             <Typography
               component="text"
               sx={{
@@ -63,7 +63,7 @@ const Landing = () => {
                 display: "flex",
                 fontFamily: "",
                 fontWeight: 500,
-                fontSize: 60,
+                fontSize: "7vmin",
                 color: "#210062",
                 textDecoration: "none",
               }}
@@ -78,7 +78,7 @@ const Landing = () => {
                 display: "flex",
                 fontFamily: "",
                 fontWeight: 500,
-                fontSize: 30,
+                fontSize: "5vmin",
                 color: "#394867",
                 textDecoration: "none",
               }}
@@ -120,18 +120,19 @@ const Landing = () => {
             )}
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={1} md={0}></Grid>
+          <Grid item xs={11} md={5}>
             <CardMedia
               component="img"
               src={image1}
               sx={{
-                width: "500px",
-                height: "500px",
+                width: "90vmin",
+                height: "90vmin",
                 borderRadius: "50%",
               }}
             ></CardMedia>
           </Grid>
-          <Grid item xs={2} md={2}></Grid>
+          <Grid item xs={1} md={2}></Grid>
         </Grid>
       </Box>
     </div>

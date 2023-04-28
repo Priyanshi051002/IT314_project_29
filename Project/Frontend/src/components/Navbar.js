@@ -58,7 +58,7 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/feed"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -106,6 +106,11 @@ const Navbar = () => {
                     textAlign="center"
                     component={Link}
                     to={"/" + page.url}
+                    sx={{
+                      fontWeight: 700,
+                      color: "inherit",
+                      textDecoration: "none",
+                    }}
                   >
                     <strong>{page.name}</strong>
                   </Typography>
@@ -117,7 +122,7 @@ const Navbar = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/feed"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -160,7 +165,7 @@ const Navbar = () => {
                 to={"/profile"}
                 sx={{ p: 0 }}
               >
-                <Avatar src="/" sx={{ bgcolor: "inherit" }} />
+                <Avatar  sx={{ bgcolor: "inherit" }} />
               </IconButton>
             </Tooltip>
           </Box>

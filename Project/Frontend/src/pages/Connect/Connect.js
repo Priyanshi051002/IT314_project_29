@@ -63,7 +63,7 @@ const Connect = () => {
           );
         } else {
           alert(
-            "Unfollwed. Navigate to Following and Followers Page to see the results"
+            "Unfollowed. Navigate to Following and Followers Page to see the results"
           );
         }
       })
@@ -98,7 +98,7 @@ const Connect = () => {
                   />
                   <CardContent>
                     <Typography variant="h5" textAlign={"left"} component="div">
-                      {user.name}
+                      {user.username}
                     </Typography>
                   </CardContent>
                   <CardActions>
