@@ -15,7 +15,7 @@ let user_id = "";
 const TextEditor = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/user/getProfile`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/getProfile`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -35,7 +35,7 @@ const TextEditor = () => {
   const [document, setDocument] = useState(null);
 
   const handleAddPost = (post) => {
-    fetch(`http://localhost:7000/post/addPost`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/addPost`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -146,8 +146,7 @@ const TextEditor = () => {
                 initialValue="<p>Share your thoughts here..</p>"
                 init={{
                   selector: "#editor",
-                  height: 500,
-                  width: 1000,
+                  min_height: 500,
                   menubar: false,
                   statusbar: false,
                   icons: "material",
@@ -163,6 +162,7 @@ const TextEditor = () => {
                     "fullscreen",
                     "table",
                     "codesample",
+                    "autoresize",
                   ],
                   toolbar:
                     "undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | charmap table codesample | searchreplace wordcount code | fullscreen ",

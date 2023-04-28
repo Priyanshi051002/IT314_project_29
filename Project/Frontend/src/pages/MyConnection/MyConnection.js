@@ -22,7 +22,7 @@ const MyConnection = () => {
   const [following, setFollowing] = useState(8);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user/getProfile", {
+    fetch(`${process.env.REACT_APP_FINAL}/user/getProfile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,13 +53,13 @@ const MyConnection = () => {
         <Box>
           <Navbar />
           <Typography
-            variant="h4"
+            variant="h5"
             textAlign={"center"}
             component="div"
             gutterBottom
             mt={2}
           >
-            Followers
+            Followers ({followersUsers.length})
           </Typography>
           <Divider />
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
@@ -92,12 +92,12 @@ const MyConnection = () => {
             </Button>
           </Box>
           <Typography
-            variant="h4"
+            variant="h5"
             textAlign={"center"}
             component="div"
             gutterBottom
           >
-            Following
+            Following ({followingUsers.length})
           </Typography>
           <Divider />
 

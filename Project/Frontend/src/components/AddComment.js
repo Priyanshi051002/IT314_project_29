@@ -23,7 +23,7 @@ const AddComment = (props) => {
   };
 
   const handleAddComment = (item) => {
-    fetch(`http://localhost:7000/post/addComment`, {
+    fetch(`${process.env.REACT_APP_FINAL}/post/addComment`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

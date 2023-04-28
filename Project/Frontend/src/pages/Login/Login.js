@@ -37,7 +37,7 @@ const Login = ({ handleChange }) => {
 
   const handleSignin = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/user/login`, {
+    fetch(`${process.env.REACT_APP_FINAL}/user/login`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -50,7 +50,7 @@ const Login = ({ handleChange }) => {
         console.log(data);
         if (data.success) {
           localStorage.setItem("token", data.data);
-          return navigate("/");
+          return navigate("/feed");
         } else {
           setLoginError(true);
         }
