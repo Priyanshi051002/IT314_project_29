@@ -31,7 +31,7 @@ export const Passwordchangeq = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          localStorage.setItem('username',details.username);
+          localStorage.setItem("username", details.username);
           navigate("/fp");
         } else {
           alert(data.error);
@@ -45,16 +45,23 @@ export const Passwordchangeq = () => {
     padding: 20,
     height: "auto",
     width: "20%",
-    margin: "2% 38%",
+    margin: "auto",
+    marginTop: "1em",
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const buttonStyle = { margin: "8px 0" };
   return (
     <div>
-      <Grid>
-        <Paper elevation={20} style={paperStyle}>
+      <Grid container>
+        <Paper
+          elevation={20}
+          style={paperStyle}
+          component={Grid}
+          xs={10}
+          sm={6}
+          md={3}
+        >
           <Grid align="center">
-            <Grid item xs={12} sm={6} md={3}></Grid>
             <Avatar style={avatarStyle}>
               <HomeOutlinedIcon />
             </Avatar>

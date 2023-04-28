@@ -87,10 +87,11 @@ const Home = () => {
               sx={{ marginTop: "1em", marginBottom: "1em", paddingY: "1em" }}
             >
               <form onSubmit={handleSearchSubmit}>
-                <Grid container>
+                <Grid container >
                   <Grid
                     item
-                    xs={1}
+                    xs={2}
+                    md={1}
                     sx={{
                       justifyContent: "center",
                       display: "flex",
@@ -99,7 +100,7 @@ const Home = () => {
                   >
                     <SearchIcon fontSize="large" />
                   </Grid>
-                  <Grid item xs={9}>
+                  <Grid item xs={7} md={9}>
                     <TextField
                       placeholder="Search"
                       fullWidth
@@ -110,7 +111,8 @@ const Home = () => {
                   </Grid>
                   <Grid
                     item
-                    xs={2}
+                    xs={3}
+                    md={2}
                     sx={{
                       justifyContent: "center",
                       display: "flex",
