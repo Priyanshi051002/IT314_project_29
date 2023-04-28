@@ -122,12 +122,6 @@ const PostCards = (props) => {
         }
         title={item.user_id}
       />
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="200"
-        image={ImageUrl}
-      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}

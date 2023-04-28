@@ -36,7 +36,7 @@ const Landing = () => {
           <Grid item xs={2} md={3}></Grid>
           <Grid item xs={5} md={1}>
             {localStorage.getItem("token") == null && (
-              <Button variant="outlined" onClick={handleClick}>
+              <Button name="Sign up" variant="outlined" onClick={handleClick}>
                 Sign up
               </Button>
             )}
@@ -86,7 +86,7 @@ const Landing = () => {
               Share your ideas here.
             </Typography>
             {localStorage.getItem("token") == null ? (
-              <Button variant="contained" sx={{ mr: 2 }}>
+              <Button name="gobabygo" variant="contained" sx={{ mr: 2 }}>
                 <Typography
                   component="text"
                   sx={{

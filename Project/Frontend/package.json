@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "cypress": "^12.11.0",
+    "cypress-slow-down": "^1.2.1",
     "faker": "^6.6.6",
     "react-scripts": "^5.0.1"
   },

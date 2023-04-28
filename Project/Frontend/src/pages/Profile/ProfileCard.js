@@ -102,7 +102,6 @@ const ProfileCard = ({ profileData }) => {
                   <Button
                     size="small"
                     variant="contained"
-                    name="addPost"
                     onClick={(e) => {
                       navigate("/profile/addPost");
                     }}

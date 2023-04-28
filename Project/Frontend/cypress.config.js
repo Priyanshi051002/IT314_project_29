@@ -20,5 +20,6 @@ module.exports = {
     videoCompression: 0,
     downloadsFolder: "cypress/downloads",
     waitForAnimations: true,
+    testIsolation: false,
   },
 };
