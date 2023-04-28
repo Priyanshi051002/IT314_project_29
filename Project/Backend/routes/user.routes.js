@@ -10,6 +10,7 @@ const {
   updatePassword,
   getAllUser,
   getUserByName,
+  getProfileOfUser,
 } = require("../controllers/user.controller");
 const router = express.Router();
 const authenticateToken = require("../middlewares/passport");
@@ -17,6 +18,7 @@ const authenticateToken = require("../middlewares/passport");
 router.post("/login", login);
 router.post("/register", register);
 router.get("/getProfile", authenticateToken, getProfile);
+router.post("/getProfileOfUser",getProfileOfUser);
 router.post("/createProfile", createProfile);
 router.put("/editProfile", authenticateToken, editProfile);
 router.post("/follow", authenticateToken, follow);

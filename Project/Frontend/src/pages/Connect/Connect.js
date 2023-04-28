@@ -15,8 +15,11 @@ import {
 // import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import ImageUrl from "../../static";
+import { useNavigate } from "react-router-dom";
+import UserProfile from "./UserProfile";
 
 const Connect = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [visible, setVisible] = useState(12);
 
@@ -42,6 +45,10 @@ const Connect = () => {
 
   const ShowMoreItems = () => {
     setVisible((prevValue) => prevValue + 4);
+  };
+
+  const handleProfile = (username) => {
+    navigate("/profiles/" + username);
   };
 
   const handleFollow = (username) => {
@@ -86,22 +93,32 @@ const Connect = () => {
           </Typography>
           <Divider />
           <Grid container rowSpacing={3} columnSpacing={4} mt={0.5} mb={2}>
+            {console.log(users)}
             {users.slice(0, visible).map((user) => (
               <Grid item xs={12} sm={6} md={3}>
                 {/* Can be modified to reduce redundancy */}
                 <Card key={user.username}>
-                  <CardMedia
+                  {/* <CardMedia
                     component="img"
                     alt="green iguana"
                     height="125"
                     image={ImageUrl}
-                  />
+                  /> */}
                   <CardContent>
-                    <Typography variant="h5" textAlign={"left"} component="div">
-                      {user.username}
-                    </Typography>
+                    <Typography variant="h4">{user.name}</Typography>
+                    <Typography variant="body1">{user.username}</Typography>
                   </CardContent>
                   <CardActions>
+                    <Button
+                      size="small"
+                      sx={{ borderRadius: "16px" }}
+                      fullWidth
+                      color="info"
+                      variant="outlined"
+                      onClick={() => handleProfile(user.username)}
+                    >
+                      View Profile
+                    </Button>
                     <Button
                       size="small"
                       sx={{ borderRadius: "16px" }}
