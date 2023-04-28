@@ -35,8 +35,10 @@ const ExpandMore = styled((props) => {
 const PostCards = (props) => {
   const { item, comments } = props;
   user_id = props.user;
+
+  let initialLike = handlePostLike(item.liked, user_id);
   const [expanded, setExpanded] = React.useState(false);
-  const [liked, setLiked] = React.useState(false);
+  const [liked, setLiked] = React.useState(initialLike);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -100,6 +102,18 @@ const PostCards = (props) => {
       });
   };
 
+  const handlePostLike = (liked, user_id) => {
+    {
+      for (let i = 0; i < liked.length; i++) {
+        if (liked[i].user_id === user_id) {
+          setLiked(true);
+          return;
+        }
+      }
+    }
+    setLiked(false);
+  };
+
   item.description = DOMPurify.sanitize(item.description);
   return (
     <Card variant="outlined" sx={{ mb: 2 }}>
@@ -157,9 +171,9 @@ const PostCards = (props) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Comments:{comments.length}</Typography>
-          <AddComment item={item} user={user_id}/>
+          <AddComment item={item} user={user_id} />
           {comments.map((comment) => (
-            <Comment item={comment}  />
+            <Comment item={comment} />
           ))}
         </CardContent>
       </Collapse>
