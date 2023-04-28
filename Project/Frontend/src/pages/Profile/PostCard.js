@@ -5,10 +5,7 @@ import {
   Typography,
   CardActions,
   Button,
-  CardMedia,
   Grid,
-  Container,
-  Box,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import PostCards from "../../components/PostCards";

@@ -46,9 +46,9 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
   return (
     <AppBar position="sticky" sx={{ mt: 1, mb: 1, borderRadius: 2 }}>
       <Container maxWidth="xl">

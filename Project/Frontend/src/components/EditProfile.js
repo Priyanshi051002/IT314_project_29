@@ -139,6 +139,7 @@ const EditProfile = ({ profile }) => {
             variant="filled"
             fullWidth
             multiline
+            
             minRows={4}
             onChange={handleChange}
           />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Paper, Grid, Avatar, TextField, Button } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Passwordchangeq = () => {
   const navigate = useNavigate();

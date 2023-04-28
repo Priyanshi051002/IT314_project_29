@@ -5,10 +5,9 @@ import {
   Avatar,
   TextField,
   Button,
-  Typography,
 } from "@mui/material";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Forgotpassword = () => {
   const navigate = useNavigate();

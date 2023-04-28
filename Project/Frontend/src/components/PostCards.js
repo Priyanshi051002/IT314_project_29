@@ -4,7 +4,6 @@ import {
   CardContent,
   Typography,
   CardActions,
-  CardMedia,
   CardHeader,
   Avatar,
   IconButton,
@@ -14,7 +13,6 @@ import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCommentIcon from "@mui/icons-material/AddComment";
-import ImageUrl from "../static";
 import DOMPurify from "dompurify";
 import Collapse from "@mui/material/Collapse";
 import red from "@mui/material/colors/red";

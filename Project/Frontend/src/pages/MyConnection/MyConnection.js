@@ -9,17 +9,24 @@ import {
   Container,
   Box,
   Divider,
+  CardActions,
 } from "@mui/material";
 
 // import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import ImageUrl from "../../static";
+import { useNavigate } from "react-router-dom";
 
 const MyConnection = () => {
+  const navigate = useNavigate();
   const [followersUsers, setFollowersUsers] = useState([]);
   const [followingUsers, setfollowingUsers] = useState([]);
   const [follower, setFollower] = useState(8);
   const [following, setFollowing] = useState(8);
+
+  const handleProfile = (username) => {
+    navigate("/profiles/" + username);
+  };
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_FINAL}/user/getProfile`, {
@@ -74,9 +81,24 @@ const MyConnection = () => {
                   />
                   <CardContent>
                     <Typography variant="h5" textAlign={"left"} component="div">
+                      {user.name}
+                    </Typography>
+                    <Typography variant="h5" textAlign={"left"} component="div">
                       {user.username}
                     </Typography>
                   </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      sx={{ borderRadius: "16px" }}
+                      fullWidth
+                      color="info"
+                      variant="outlined"
+                      onClick={() => handleProfile(user.username)}
+                    >
+                      View Profile
+                    </Button>
+                  </CardActions>
                 </Card>
               </Grid>
             ))}
@@ -112,10 +134,25 @@ const MyConnection = () => {
                     image={ImageUrl}
                   />
                   <CardContent>
-                    <Typography variant="h5" textAlign={"left"} component="div">
+                    <Typography variant="h5" >
+                      {user.name}
+                    </Typography>
+                    <Typography variant="h5" >
                       {user.username}
                     </Typography>
                   </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      sx={{ borderRadius: "16px" }}
+                      fullWidth
+                      color="info"
+                      variant="outlined"
+                      onClick={() => handleProfile(user.username)}
+                    >
+                      View Profile
+                    </Button>
+                  </CardActions>
                 </Card>
               </Grid>
             ))}

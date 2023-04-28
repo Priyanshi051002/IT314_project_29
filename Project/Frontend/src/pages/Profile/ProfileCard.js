@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {
   Card,
@@ -8,8 +8,6 @@ import {
   Button,
   CardMedia,
   Grid,
-  Container,
-  Box,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import ImageUrl from "../../static";
