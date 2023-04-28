@@ -2,7 +2,7 @@
 
 describe("Login component", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/signinout");
+    cy.visit("/signinout");
   });
 
   it("Displays the login form", () => {
@@ -22,14 +22,13 @@ describe("Login component", () => {
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
 
-    // // Verify that the login API was called with the correct credentials
     // cy.wait("@signin").its("request.body").should("deep.equal", {
     //   username: "d@gmail.com",
     //   password: "1234",
     // });
 
     // Verify that the user is redirected to the home page
-    cy.url().should("equal", "http://localhost:3000/feed");
+    cy.url().should("equal", Cypress.config().baseUrl + "/feed");
   });
 
   it("Displays an error message for invalid login credentials", () => {
@@ -50,12 +49,12 @@ describe("Login component", () => {
 
   it("Don't have account go to sign up", () => {
     cy.get('a:contains("Sign Up")').click();
-    cy.url().should("equal", "http://localhost:3000/signinout");
+    cy.url().should("equal", Cypress.config().baseUrl + "/signinout");
   });
 
   it("Forgot Password birthplce->return-->password change", () => {
     cy.get('a:contains("Forgot Password")').click();
-    cy.url().should("equal", "http://localhost:3000/pc");
+    cy.url().should("equal", Cypress.config().baseUrl + "/pc");
 
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='birthplace']").type("Tatooine");
@@ -82,6 +81,6 @@ describe("Login component", () => {
     // });
 
     // Verify that the user is redirected to the home page
-    cy.url().should("equal", "http://localhost:3000/feed");
+    cy.url().should("equal", Cypress.config().baseUrl + "/feed");
   });
 });

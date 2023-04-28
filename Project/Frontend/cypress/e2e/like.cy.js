@@ -2,11 +2,11 @@
 
 describe("Like test", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/signinout");
+    cy.visit("/signinout");
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
-    cy.url().should("equal", "http://localhost:3000/feed");
+    cy.url().should("equal", Cypress.config().baseUrl + "/feed");
     cy.reload();
   });
 

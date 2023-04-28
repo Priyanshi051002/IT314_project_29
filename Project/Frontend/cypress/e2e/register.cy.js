@@ -13,7 +13,7 @@ import {
 describe("Register", () => {
   // cypress register test
   it("Successfully loads the SignUp page", () => {
-    cy.visit("http://localhost:3000/signinout");
+    cy.visit("/signinout");
     cy.url().should("include", "/signinout");
     // got to sign up page
     // cy.get("SIGN UP").click();
@@ -22,7 +22,7 @@ describe("Register", () => {
 
   describe("Sign Up Form Testing", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:3000/signinout");
+      cy.visit("/signinout");
       // go to sign up page from nav bar
       // go you have account no problem go to login page
       cy.get('a:contains("Sign Up")').click();
@@ -126,7 +126,7 @@ describe("Register", () => {
 
   describe("Rigorous testing", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:3000/signinout");
+      cy.visit("/signinout");
       // go to sign up page from nav bar
       // go you have account no problem go to login page
       cy.get('a:contains("Sign Up")').click();
@@ -134,7 +134,7 @@ describe("Register", () => {
 
     it("Get 10 users signed up", () => {
       for (let i = 0; i < 10; i++) {
-        cy.visit("http://localhost:3000/signinout");
+        cy.visit("/signinout");
         cy.get('a:contains("Sign Up")').click();
         cy.get("[name='name']").type(randFullName());
         cy.get("[name='username']").type(randEmail());

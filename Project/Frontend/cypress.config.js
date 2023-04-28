@@ -11,6 +11,8 @@ module.exports = {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    // base url for the frontend
+    baseUrl: "http://localhost:3000",
     projectId: "steqzz",
     screenshotOnRunFailure: true,
     screenshotsFolder: "cypress/screenshots",

@@ -2,19 +2,21 @@
 
 describe("Connect user test", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/signinout");
+    cy.visit("/signinout");
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
-    cy.url().should("equal", "http://localhost:3000/feed");
+    cy.url().should("equal", Cypress.config().baseUrl + "/feed");
     cy.reload();
     // if else statement in cypress
-    cy.request("http://localhost:5000/user/getProfile").then((response) => {
-      if (response.body.sucess) {
-        cy.reload();
+    cy.request(process.env.REACT_APP_MONGO + "/user/getProfile").then(
+      (response) => {
+        if (response.body.sucess) {
+          cy.reload();
+        }
       }
-    });
-    cy.visit("http://localhost:3000/profile");
+    );
+    cy.visit("/profile");
   });
 
   it("Go to Connections page", () => {
@@ -41,25 +43,27 @@ describe("Connect user test", () => {
   });
 
   afterEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.visit("/");
   });
 });
 
 describe("After the case connections", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/signinout");
+    cy.visit("/signinout");
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
-    cy.url().should("equal", "http://localhost:3000/feed");
+    cy.url().should("equal", Cypress.config().baseUrl + "/feed");
     cy.reload();
     // if else statement in cypress
-    cy.request("http://localhost:5000/user/getProfile").then((response) => {
-      if (response.body.sucess) {
-        cy.reload();
+    cy.request(process.env.REACT_APP_MONGO + "/user/getProfile").then(
+      (response) => {
+        if (response.body.sucess) {
+          cy.reload();
+        }
       }
-    });
-    cy.visit("http://localhost:3000/profile");
+    );
+    cy.visit("/profile");
   });
 
   it("Go to Connections page", () => {

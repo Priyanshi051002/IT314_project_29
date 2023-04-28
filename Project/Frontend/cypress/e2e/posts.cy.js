@@ -2,19 +2,21 @@
 
 describe("Posts testing", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/signinout");
+    cy.visit("/signinout");
     cy.get("input[name='username']").type("darthvadar@forcechock.com");
     cy.get("input[name='password']").type("1234");
     cy.get("button[type='submit']").click();
-    cy.url().should("equal", "http://localhost:3000/feed");
+    cy.url().should("equal", Cypress.config().baseUrl + "/feed");
     cy.reload();
     // if else statement in cypress
-    cy.request("http://localhost:5000/user/getProfile").then((response) => {
-      if (response.body.sucess) {
-        cy.reload();
+    cy.request(process.env.REACT_APP_MONGO + "/user/getProfile").then(
+      (response) => {
+        if (response.body.sucess) {
+          cy.reload();
+        }
       }
-    });
-    cy.visit("http://localhost:3000/profile");
+    );
+    cy.visit("/profile");
   });
 
   it("Massive test: Should create a new post -> After showing the post", () => {
@@ -57,9 +59,7 @@ describe("Posts testing", () => {
     cy.scrollTo("bottom");
     // Click "Add Post" button
     cy.get("button[classname='add_posts']").click();
-    cy.get("button[classname='confirm_bhai']")
-      .click()
-      .visit("http://localhost:3000/myposts");
+    cy.get("button[classname='confirm_bhai']").click().visit("/myposts");
 
     cy.scrollTo("bottom");
   });
@@ -104,9 +104,7 @@ describe("Posts testing", () => {
     cy.scrollTo("bottom");
     // Click "Add Post" button
     cy.get("button[classname='add_posts']").click();
-    cy.get("button[classname='confirm_bhai']")
-      .click()
-      .visit("http://localhost:3000/myposts");
+    cy.get("button[classname='confirm_bhai']").click().visit("/myposts");
 
     cy.scrollTo("bottom");
   });
@@ -115,6 +113,6 @@ describe("Posts testing", () => {
     cy.get("svg[name='delete']").eq(1).click();
     // confirmation message
     // cy.wait(cy.get(".MuiAlert-message").should("contain.text", "Post deleted"));
-    cy.visit("http://localhost:3000/myposts");
+    cy.visit("/myposts");
   });
 });
